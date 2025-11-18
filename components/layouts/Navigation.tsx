@@ -1,19 +1,44 @@
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const Navigation = () => {
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-md border-b border-text-primary/5 px-4">
-      <div className="grid-editorial items-center py-6">
-        <div className="col-span-3">
-          <Link
-            href="/"
-            className="text-2xl font-display font-bold tracking-tight text-text-primary hover:text-terracotta transition-premium"
-          >
-            Dunespark
-          </Link>
-        </div>
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
-        <div className="col-span-9 flex justify-end items-center gap-12">
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 bg-pure-white/80 backdrop-blur-md border-b border-text-primary/5 px-4 transition-transform duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
+      <div className="py-4 md:py-4 flex items-center justify-between">
+        <Link
+          href="/"
+          className="font-display text-2xl md:text-3xl font-bold tracking-tight text-text-primary hover:text-terracotta transition-premium"
+        >
+          DUNESPARK
+        </Link>
+
+        <div className="hidden md:flex items-center gap-8 lg:gap-12">
           <Link
             href="/services"
             className="text-sm font-medium text-text-secondary hover:text-text-primary transition-premium tracking-wide uppercase"

@@ -1,7 +1,13 @@
+import { ReactNode } from "react";
 import Head from "next/head";
-import Footer from "./Footer";
-import { LayoutProps } from "@/types";
 import Navigation from "./Navigation";
+import Footer from "./Footer";
+
+interface LayoutProps {
+  children: ReactNode;
+  title?: string;
+  description?: string;
+}
 
 const Layout = ({
   children,
@@ -16,7 +22,7 @@ const Layout = ({
       </Head>
       <div className="min-h-screen flex flex-col px-4">
         <Navigation />
-        <main className="grow pt-32">{children}</main>
+        <main className="grow pt-24 md:pt-32">{children}</main>
       </div>
       <Footer />
     </>
