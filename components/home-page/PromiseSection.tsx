@@ -68,12 +68,12 @@ const PromiseSection = () => {
                 <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-120 leading-tight">
                   High-quality leads without manual outreach
                 </h4>
-                <div className="mt-auto ml-auto relative w-150 h-140">
+                <div className="mt-auto ml-auto relative w-80 h-80 lg:w-150 lg:h-140">
                   <Image
                     fill
                     alt="Leads generation"
                     className="object-cover"
-                    src="/images/home-page/card-1.webp"
+                    src="/images/home-page/promise-card-1.webp"
                   />
                 </div>
               </div>
@@ -82,12 +82,12 @@ const PromiseSection = () => {
                 <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-120 leading-tight">
                   Data-backed sales prep that closes faster
                 </h4>
-                <div className="mt-auto ml-auto relative w-150 h-140">
+                <div className="mt-auto ml-auto relative w-80 h-80 lg:w-150 lg:h-140">
                   <Image
                     fill
                     alt="Sales preparation"
                     className="object-cover"
-                    src="/images/home-page/promise-2.webp"
+                    src="/images/home-page/promise-card-2.webp"
                   />
                 </div>
               </div>
@@ -96,7 +96,7 @@ const PromiseSection = () => {
                 <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-160 leading-tight">
                   Seamless onboarding experiences that retain clients longer
                 </h4>
-                <div className="mt-auto ml-auto relative w-150 h-140">
+                <div className="mt-auto ml-auto relative w-80 h-80 lg:w-150 lg:h-140">
                   <Image
                     fill
                     alt="Client onboarding"
@@ -110,7 +110,7 @@ const PromiseSection = () => {
                 <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-120 leading-tight">
                   Continuous optimization that evolves with your business
                 </h4>
-                <div className="mt-auto ml-auto relative w-150 h-140">
+                <div className="mt-auto ml-auto relative w-80 h-80 lg:w-150 lg:h-140">
                   <Image
                     fill
                     className="object-cover"
