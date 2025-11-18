@@ -89,7 +89,7 @@ const HeroSection = () => {
               fill
               alt="Tech consulting"
               className="object-cover"
-              src="/images/home-page/hero-2.jpg"
+              src="/images/home-page/hero-2.webp"
               style={{ filter: "saturate(0.85)" }}
             />
           </div>

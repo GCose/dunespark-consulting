@@ -18,7 +18,7 @@ const PromiseSection = () => {
                   fill
                   alt="Growth systems"
                   className="object-cover"
-                  src="/images/home-page/promise.jpg"
+                  src="/images/home-page/promise.webp"
                   style={{ filter: "saturate(0.85)" }}
                 />
               </div>
@@ -65,7 +65,7 @@ const PromiseSection = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-cream p-8 relative min-h-[800px] flex flex-col">
-                <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-[30rem] leading-tight">
+                <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-120 leading-tight">
                   High-quality leads without manual outreach
                 </h4>
                 <div className="mt-auto ml-auto relative w-150 h-140">
@@ -73,7 +73,7 @@ const PromiseSection = () => {
                     fill
                     alt="Leads generation"
                     className="object-cover"
-                    src="/images/home-page/card-1.jpg"
+                    src="/images/home-page/card-1.webp"
                   />
                 </div>
               </div>
@@ -87,7 +87,7 @@ const PromiseSection = () => {
                     fill
                     alt="Sales preparation"
                     className="object-cover"
-                    src="/images/home-page/promise-2.jpg"
+                    src="/images/home-page/promise-2.webp"
                   />
                 </div>
               </div>
@@ -101,7 +101,7 @@ const PromiseSection = () => {
                     fill
                     alt="Client onboarding"
                     className="object-cover"
-                    src="/images/home-page/promise-card-3.jpg"
+                    src="/images/home-page/promise-card-3.webp"
                   />
                 </div>
               </div>
@@ -115,7 +115,7 @@ const PromiseSection = () => {
                     fill
                     className="object-cover"
                     alt="Business optimization"
-                    src="/images/home-page/promise-card-4.jpg"
+                    src="/images/home-page/promise-card-4.webp"
                   />
                 </div>
               </div>
