@@ -38,7 +38,7 @@ const ApartSection = () => {
   ];
 
   return (
-    <section className="bg-warm-beige py-fluid-lg">
+    <section className="bg-pure-white py-fluid-lg">
       <div className="mb-16 lg:mb-24">
         <h2 className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-3xl md:text-6xl lg:text-7xl">
           WHAT SETS DUNESPARK APART — THE BOUTIQUE GROWTH EXPERIENCE
