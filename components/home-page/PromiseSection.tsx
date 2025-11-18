@@ -7,7 +7,7 @@ const PromiseSection = () => {
         <div className="">
           <div className="mb-16 lg:mb-44">
             <h2 className="font-display font-extrabold text-text-primary leading-[1.05] md:max-w-400 tracking-tight text-4xl md:text-6xl lg:text-7xl">
-              OUR PROMISE — GROWTH MADE SIMPLE, SMART, AND SUSTAINABLE
+              OUR PROMISE , GROWTH MADE SIMPLE, SMART, AND SUSTAINABLE
             </h2>
           </div>
 
@@ -28,17 +28,17 @@ const PromiseSection = () => {
               <p className="text-text-primary text-xl font-medium md:text-2xl lg:text-3xl md:leading-10">
                 At Dunespark, we believe{" "}
                 <strong className="font-bold text-terracotta">
-                  growth is a system — not a project.
+                  growth is a system , not a project.
                 </strong>
               </p>
               <p className="text-text-primary text-xl font-medium md:text-2xl lg:text-3xl md:leading-10 mt-8">
                 We don{"'"}t chase quick fixes or spread-your-budget-thin
                 approaches. We build modular, AI-powered growth systems designed
-                to work in harmony — solving your biggest bottlenecks and
+                to work in harmony , solving your biggest bottlenecks and
                 compounding results over time.
               </p>
               <p className="text-text-primary text-xl font-medium md:text-2xl lg:text-3xl md:leading-10 mt-8">
-                With Dunespark, you don{"'"}t get service providers — you get{" "}
+                With Dunespark, you don{"'"}t get service providers , you get{" "}
                 <strong className="font-bold text-terracotta">
                   strategic growth architects
                 </strong>{" "}

@@ -24,7 +24,7 @@ const ChallengesSection = () => {
           <ul className="space-y-8">
             <li className="text-text-primary font-medium text-xl md:text-3xl leading-8 md:leading-10">
               You{"'"}ve hired agencies and consultants, but their work feels
-              disconnected — marketing, sales, software, all running separate
+              disconnected , marketing, sales, software, all running separate
               races.
             </li>
             <li className="text-text-primary font-medium text-xl md:text-3xl leading-8 md:leading-10">
@@ -41,7 +41,7 @@ const ChallengesSection = () => {
             </li>
             <li className="text-text-primary font-medium text-xl md:text-3xl leading-8 md:leading-10">
               The tech solutions you{""}ve tried are complex or don{""}t talk to
-              each other — creating more headaches than help.
+              each other , creating more headaches than help.
             </li>
           </ul>
         </div>

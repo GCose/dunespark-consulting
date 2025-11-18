@@ -68,7 +68,7 @@ const HeroSection = () => {
         <div className="md:col-span-6 lg:col-span-4 flex items-center px-0 md:px-8">
           <div className="space-y-8">
             <p className="text-black text-xl font-medium md:text-2xl lg:text-3xl leading-7 md:leading-10">
-              You deserve a growth engine that works — effortlessly,
+              You deserve a growth engine that works , effortlessly,
               intelligently, and built to scale.
             </p>
             <p className="text-black text-xl font-medium md:text-2xl lg:text-3xl leading-7 md:leading-10">
@@ -77,7 +77,7 @@ const HeroSection = () => {
               on what matters most.
             </p>
             <p className="text-black text-xl font-medium md:text-2xl lg:text-3xl leading-7 md:leading-10">
-              Imagine a system designed for your success — one that runs quietly
+              Imagine a system designed for your success , one that runs quietly
               in the background, freeing you to focus on what matters most.
             </p>
           </div>
