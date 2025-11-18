@@ -26,7 +26,7 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 bg-pure-white/80 backdrop-blur-md border-b border-text-primary/5 px-4 transition-transform duration-300 ${
+      className={`fixed max-w-editorial top-0 left-0 right-0 z-50 bg-pure-white/80 backdrop-blur-md border-b border-text-primary/5 px-4 transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -41,25 +41,25 @@ const Navigation = () => {
         <div className="hidden md:flex items-center gap-8 lg:gap-12">
           <Link
             href="/services"
-            className="text-sm font-medium text-text-secondary hover:text-text-primary transition-premium tracking-wide uppercase"
+            className="text-lg font-medium text-text-secondary hover:text-text-primary transition-premium tracking-wide uppercase"
           >
             Services
           </Link>
           <Link
             href="/about"
-            className="text-sm font-medium text-text-secondary hover:text-text-primary transition-premium tracking-wide uppercase"
+            className="text-lg font-medium text-text-secondary hover:text-text-primary transition-premium tracking-wide uppercase"
           >
             About
           </Link>
           <Link
             href="/work"
-            className="text-sm font-medium text-text-secondary hover:text-text-primary transition-premium tracking-wide uppercase"
+            className="text-lg font-medium text-text-secondary hover:text-text-primary transition-premium tracking-wide uppercase"
           >
             Work
           </Link>
           <Link
             href="/insights"
-            className="text-sm font-medium text-text-secondary hover:text-text-primary transition-premium tracking-wide uppercase"
+            className="text-lg font-medium text-text-secondary hover:text-text-primary transition-premium tracking-wide uppercase"
           >
             Insights
           </Link>
