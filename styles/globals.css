@@ -54,9 +54,10 @@
   --color-text-tertiary: #8b7e6a;
   --color-text-muted: #afa593;
 
-  --font-display: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
+  --font-display: "Playfair Display", ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+  --font-body: "Epilogue", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   --font-size-xs: 0.833rem;
   --font-size-sm: 1rem;
@@ -94,7 +95,6 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
 
-  --container-max-width: 1600px;
   --container-padding: clamp(1.5rem, 5vw, 4rem);
 
   --grid-columns: 12;
@@ -142,10 +142,10 @@
   }
 
   body {
+    background-color: var(--color-pure-white);
+    color: var(--color-text-primary);
     font-family: var(--font-body);
     font-size: var(--font-size-base);
-    color: var(--color-text-primary);
-    background-color: var(--color-cream);
     line-height: var(--line-height-relaxed);
   }
 
@@ -164,31 +164,26 @@
   h1 {
     font-size: var(--font-size-display-md);
   }
-
   h2 {
     font-size: var(--font-size-5xl);
   }
-
   h3 {
     font-size: var(--font-size-4xl);
   }
-
   h4 {
     font-size: var(--font-size-3xl);
   }
-
   h5 {
     font-size: var(--font-size-2xl);
   }
-
   h6 {
     font-size: var(--font-size-xl);
   }
 
   p {
     font-size: var(--font-size-base);
-    color: var(--color-text-secondary);
     line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
   }
 
   ::selection {
@@ -209,8 +204,6 @@
   }
 
   .container-editorial {
-    margin-inline: auto;
-    max-width: var(--container-max-width);
     padding-inline: var(--container-padding);
   }
 
@@ -226,23 +219,18 @@
   .py-fluid-xs {
     padding-block: var(--spacing-fluid-xs);
   }
-
   .py-fluid-sm {
     padding-block: var(--spacing-fluid-sm);
   }
-
   .py-fluid-md {
     padding-block: var(--spacing-fluid-md);
   }
-
   .py-fluid-lg {
     padding-block: var(--spacing-fluid-lg);
   }
-
   .py-fluid-xl {
     padding-block: var(--spacing-fluid-xl);
   }
-
   .py-fluid-2xl {
     padding-block: var(--spacing-fluid-2xl);
   }
@@ -250,23 +238,18 @@
   .pt-fluid-xs {
     padding-block-start: var(--spacing-fluid-xs);
   }
-
   .pt-fluid-sm {
     padding-block-start: var(--spacing-fluid-sm);
   }
-
   .pt-fluid-md {
     padding-block-start: var(--spacing-fluid-md);
   }
-
   .pt-fluid-lg {
     padding-block-start: var(--spacing-fluid-lg);
   }
-
   .pt-fluid-xl {
     padding-block-start: var(--spacing-fluid-xl);
   }
-
   .pt-fluid-2xl {
     padding-block-start: var(--spacing-fluid-2xl);
   }
@@ -274,23 +257,18 @@
   .pb-fluid-xs {
     padding-block-end: var(--spacing-fluid-xs);
   }
-
   .pb-fluid-sm {
     padding-block-end: var(--spacing-fluid-sm);
   }
-
   .pb-fluid-md {
     padding-block-end: var(--spacing-fluid-md);
   }
-
   .pb-fluid-lg {
     padding-block-end: var(--spacing-fluid-lg);
   }
-
   .pb-fluid-xl {
     padding-block-end: var(--spacing-fluid-xl);
   }
-
   .pb-fluid-2xl {
     padding-block-end: var(--spacing-fluid-2xl);
   }
