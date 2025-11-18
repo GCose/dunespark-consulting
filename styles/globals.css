@@ -142,11 +142,11 @@
   }
 
   body {
-    background-color: var(--color-pure-white);
-    color: var(--color-text-primary);
     font-family: var(--font-body);
+    color: var(--color-text-primary);
     font-size: var(--font-size-base);
     line-height: var(--line-height-relaxed);
+    background-color: var(--color-pure-white);
   }
 
   h1,

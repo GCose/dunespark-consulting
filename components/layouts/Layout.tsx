@@ -16,7 +16,7 @@ const Layout = ({
       </Head>
       <div className="min-h-screen flex flex-col px-4">
         <Navigation />
-        <main className="flex-grow pt-32">{children}</main>
+        <main className="grow pt-32">{children}</main>
       </div>
       <Footer />
     </>
