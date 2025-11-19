@@ -52,7 +52,7 @@ const PromiseSection = () => {
       </section>
 
       <section className="py-14">
-        <div className=" px-8">
+        <div className=" md:px-8">
           <div className="grid grid-cols-1 gap-16">
             <div className="text-right space-y-6">
               <h3 className="font-display font-bold text-text-primary text-3xl md:text-4xl lg:text-6xl leading-tight">
@@ -64,7 +64,7 @@ const PromiseSection = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-cream p-8 relative min-h-[800px] flex flex-col">
+              <div className="bg-cream p-8 relative gap-6 md:min-h-[800px] flex flex-col">
                 <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-120 leading-tight">
                   High-quality leads without manual outreach
                 </h4>
@@ -78,7 +78,7 @@ const PromiseSection = () => {
                 </div>
               </div>
 
-              <div className="bg-cream p-8 relative min-h-[800px] flex flex-col">
+              <div className="bg-cream p-8 relative gap-6 md:min-h-[800px] flex flex-col">
                 <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-120 leading-tight">
                   Data-backed sales prep that closes faster
                 </h4>
@@ -92,7 +92,7 @@ const PromiseSection = () => {
                 </div>
               </div>
 
-              <div className="bg-cream p-8 relative min-h-[800px] flex flex-col">
+              <div className="bg-cream p-8 relative gap-6 md:min-h-[800px] flex flex-col">
                 <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-160 leading-tight">
                   Seamless onboarding experiences that retain clients longer
                 </h4>
@@ -106,7 +106,7 @@ const PromiseSection = () => {
                 </div>
               </div>
 
-              <div className="bg-cream p-8 relative min-h-[800px] flex flex-col">
+              <div className="bg-cream p-8 relative gap-6 md:min-h-[800px] flex flex-col">
                 <h4 className="font-display font-semibold text-text-primary text-xl md:text-4xl max-w-120 leading-tight">
                   Continuous optimization that evolves with your business
                 </h4>
