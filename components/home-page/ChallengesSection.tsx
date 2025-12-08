@@ -18,7 +18,7 @@ const ChallengesSection = () => {
           </p>
         </div>
 
-        <div className="hidden lg:block lg:col-span-1" />
+        <div className="hidden lg:block lg:col-span-1 " />
 
         <div className="lg:col-span-5">
           <ul className="space-y-8">

@@ -50,8 +50,8 @@ const HeroSection = () => {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 md:grid-cols-10 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] pb-40 pt-20 bg-pure-white">
-        <div className="hidden lg:block lg:col-span-1" />
+      <section className="grid grid-cols-1 md:grid-cols-10 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] pb-40 bg-pure-white">
+        <div className="hidden lg:block lg:col-span-1 border border-warm-sand" />
 
         <div className="md:col-span-4 lg:col-span-3">
           <div className="relative aspect-3/4 overflow-hidden">
@@ -67,16 +67,16 @@ const HeroSection = () => {
 
         <div className="md:col-span-6 lg:col-span-4 flex items-center px-0 md:px-8">
           <div className="space-y-8">
-            <p className="text-black text-xl font-medium md:text-2xl lg:text-3xl leading-7 md:leading-10">
+            <p className="text-black text-xl font-medium md:text-2xl lg:text-4xl leading-7 md:leading-relaxed">
               You deserve a growth engine that works , effortlessly,
               intelligently, and built to scale.
             </p>
-            <p className="text-black text-xl font-medium md:text-2xl lg:text-3xl leading-7 md:leading-10">
+            <p className="text-black text-xl font-medium md:text-2xl lg:text-4xl leading-7 md:leading-relaxed">
               At Dunespark Consulting, we install elegant, AI-powered growth
               systems that run quietly in the background, freeing you to focus
               on what matters most.
             </p>
-            <p className="text-black text-xl font-medium md:text-2xl lg:text-3xl leading-7 md:leading-10">
+            <p className="text-black text-xl font-medium md:text-2xl lg:text-4xl leading-7 md:leading-relaxed">
               Imagine a system designed for your success , one that runs quietly
               in the background, freeing you to focus on what matters most.
             </p>
@@ -95,7 +95,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className="hidden lg:block lg:col-span-1" />
+        <div className="hidden lg:block lg:col-span-1 border border-warm-sand" />
       </section>
     </>
   );

@@ -1,6 +1,7 @@
+import "@/styles/globals.css";
+import { ReactLenis } from "lenis/react";
 import type { AppProps } from "next/app";
 import { Playfair_Display } from "next/font/google";
-import "@/styles/globals.css";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -11,9 +12,11 @@ const playfair = Playfair_Display({
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <div className={playfair.variable}>
-      <Component {...pageProps} />
-    </div>
+    <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}>
+      <div className={playfair.variable}>
+        <Component {...pageProps} />
+      </div>
+    </ReactLenis>
   );
 };
 

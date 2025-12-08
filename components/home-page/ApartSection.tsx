@@ -112,10 +112,10 @@ const ApartSection = () => {
                     <div className="text-terracotta text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-4 md:mb-6">
                       {point.number}
                     </div>
-                    <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl lg:text-4xl mb-3 md:mb-4 leading-tight">
+                    <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4 leading-tight">
                       {point.title}
                     </h3>
-                    <p className="text-text-secondary text-lg md:text-xl lg:text-2xl leading-relaxed">
+                    <p className="text-text-secondary text-lg md:text-xl lg:text-3xl leading-10">
                       {point.description}
                     </p>
                   </div>
@@ -125,15 +125,15 @@ const ApartSection = () => {
         </div>
 
         <div className="lg:col-span-4">
-          <div className="lg:sticky lg:top-20 lg:h-fit mb-12 lg:mb-0">
-            <div className="relative aspect-2/3 overflow-hidden">
+          <div className="lg:sticky lg:top-15 lg:h-fit mb-12 lg:mb-">
+            <div className="relative min-h-[87vh]">
               <Image
-                key={activeImage}
                 fill
-                alt="Growth systems"
-                className="object-cover transition-opacity duration-500"
                 src={activeImage}
+                key={activeImage}
+                alt="Growth systems"
                 style={{ filter: "saturate(0.85)" }}
+                className="object-cover transition-opacity duration-500"
               />
             </div>
           </div>
@@ -164,7 +164,7 @@ const ApartSection = () => {
                     <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4 leading-tight">
                       {point.title}
                     </h3>
-                    <p className="text-text-secondary text-lg md:text-xl lg:text-3xl leading-relaxed">
+                    <p className="text-text-secondary text-lg md:text-xl lg:text-3xl leading-10">
                       {point.description}
                     </p>
                   </div>
