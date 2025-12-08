@@ -205,6 +205,16 @@
     color: var(--color-text-secondary);
   }
 
+  ::-webkit-scrollbar {
+    width: 0.6rem;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10rem;
+    background-color: var(--color-terracotta);
+  }
+
   ::selection {
     background-color: color-mix(
       in srgb,

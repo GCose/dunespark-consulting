@@ -1,36 +1,9 @@
-import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import { useRef, useState, useEffect } from "react";
 
 const ApartSection = () => {
   const pointRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activePoint, setActivePoint] = useState(0);
-
-  useEffect(() => {
-    const observers = pointRefs.current.map((ref, index) => {
-      if (!ref) return null;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActivePoint(index);
-            }
-          });
-        },
-        {
-          threshold: 0.6,
-          rootMargin: "-10% 0px",
-        }
-      );
-
-      observer.observe(ref);
-      return observer;
-    });
-
-    return () => {
-      observers.forEach((observer) => observer?.disconnect());
-    };
-  }, []);
 
   const points = [
     {
@@ -39,6 +12,7 @@ const ApartSection = () => {
       description: "Tested, proven, ready to deploy quickly",
       side: "left",
       image: "/images/home-page/apart-1.webp",
+      bg: "bg-white",
     },
     {
       number: "02",
@@ -46,6 +20,7 @@ const ApartSection = () => {
       description: "Most systems go live in under 14 days",
       side: "right",
       image: "/images/home-page/apart-2.webp",
+      bg: "bg-[#FFF8E1]",
     },
     {
       number: "03",
@@ -53,6 +28,7 @@ const ApartSection = () => {
       description: "Self-optimizing and built to grow with you",
       side: "left",
       image: "/images/home-page/apart-3.webp",
+      bg: "bg-[#E8F5E9]",
     },
     {
       number: "04",
@@ -60,6 +36,7 @@ const ApartSection = () => {
       description: "Personalized attention with enterprise-grade quality",
       side: "right",
       image: "/images/home-page/apart-4.webp",
+      bg: "bg-[#E3F2FD]",
     },
     {
       number: "05",
@@ -67,13 +44,31 @@ const ApartSection = () => {
       description: "Every system tied directly to revenue and growth",
       side: "left",
       image: "/images/home-page/apart-5.webp",
+      bg: "bg-[#F3E5F5]",
     },
   ];
 
-  const activeImage = points[activePoint]?.image || points[0].image;
+  useEffect(() => {
+    const observers = pointRefs.current.map((ref, index) => {
+      if (!ref) return null;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setActivePoint(index);
+          });
+        },
+        { threshold: 0.5 }
+      );
+      observer.observe(ref);
+      return observer;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
+  }, []);
 
   return (
-    <section className="bg-pure-white py-fluid-lg">
+    <section
+      className={`${points[activePoint].bg} transition-colors duration-700 py-fluid-lg`}
+    >
       <div className="mb-16 lg:mb-24">
         <h2 className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-3xl md:text-6xl lg:text-7xl">
           WHAT SETS DUNESPARK APART — THE BOUTIQUE GROWTH EXPERIENCE
@@ -89,89 +84,111 @@ const ApartSection = () => {
         </div>
       </div>
 
-      <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      {/* Desktop layout */}
+      <div className="hidden lg:grid grid-cols-12 gap-8 lg:gap-12">
         <div className="lg:col-span-4 flex flex-col">
           {points
-            .filter((point) => point.side === "left")
+            .filter((p) => p.side === "left")
             .map((point, idx) => {
               const originalIndex = points.findIndex(
                 (p) => p.number === point.number
               );
-
               return (
                 <div
                   key={point.number}
                   ref={(el) => {
                     pointRefs.current[originalIndex] = el;
                   }}
-                  className={`min-h-[150vh] flex items-center py-20 ${
+                  className={`min-h-[150vh] flex flex-col justify-center py-20 ${
                     idx > 0 ? "mt-[150vh]" : ""
                   }`}
                 >
-                  <div>
-                    <div className="text-terracotta text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-4 md:mb-6">
-                      {point.number}
-                    </div>
-                    <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4 leading-tight">
-                      {point.title}
-                    </h3>
-                    <p className="text-text-secondary text-lg md:text-xl lg:text-3xl leading-10">
-                      {point.description}
-                    </p>
+                  <div className="text-terracotta text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-4 md:mb-6">
+                    {point.number}
                   </div>
+                  <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4 leading-tight">
+                    {point.title}
+                  </h3>
+                  <p className="text-text-secondary text-lg md:text-xl lg:text-3xl leading-10">
+                    {point.description}
+                  </p>
                 </div>
               );
             })}
         </div>
 
-        <div className="lg:col-span-4">
-          <div className="lg:sticky lg:top-15 lg:h-fit mb-12 lg:mb-">
-            <div className="relative min-h-[87vh]">
+        <div className="lg:col-span-4 relative">
+          <div className="hidden lg:block lg:sticky lg:top-20 mb-12 lg:mb-0 h-[80vh] md:h-[90vh]">
+            {points.map((point, idx) => (
               <Image
+                key={point.number}
                 fill
-                src={activeImage}
-                key={activeImage}
+                src={point.image}
                 alt="Growth systems"
                 style={{ filter: "saturate(0.85)" }}
-                className="object-cover transition-opacity duration-500"
+                className={`object-cover transition-opacity duration-700 absolute top-0 left-0 w-full h-full ${
+                  idx === activePoint ? "opacity-100" : "opacity-0"
+                }`}
               />
-            </div>
+            ))}
           </div>
         </div>
 
         <div className="lg:col-span-4 flex flex-col mt-[150vh]">
           {points
-            .filter((point) => point.side === "right")
+            .filter((p) => p.side === "right")
             .map((point, idx) => {
               const originalIndex = points.findIndex(
                 (p) => p.number === point.number
               );
-
               return (
                 <div
                   key={point.number}
                   ref={(el) => {
                     pointRefs.current[originalIndex] = el;
                   }}
-                  className={`min-h-[150vh] flex items-center py-20 ${
+                  className={`min-h-[150vh] flex flex-col justify-center py-20 ${
                     idx > 0 ? "mt-[150vh]" : ""
                   }`}
                 >
-                  <div>
-                    <div className="text-terracotta text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-4 md:mb-6">
-                      {point.number}
-                    </div>
-                    <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4 leading-tight">
-                      {point.title}
-                    </h3>
-                    <p className="text-text-secondary text-lg md:text-xl lg:text-3xl leading-10">
-                      {point.description}
-                    </p>
+                  <div className="text-terracotta text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-4 md:mb-6">
+                    {point.number}
                   </div>
+                  <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4 leading-tight">
+                    {point.title}
+                  </h3>
+                  <p className="text-text-secondary text-lg md:text-xl lg:text-3xl leading-10">
+                    {point.description}
+                  </p>
                 </div>
               );
             })}
         </div>
+      </div>
+
+      <div className="bg-cream lg:hidden flex flex-col gap-12">
+        {points.map((point) => (
+          <div key={point.number} className="flex flex-col items-start">
+            <div className="text-terracotta text-6xl font-display font-bold mb-2">
+              {point.number}
+            </div>
+            <h3 className="font-display font-bold text-text-primary text-2xl mb-2">
+              {point.title}
+            </h3>
+            <p className="text-text-secondary text-lg mb-4">
+              {point.description}
+            </p>
+            <div className="relative w-full h-64">
+              <Image
+                fill
+                src={point.image}
+                alt={point.title}
+                style={{ filter: "saturate(0.85)" }}
+                className="object-cover"
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

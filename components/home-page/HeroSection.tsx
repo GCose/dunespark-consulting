@@ -105,7 +105,7 @@ const HeroSection = () => {
             opacity: 1,
             clipPath: "inset(0 0% 0 0)",
             duration: 1.4,
-            delay: 0.5,
+            delay: 0.2,
             ease: "power3.out",
           });
 
@@ -113,7 +113,7 @@ const HeroSection = () => {
             opacity: 1,
             y: 0,
             duration: 1.1,
-            stagger: 0.75,
+            stagger: 0.45,
             ease: "power3.out",
           });
 
