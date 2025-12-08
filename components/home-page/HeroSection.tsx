@@ -1,17 +1,92 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 const HeroSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    gsap.set(sectionRef.current, { opacity: 1, visibility: "visible" });
+
+    if (titleRef.current) {
+      const words = titleRef.current.querySelectorAll(".word");
+      gsap.set(words, { y: -80, opacity: 0 });
+    }
+    gsap.set(imageRef.current, {
+      opacity: 0,
+      clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+    });
+    gsap.set(ctaRef.current, { y: 50, opacity: 0 });
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.3 });
+
+      if (titleRef.current) {
+        const words = titleRef.current.querySelectorAll(".word");
+
+        tl.to(words, {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: "power3.out",
+        });
+      }
+
+      tl.to(
+        imageRef.current,
+        {
+          opacity: 1,
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          duration: 1.8,
+          ease: "power3.inOut",
+        },
+        "-=1.5"
+      );
+
+      tl.to(
+        ctaRef.current,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.4,
+          ease: "power3.out",
+        },
+        "-=1"
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
-      <section className="pb-15 bg-pure-white">
-        <h1 className="font-display font-extrabold text-text-primary md:leading-tight tracking-tight text-[clamp(2.2rem,5vw,7rem)]">
-          <span className="">INSTALL THE GROWTH INFRASTRUCTURE</span>
+      <section
+        ref={sectionRef}
+        className="pb-15 bg-pure-white opacity-0"
+        style={{ visibility: "hidden" }}
+      >
+        <h1
+          ref={titleRef}
+          className="font-display font-extrabold text-text-primary md:leading-tight tracking-tight text-[clamp(2.2rem,5vw,7rem)]"
+        >
+          <span className="word inline-block">INSTALL</span>{" "}
+          <span className="word inline-block">THE</span>{" "}
+          <span className="word inline-block">GROWTH</span>{" "}
+          <span className="word inline-block">INFRASTRUCTURE</span>
           <br />
-          YOUR BUSINESS HAS BEEN MISSING
+          <span className="word inline-block">YOUR</span>{" "}
+          <span className="word inline-block">BUSINESS</span>{" "}
+          <span className="word inline-block">HAS</span>{" "}
+          <span className="word inline-block">BEEN</span>{" "}
+          <span className="word inline-block">MISSING</span>
         </h1>
 
-        <div className="relative w-full h-screen mt-10">
+        <div ref={imageRef} className="relative w-full h-screen mt-10">
           <Image
             fill
             priority
@@ -21,7 +96,10 @@ const HeroSection = () => {
           />
         </div>
 
-        <div className="mx-auto mt-10 flex flex-col md:flex-row items-start md:items-end md:justify-end gap-4">
+        <div
+          ref={ctaRef}
+          className="mx-auto mt-10 flex flex-col md:flex-row items-start md:items-end md:justify-end gap-4"
+        >
           <Link
             href="/contact"
             className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand hover:bg-white hover:text-terracotta font-medium text-center bg-warm-sand text-white transition-all duration-300"
