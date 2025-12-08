@@ -13,13 +13,13 @@ const ChallengesSection = () => {
       </div>
 
       <div className="container grid grid-cols-1 lg:grid-cols-12 relative z-10">
-        <div className="lg:col-span-4 lg:col-start-2 pt-5 md:pt-20 border-y md:border-b-0 md:border-y-0 border-gray-300">
+        <div className="lg:col-span-4 lg:col-start-2 pt-5 md:pt-20 border-y md:border-b-0 md:border-y-0 border-gray-500">
           <p className="text-terracotta text-2xl md:text-3xl lg:text-5xl font-bold md:leading-15 pb-5">
             You{"'"}re not alone if this sounds familiar:
           </p>
         </div>
 
-        <div className="lg:col-span-6 lg:col-start-7 md:border-l md:border-r border-gray-300 md:px-10 pt-5 md:pt-20">
+        <div className="lg:col-span-6 lg:col-start-7 md:border-l md:border-r border-gray-500 md:px-10 pt-5 md:pt-20">
           <ul className="space-y-8 mb-12">
             <li className="text-text-primary font-medium text-xl md:text-3xl leading-relaxed">
               You{"'"}ve hired agencies and consultants, but their work feels
@@ -56,12 +56,12 @@ const ChallengesSection = () => {
         </div>
 
         <div className="lg:col-span-4 lg:col-start-2 pt-20 lg:pt-32">
-          <h3 className="font-display font-bold text-terracotta text-2xl md:text-4xl lg:text-5xl leading-tight pb-5 pt-5 md:pt-20 border-y md:border-y-0 border-gray-300">
+          <h3 className="font-display font-bold text-terracotta text-2xl md:text-4xl lg:text-5xl leading-tight pb-5 pt-5 md:pt-20 border-y md:border-y-0 border-gray-500">
             Why is growth so hard?
           </h3>
         </div>
 
-        <div className="lg:col-span-6 lg:col-start-7 pt-12 flex flex-col gap-8 lg:pt-52 md:border-l md:border-r border-gray-300">
+        <div className="lg:col-span-6 lg:col-start-7 pt-12 flex flex-col gap-8 lg:pt-52 md:border-l md:border-r border-gray-500">
           <p className="text-text-primary font-medium text-xl md:text-2xl lg:text-3xl leading-relaxed md:px-10">
             Because{" "}
             <strong className="font-bold text-terracotta-dark">
