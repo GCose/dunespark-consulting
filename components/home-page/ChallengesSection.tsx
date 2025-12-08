@@ -123,7 +123,7 @@ const ChallengesSection = () => {
           </p>
         </div>
 
-        <div className="lg:col-span-6 lg:col-start-7 md:border-l md:border-r border-gray-500 md:px-10 pt-5 md:pt-20">
+        <div className="lg:col-span-10 lg:col-start-7 md:border-l md:border-r border-gray-500 md:px-10 pt-5 md:pt-20">
           <ul ref={listRef} className="space-y-8 mb-12">
             <li className="text-text-primary font-medium text-xl md:text-3xl leading-relaxed">
               You{"'"}ve hired agencies and consultants, but their work feels
@@ -172,7 +172,7 @@ const ChallengesSection = () => {
           </h3>
         </div>
 
-        <div className="lg:col-span-6 lg:col-start-7 pt-12 flex flex-col gap-8 lg:pt-52 md:border-l md:border-r border-gray-500">
+        <div className="lg:col-span-10 lg:col-start-7 pt-12 flex flex-col gap-8 lg:pt-52 md:border-l md:border-r border-gray-500">
           <p
             ref={descriptionRef}
             className="text-text-primary font-medium text-xl md:text-2xl lg:text-3xl leading-relaxed md:px-10"

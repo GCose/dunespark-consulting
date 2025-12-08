@@ -84,7 +84,6 @@ const ApartSection = () => {
         </div>
       </div>
 
-      {/* Desktop layout */}
       <div className="hidden lg:grid grid-cols-12 gap-8 lg:gap-12">
         <div className="lg:col-span-4 flex flex-col">
           {points
