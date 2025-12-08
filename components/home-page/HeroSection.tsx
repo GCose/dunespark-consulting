@@ -42,7 +42,7 @@ const HeroSection = () => {
         </div>
       </section>
 
-      <section className="md:mt-50 relative grid grid-cols-1 md:grid-cols-10 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] bg-pure-white">
+      <section className="mt-20 md:mt-50 relative grid grid-cols-1 md:grid-cols-10 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] bg-pure-white">
         <div className="hidden lg:block absolute inset-y-0 left-0 w-px bg-gray-600" />
         <div className="hidden lg:block absolute inset-y-0 right-0 w-px bg-gray-600" />
 
