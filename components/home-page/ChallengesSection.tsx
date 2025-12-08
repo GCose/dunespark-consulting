@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ChallengesSection = () => {
   return (
-    <section className="rounded-full clip-diagonal-sm py-fluid-lg md:mt-30 relative">
+    <section className="py-fluid-lg md:mt-30 relative">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] relative z-10">
         <div className="lg:col-span-10">
           <h2 className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-[clamp(2.2rem,5vw,7rem)] mb-16 lg:mb-24">
@@ -43,7 +43,7 @@ const ChallengesSection = () => {
               each other , creating more headaches than help.
             </li>
           </ul>
-          <div className="mx-auto px-4 mt-10 flex flex-col md:flex-row items-start md:items-start md:justify-end gap-4">
+          <div className="mx-auto mt-10 flex flex-col md:flex-row items-start md:items-start md:justify-end gap-4">
             <Link
               href="/contact"
               className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand hover:bg-white hover:text-terracotta font-medium text-center bg-warm-sand text-white transition-all duration-300"
@@ -61,8 +61,8 @@ const ChallengesSection = () => {
           </h3>
         </div>
 
-        <div className="lg:col-span-6 lg:col-start-7 pt-12 flex flex-col gap-8 lg:pt-52 md:border-l md:border-r border-gray-300 md:px-10">
-          <p className="text-text-primary font-medium text-xl md:text-2xl lg:text-3xl leading-relaxed">
+        <div className="lg:col-span-6 lg:col-start-7 pt-12 flex flex-col gap-8 lg:pt-52 md:border-l md:border-r border-gray-300">
+          <p className="text-text-primary font-medium text-xl md:text-2xl lg:text-3xl leading-relaxed md:px-10">
             Because{" "}
             <strong className="font-bold text-terracotta-dark">
               traditional growth models are broken.

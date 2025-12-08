@@ -21,7 +21,7 @@ const HeroSection = () => {
           />
         </div>
 
-        <div className="mx-auto px-4 mt-10 flex flex-col md:flex-row items-start md:items-end md:justify-end gap-4">
+        <div className="mx-auto mt-10 flex flex-col md:flex-row items-start md:items-end md:justify-end gap-4">
           <Link
             href="/contact"
             className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand hover:bg-white hover:text-terracotta font-medium text-center bg-warm-sand text-white transition-all duration-300"
@@ -42,7 +42,7 @@ const HeroSection = () => {
         </div>
       </section>
 
-      <section className="relative grid grid-cols-1 md:grid-cols-10 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] bg-pure-white">
+      <section className="md:mt-50 relative grid grid-cols-1 md:grid-cols-10 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] bg-pure-white">
         <div className="hidden lg:block absolute inset-y-0 left-0 w-px bg-gray-600" />
         <div className="hidden lg:block absolute inset-y-0 right-0 w-px bg-gray-600" />
 
@@ -58,7 +58,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className="md:col-span-6 lg:col-span-4 lg:col-start-5 flex items-center px-0">
+        <div className="md:col-span-6 lg:col-span-5 lg:col-start-5 flex items-center px-0">
           <div className="space-y-18">
             <p className="font-body text-black font-normal text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
               You deserve a growth engine that works, effortlessly,
@@ -76,7 +76,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className="md:col-span-10 md:col-start-1 lg:col-span-4 lg:col-start-9 mt-12 border-l border-r border-gray-300 md:mt-16 lg:mt-0 lg:pt-280">
+        <div className="md:col-span-10 md:col-start-1 lg:col-span-4 lg:col-start-10 mt-12 border-l border-r border-gray-300 md:mt-16 lg:mt-0 lg:pt-280">
           <div className="relative aspect-3/4 overflow-hidden">
             <Image
               fill
