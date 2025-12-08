@@ -15,13 +15,14 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
   useEffect(() => {
     const typeInterval = setInterval(() => {
       if (indexRef.current < text.length) {
-        setTypedText((prev) => prev + text[indexRef.current]);
+        const char = text.charAt(indexRef.current);
+        setTypedText((prev) => prev + char);
         indexRef.current += 1;
       } else {
         clearInterval(typeInterval);
 
         setTimeout(() => {
-          setShowOverlay(true); // trigger overlay animation
+          setShowOverlay(true);
         }, 500);
       }
     }, 100);
@@ -46,7 +47,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
   }, [showOverlay, onFinish]);
 
   return (
-    <div className="fixed inset-0 bg-pure-white flex items-center justify-center z-[9999]">
+    <div className="fixed inset-0 bg-cream flex items-center justify-center z-9999">
       <h1 className="font-display font-extrabold text-4xl md:text-6xl lg:text-8xl text-text-primary tracking-tight">
         {typedText}
       </h1>
@@ -54,7 +55,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
       {showOverlay && (
         <div
           ref={overlayRef}
-          className="absolute inset-0 bg-terracotta clip-diagonal-lg z-50"
+          className="absolute inset-0 bg-white clip-diagonal-lg z-50"
         />
       )}
     </div>
