@@ -73,7 +73,7 @@ const PromiseSection = () => {
             duration: 1.8,
             ease: "power3.inOut",
           },
-          "-=0.8"
+          "-=1.1"
         );
 
         tl.to(
@@ -83,7 +83,7 @@ const PromiseSection = () => {
             duration: 1.4,
             ease: "power3.inOut",
           },
-          "-=0.2"
+          "-=0.8"
         );
 
         tl.to(

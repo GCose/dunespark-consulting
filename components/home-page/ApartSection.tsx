@@ -1,5 +1,6 @@
-import Image from "next/image";
+import { gsap } from "gsap";
 import Link from "next/link";
+import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
 const ApartSection = () => {
@@ -73,7 +74,7 @@ const ApartSection = () => {
     const mobileCards = document.querySelectorAll(".mobile-card");
 
     const observers = Array.from(mobileCards).map((card) => {
-      gsap.set(card, { opacity: 0, y: 50 });
+      gsap.set(card, { opacity: 0, y: -50 });
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -83,6 +84,7 @@ const ApartSection = () => {
                 opacity: 1,
                 y: 0,
                 duration: 1,
+                delay: 0.3,
                 ease: "power3.out",
               });
               observer.disconnect();
@@ -198,11 +200,11 @@ const ApartSection = () => {
         </div>
       </div>
 
-      <div className="mobile-card lg:hidden flex flex-col gap-12">
+      <div className="lg:hidden flex flex-col gap-12">
         {points.map((point) => (
           <div
             key={point.number}
-            className="bg-cream flex flex-col items-start py-4 px-5 clip-diagonal-lg"
+            className="bg-cream mobile-card flex flex-col items-start py-4 px-5 clip-diagonal-lg"
           >
             <div className="text-terracotta text-6xl font-display font-bold mb-2">
               {point.number}
