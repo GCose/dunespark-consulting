@@ -204,7 +204,7 @@ const ApartSection = () => {
         {points.map((point) => (
           <div
             key={point.number}
-            className="bg-pure-white mobile-card flex flex-col items-start py-4 px-5 clip-diagonal-lg"
+            className="bg-cream mobile-card flex flex-col items-start py-4 px-5 clip-diagonal-lg"
           >
             <div className="text-terracotta text-6xl font-display font-bold mb-2">
               {point.number}
@@ -220,7 +220,6 @@ const ApartSection = () => {
                 fill
                 src={point.image}
                 alt={point.title}
-                style={{ filter: "saturate(0.85)" }}
                 className="object-cover clip-diagonal-lg"
               />
             </div>
