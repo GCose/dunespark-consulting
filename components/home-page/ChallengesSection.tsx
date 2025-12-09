@@ -93,7 +93,7 @@ const ChallengesSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-cream px-8 clip-diagonal py-fluid-lg md:mt-30 relative opacity-0"
+      className="bg-cream px-8 clip-diagonal py-fluid-lg my-40 md:mt-30 relative opacity-0"
       style={{ visibility: "hidden" }}
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] relative z-10">
