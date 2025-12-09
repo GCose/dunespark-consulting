@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef, useEffect } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useLottie } from "lottie-react";
+import rocketAnimation from "@/public/lotties/rocket-businessman.json";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -15,11 +17,18 @@ const PromiseSection = () => {
   const imageRef = useRef<HTMLDivElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const rocketRef = useRef<HTMLDivElement>(null);
 
   const horizontalWrapperRef = useRef<HTMLElement>(null);
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
   const horizontalContentRef = useRef<HTMLDivElement>(null);
   const brandTextRef = useRef<HTMLDivElement>(null);
+
+  const { View: RocketView } = useLottie({
+    animationData: rocketAnimation,
+    loop: true,
+    autoplay: true,
+  });
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -39,6 +48,7 @@ const PromiseSection = () => {
 
     gsap.set(textContentRef.current, { opacity: 0, y: -100 });
     gsap.set(ctaRef.current, { opacity: 0, y: 50 });
+    gsap.set(rocketRef.current, { opacity: 0, x: -50, y: 30 });
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -106,6 +116,32 @@ const PromiseSection = () => {
             ease: "power3.out",
           },
           "-=0.9"
+        );
+
+        tl.to(
+          rocketRef.current,
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            rotation: 2,
+            duration: 1.2,
+            ease: "power3.out",
+          },
+          "-=0.6"
+        );
+
+        tl.to(
+          rocketRef.current,
+          {
+            x: 100,
+            y: -135,
+            duration: 1.5,
+            ease: "power1.inOut",
+            repeat: -1,
+            yoyo: true,
+          },
+          "+=0"
         );
 
         observer.disconnect();
@@ -299,6 +335,13 @@ const PromiseSection = () => {
                   Book Discovery Call
                 </span>
               </Link>
+            </div>
+
+            <div
+              ref={rocketRef}
+              className="hidden lg:block mt-12 w-[200px] h-[200px] lg:w-[250px] lg:h-[250px]"
+            >
+              {RocketView}
             </div>
           </div>
         </div>
