@@ -314,7 +314,7 @@ const GrowthEcosystemSection = () => {
               style={{ transformOrigin: "center top" }}
             >
               <div
-                className={`relative clip-diagonal-lg circuit-board bg-cream border border-terracotta/20 p-12 lg:p-16 min-h-[80vh] flex flex-col`}
+                className={`relative clip-diagonal-lg circuit-board bg-linear-to-br ${card.gradient} backdrop-blur-sm bg-cream/95 border border-terracotta/20 p-8 md:p-12 lg:p-16 min-h-[65vh] md:min-h-[70vh] lg:min-h-[80vh] flex flex-col`}
               >
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">
