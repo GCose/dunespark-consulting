@@ -85,7 +85,7 @@ const ApartSection = () => {
       </div>
 
       <div className="hidden lg:grid grid-cols-12 gap-8 lg:gap-12">
-        <div className="lg:col-span-4 flex flex-col">
+        <div className="lg:col-span-3 flex flex-col">
           {points
             .filter((p) => p.side === "left")
             .map((point, idx) => {
@@ -116,12 +116,12 @@ const ApartSection = () => {
             })}
         </div>
 
-        <div className="lg:col-span-4 relative">
+        <div className="lg:col-span-6 relative">
           <div className="hidden lg:block lg:sticky lg:top-10 lg:py-10 mb-12 lg:mb-0 h-[80vh] md:h-[90vh]">
             {points.map((point, idx) => (
               <Image
-                key={point.number}
                 fill
+                key={point.number}
                 src={point.image}
                 alt="Growth systems"
                 className={`object-cover clip-diagonal-lg transition-opacity duration-700 absolute top-0 left-0 w-full h-full ${
@@ -132,7 +132,7 @@ const ApartSection = () => {
           </div>
         </div>
 
-        <div className="lg:col-span-4 flex flex-col mt-[150vh]">
+        <div className="lg:col-span-3 flex flex-col mt-[150vh]">
           {points
             .filter((p) => p.side === "right")
             .map((point, idx) => {
@@ -182,7 +182,7 @@ const ApartSection = () => {
                 src={point.image}
                 alt={point.title}
                 style={{ filter: "saturate(0.85)" }}
-                className="object-cover"
+                className="object-cover clip-diagonal-lg"
               />
             </div>
           </div>
