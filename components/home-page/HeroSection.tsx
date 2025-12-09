@@ -157,7 +157,10 @@ const HeroSection = () => {
           <span className="word inline-block">MISSING</span>
         </h1>
 
-        <div ref={imageRef} className="relative w-full h-screen mt-10">
+        <div
+          ref={imageRef}
+          className="relative w-full h-[50vh] md:h-screen mt-10"
+        >
           <Image
             fill
             priority

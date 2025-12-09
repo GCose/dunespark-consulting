@@ -13,6 +13,8 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+
     const typeInterval = setInterval(() => {
       if (indexRef.current < text.length) {
         const char = text.charAt(indexRef.current);
@@ -27,7 +29,10 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
       }
     }, 100);
 
-    return () => clearInterval(typeInterval);
+    return () => {
+      clearInterval(typeInterval);
+      document.body.style.overflow = "";
+    };
   }, []);
 
   useEffect(() => {
@@ -40,7 +45,10 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
           duration: 1.2,
           ease: "power3.inOut",
           transformOrigin: "center",
-          onComplete: onFinish,
+          onComplete: () => {
+            document.body.style.overflow = "";
+            onFinish();
+          },
         }
       );
     }
