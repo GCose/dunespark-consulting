@@ -27,28 +27,28 @@ const GrowthEcosystemSection = () => {
     autoplay: false,
   });
 
-  const { View: Money1View } = useLottie({
+  const { View: Money1View, play: playMoney1 } = useLottie({
     animationData: moneyAnimation,
     loop: true,
-    autoplay: true,
+    autoplay: false,
   });
 
-  const { View: Money2View } = useLottie({
+  const { View: Money2View, play: playMoney2 } = useLottie({
     animationData: moneyAnimation,
     loop: true,
-    autoplay: true,
+    autoplay: false,
   });
 
-  const { View: Money3View } = useLottie({
+  const { View: Money3View, play: playMoney3 } = useLottie({
     animationData: moneyAnimation,
     loop: true,
-    autoplay: true,
+    autoplay: false,
   });
 
-  const { View: Money4View } = useLottie({
+  const { View: Money4View, play: playMoney4 } = useLottie({
     animationData: moneyAnimation,
     loop: true,
-    autoplay: true,
+    autoplay: false,
   });
 
   const cards = [
@@ -160,6 +160,7 @@ const GrowthEcosystemSection = () => {
       scale: 1,
       duration: 1,
       ease: "power2.out",
+      onStart: () => playMoney1(),
     })
       .to(
         card1Ref.current,
@@ -180,6 +181,7 @@ const GrowthEcosystemSection = () => {
           scale: 1,
           duration: 1,
           ease: "power2.out",
+          onStart: () => playMoney2(),
         },
         "-=0.5"
       )
@@ -202,6 +204,7 @@ const GrowthEcosystemSection = () => {
           scale: 1,
           duration: 1,
           ease: "power2.out",
+          onStart: () => playMoney3(),
         },
         "-=0.5"
       )
@@ -224,6 +227,7 @@ const GrowthEcosystemSection = () => {
           scale: 1,
           duration: 1,
           ease: "power2.out",
+          onStart: () => playMoney4(),
         },
         "-=0.5"
       )
@@ -255,7 +259,7 @@ const GrowthEcosystemSection = () => {
       }
       tl.kill();
     };
-  }, [playConfetti]);
+  }, [playConfetti, playMoney1, playMoney2, playMoney3, playMoney4]);
 
   return (
     <section
@@ -310,7 +314,7 @@ const GrowthEcosystemSection = () => {
               style={{ transformOrigin: "center top" }}
             >
               <div
-                className={`relative clip-diagonal-lg circuit-board bg-linear-to-br ${card.gradient} backdrop-blur-sm bg-cream/95 border border-terracotta/20 p-12 lg:p-16 min-h-[80vh] flex flex-col`}
+                className={`relative clip-diagonal-lg circuit-board bg-cream border border-terracotta/20 p-12 lg:p-16 min-h-[80vh] flex flex-col`}
               >
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">
