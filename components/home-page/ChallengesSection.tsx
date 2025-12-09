@@ -188,7 +188,6 @@ const ChallengesSection = () => {
           <div ref={imageRef} className="relative w-full min-h-screen">
             <Image
               fill
-              style={{ filter: "saturate(0.85)" }}
               alt="Growth challenges visualization"
               src="/images/home-page/challenge.webp"
               className="object-cover clip-diagonal-lg"
