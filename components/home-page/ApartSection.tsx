@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 
 const ApartSection = () => {
@@ -164,9 +165,12 @@ const ApartSection = () => {
         </div>
       </div>
 
-      <div className="bg-cream lg:hidden flex flex-col gap-12">
+      <div className="lg:hidden flex flex-col gap-12">
         {points.map((point) => (
-          <div key={point.number} className="flex flex-col items-start">
+          <div
+            key={point.number}
+            className="bg-cream flex flex-col items-start py-4 px-5 clip-diagonal-lg"
+          >
             <div className="text-terracotta text-6xl font-display font-bold mb-2">
               {point.number}
             </div>
@@ -187,6 +191,17 @@ const ApartSection = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="flex flex-col md:flex-row justify-center items-center mt-24 gap-4">
+        <Link
+          href="/contact"
+          className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand hover:bg-white hover:text-terracotta font-medium text-center bg-warm-sand text-white transition-all duration-300"
+        >
+          <span className="font-display font-bold uppercase tracking-wider text-[clamp(1rem,2vw,1.4rem)]">
+            Book Consultation Call
+          </span>
+        </Link>
       </div>
     </section>
   );

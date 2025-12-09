@@ -42,7 +42,7 @@ const Navigation = () => {
       <div className="py-4 md:py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="font-display text-2xl md:text-3xl font-bold tracking-tight text-text-primary hover:text-terracotta transition-premium"
+          className="font-display text-2xl md:text-3xl font-bold tracking-tight text-text-tertiary hover:text-terracotta transition-premium"
         >
           DUNESPARK
         </Link>
