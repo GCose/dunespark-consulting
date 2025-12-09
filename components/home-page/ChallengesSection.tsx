@@ -2,10 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import { useLottie } from "lottie-react";
+import splashAnimation from "@/public/lotties/water-splash.json";
 
 const ChallengesSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const splashRef = useRef<SVGSVGElement>(null);
+  const splashContainerRef = useRef<HTMLDivElement>(null);
   const mainTitleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -13,6 +15,16 @@ const ChallengesSection = () => {
   const nextTitleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+
+  const { View, play, setSpeed } = useLottie({
+    animationData: splashAnimation,
+    loop: true,
+    autoplay: false,
+  });
+
+  useEffect(() => {
+    setSpeed(0.6);
+  }, [setSpeed]);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -29,17 +41,7 @@ const ChallengesSection = () => {
     gsap.set(nextTitleRef.current, { opacity: 0, y: -50 });
     gsap.set(descriptionRef.current, { opacity: 0, y: 40 });
     gsap.set(imageRef.current, { opacity: 0, clipPath: "inset(0 100% 0 0)" });
-
-    // Splash setup
-    if (splashRef.current) {
-      const splashDroplets =
-        splashRef.current.querySelectorAll(".splash-droplet");
-      gsap.set(splashDroplets, {
-        scale: 0,
-        opacity: 0,
-        transformOrigin: "center center",
-      });
-    }
+    gsap.set(splashContainerRef.current, { opacity: 0 });
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -74,25 +76,17 @@ const ChallengesSection = () => {
           "-=0.5"
         );
 
-        // SPLASH BURST - After CTA shows
-        if (splashRef.current) {
-          const splashDroplets =
-            splashRef.current.querySelectorAll(".splash-droplet");
-          tl.to(
-            splashDroplets,
-            {
-              scale: 1,
-              opacity: 0.2,
-              duration: 0.8,
-              stagger: {
-                amount: 0.3,
-                from: "random",
-              },
-              ease: "back.out(2)",
+        tl.to(
+          splashContainerRef.current,
+          {
+            opacity: 1,
+            duration: 0.3,
+            onComplete: () => {
+              play();
             },
-            "-=0.3"
-          );
-        }
+          },
+          "-=1.4"
+        );
 
         tl.to(
           nextTitleRef.current,
@@ -121,7 +115,7 @@ const ChallengesSection = () => {
     );
 
     observer.observe(sectionRef.current);
-  }, []);
+  }, [play]);
 
   return (
     <section
@@ -129,231 +123,16 @@ const ChallengesSection = () => {
       className="py-fluid-lg md:mt-30 relative opacity-0 overflow-hidden"
       style={{ visibility: "hidden" }}
     >
-      <svg
-        ref={splashRef}
-        className="hidden lg:block absolute top-[20%] left-[15%] w-[900px] h-[900px] pointer-events-none z-0"
-        viewBox="0 0 900 900"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+      {/* Lottie Splash - Desktop Only */}
+      <div
+        ref={splashContainerRef}
+        className="hidden lg:block absolute top-1/2 left-0 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none z-0"
+        style={{
+          filter: "hue-rotate(200deg) saturate(1.8) brightness(0.85)",
+        }}
       >
-        <ellipse
-          className="splash-droplet"
-          cx="450"
-          cy="450"
-          rx="180"
-          ry="180"
-          fill="#C67B5C"
-          opacity="0.3"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="450"
-          cy="450"
-          rx="120"
-          ry="120"
-          fill="#C67B5C"
-          opacity="0.4"
-        />
-
-        <ellipse
-          className="splash-droplet"
-          cx="280"
-          cy="320"
-          rx="85"
-          ry="95"
-          fill="#C67B5C"
-          transform="rotate(-25 280 320)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="620"
-          cy="300"
-          rx="75"
-          ry="90"
-          fill="#C67B5C"
-          transform="rotate(30 620 300)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="690"
-          cy="480"
-          rx="70"
-          ry="80"
-          fill="#C67B5C"
-          transform="rotate(15 690 480)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="600"
-          cy="650"
-          rx="80"
-          ry="85"
-          fill="#C67B5C"
-          transform="rotate(-40 600 650)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="320"
-          cy="620"
-          rx="75"
-          ry="90"
-          fill="#C67B5C"
-          transform="rotate(20 320 620)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="220"
-          cy="480"
-          rx="65"
-          ry="75"
-          fill="#C67B5C"
-          transform="rotate(-35 220 480)"
-        />
-
-        <ellipse
-          className="splash-droplet"
-          cx="380"
-          cy="250"
-          rx="55"
-          ry="65"
-          fill="#C67B5C"
-          transform="rotate(45 380 250)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="550"
-          cy="240"
-          rx="50"
-          ry="60"
-          fill="#C67B5C"
-          transform="rotate(-20 550 240)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="720"
-          cy="380"
-          rx="45"
-          ry="55"
-          fill="#C67B5C"
-          transform="rotate(60 720 380)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="740"
-          cy="580"
-          rx="50"
-          ry="58"
-          fill="#C67B5C"
-          transform="rotate(-15 740 580)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="520"
-          cy="720"
-          rx="48"
-          ry="56"
-          fill="#C67B5C"
-          transform="rotate(35 520 720)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="350"
-          cy="730"
-          rx="52"
-          ry="60"
-          fill="#C67B5C"
-          transform="rotate(-50 350 730)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="180"
-          cy="580"
-          rx="45"
-          ry="53"
-          fill="#C67B5C"
-          transform="rotate(25 180 580)"
-        />
-        <ellipse
-          className="splash-droplet"
-          cx="160"
-          cy="380"
-          rx="48"
-          ry="55"
-          fill="#C67B5C"
-          transform="rotate(-45 160 380)"
-        />
-
-        <circle
-          className="splash-droplet"
-          cx="320"
-          cy="190"
-          r="28"
-          fill="#C67B5C"
-        />
-        <circle
-          className="splash-droplet"
-          cx="580"
-          cy="170"
-          r="25"
-          fill="#C67B5C"
-        />
-        <circle
-          className="splash-droplet"
-          cx="760"
-          cy="300"
-          r="30"
-          fill="#C67B5C"
-        />
-        <circle
-          className="splash-droplet"
-          cx="790"
-          cy="520"
-          r="26"
-          fill="#C67B5C"
-        />
-        <circle
-          className="splash-droplet"
-          cx="680"
-          cy="720"
-          r="28"
-          fill="#C67B5C"
-        />
-        <circle
-          className="splash-droplet"
-          cx="450"
-          cy="780"
-          r="32"
-          fill="#C67B5C"
-        />
-        <circle
-          className="splash-droplet"
-          cx="250"
-          cy="730"
-          r="27"
-          fill="#C67B5C"
-        />
-        <circle
-          className="splash-droplet"
-          cx="120"
-          cy="520"
-          r="29"
-          fill="#C67B5C"
-        />
-        <circle
-          className="splash-droplet"
-          cx="110"
-          cy="300"
-          r="26"
-          fill="#C67B5C"
-        />
-        <circle
-          className="splash-droplet"
-          cx="240"
-          cy="180"
-          r="24"
-          fill="#C67B5C"
-        />
-      </svg>
+        {View}
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] relative z-10">
         <div className="lg:col-span-10">
