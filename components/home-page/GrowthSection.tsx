@@ -305,7 +305,7 @@ const GrowthEcosystemSection = () => {
         ref={stackContainerRef}
         className="relative min-h-screen flex items-start justify-center"
       >
-        <div className="sticky top-32 w-full max-w-7xl mx-auto px-4">
+        <div className="sticky top-[8vh] w-full max-w-7xl mx-auto px-4">
           {cards.map((card, index) => (
             <div
               key={index}
