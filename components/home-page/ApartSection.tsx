@@ -70,7 +70,7 @@ const ApartSection = () => {
       className={`${points[activePoint].bg} transition-colors duration-700 py-fluid-lg`}
     >
       <div className="mb-16 lg:mb-24">
-        <h2 className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-3xl md:text-6xl lg:text-7xl">
+        <h2 className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-[clamp(2.2rem,5vw,7rem)]">
           WHAT SETS DUNESPARK APART — THE BOUTIQUE GROWTH EXPERIENCE
         </h2>
       </div>
