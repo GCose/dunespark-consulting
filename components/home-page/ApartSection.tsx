@@ -44,7 +44,7 @@ const ApartSection = () => {
       description: "Every system tied directly to revenue and growth",
       side: "left",
       image: "/images/home-page/apart-5.webp",
-      bg: "bg-[#F3E5F5]",
+      bg: "bg-terracotta/10",
     },
   ];
 
@@ -117,15 +117,14 @@ const ApartSection = () => {
         </div>
 
         <div className="lg:col-span-4 relative">
-          <div className="hidden lg:block lg:sticky lg:top-20 mb-12 lg:mb-0 h-[80vh] md:h-[90vh]">
+          <div className="hidden lg:block lg:sticky lg:top-10 lg:py-10 mb-12 lg:mb-0 h-[80vh] md:h-[90vh]">
             {points.map((point, idx) => (
               <Image
                 key={point.number}
                 fill
                 src={point.image}
                 alt="Growth systems"
-                style={{ filter: "saturate(0.85)" }}
-                className={`object-cover transition-opacity duration-700 absolute top-0 left-0 w-full h-full ${
+                className={`object-cover clip-diagonal-lg transition-opacity duration-700 absolute top-0 left-0 w-full h-full ${
                   idx === activePoint ? "opacity-100" : "opacity-0"
                 }`}
               />
