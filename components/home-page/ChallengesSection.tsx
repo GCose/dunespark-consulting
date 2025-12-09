@@ -120,10 +120,9 @@ const ChallengesSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-fluid-lg md:mt-30 relative opacity-0 overflow-hidden"
+      className="dot-matrix py-fluid-lg md:mt-30 relative opacity-0 overflow-hidden"
       style={{ visibility: "hidden" }}
     >
-      {/* Lottie Splash - Desktop Only */}
       <div
         ref={splashContainerRef}
         className="hidden lg:block absolute top-1/2 left-0 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none z-0"

@@ -55,7 +55,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
   }, [showOverlay, onFinish]);
 
   return (
-    <div className="fixed inset-0 bg-cream flex items-center justify-center h-screen z-9999 overflow-hidden">
+    <div className="fixed inset-0 circuit-board bg-cream flex items-center justify-center h-screen z-9999 overflow-hidden">
       <h1 className="font-display font-extrabold text-4xl md:text-6xl lg:text-8xl text-terracotta tracking-tight">
         {typedText}
       </h1>
@@ -63,7 +63,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
       {showOverlay && (
         <div
           ref={overlayRef}
-          className="absolute inset-0 bg-black/30 clip-diagonal-lg z-50 overflow-hidden h-screen"
+          className="absolute inset-0 bg-cream clip-diagonal-lg z-50 overflow-hidden h-screen"
         />
       )}
     </div>

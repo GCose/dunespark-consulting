@@ -349,7 +349,7 @@ const PromiseSection = () => {
 
       <section
         ref={horizontalWrapperRef}
-        className="relative mt-32 lg:min-h-[500vh] md:bg-terracotta-dark/10"
+        className="relative mt-32 lg:min-h-[500vh] md:bg-transparent circuit-board"
       >
         <div
           ref={horizontalContainerRef}
