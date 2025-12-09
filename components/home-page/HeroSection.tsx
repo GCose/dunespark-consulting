@@ -159,7 +159,7 @@ const HeroSection = () => {
 
         <div
           ref={imageRef}
-          className="relative w-full h-[50vh] md:h-screen mt-10"
+          className="relative w-full h-[70vh] md:h-screen mt-10"
         >
           <Image
             fill
