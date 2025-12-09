@@ -1,7 +1,7 @@
+import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
