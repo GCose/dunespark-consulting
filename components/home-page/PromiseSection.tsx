@@ -348,7 +348,7 @@ const PromiseSection = () => {
                 key={index}
                 className="mobile-card lg:min-w-[65vw] lg:w-[65vw] lg:h-screen lg:flex lg:items-center lg:justify-center lg:px-12 mt-8 lg:mt-0"
               >
-                <div className="bg-terracotta clip-diagonal-lg p-8 lg:p-16 w-full lg:max-w-[80vw] lg:h-[90vh] flex flex-col gap-6 relative">
+                <div className="bg-terracotta clip-diagonal-lg md:clip-diagonal-sm p-8 lg:p-16 w-full lg:max-w-[80vw] lg:h-[90vh] flex flex-col gap-6 relative">
                   <h4 className="font-display font-semibold text-white text-[clamp(1.5rem,5vw,2.5rem)] max-w-190 leading-tight">
                     {card.title}
                   </h4>
