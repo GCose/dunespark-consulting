@@ -56,7 +56,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
 
   return (
     <div className="fixed inset-0 bg-cream flex items-center justify-center h-screen z-9999 overflow-hidden">
-      <h1 className="font-display font-extrabold text-4xl md:text-6xl lg:text-8xl text-text-primary tracking-tight">
+      <h1 className="font-display font-extrabold text-4xl md:text-6xl lg:text-8xl text-terracotta tracking-tight">
         {typedText}
       </h1>
 

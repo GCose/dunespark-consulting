@@ -121,8 +121,8 @@ const ApartSection = () => {
             {points.map((point, idx) => (
               <Image
                 fill
-                key={point.number}
                 src={point.image}
+                key={point.number}
                 alt="Growth systems"
                 className={`object-cover clip-diagonal-lg transition-opacity duration-700 absolute top-0 left-0 w-full h-full ${
                   idx === activePoint ? "opacity-100" : "opacity-0"
