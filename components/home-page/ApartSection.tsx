@@ -14,7 +14,7 @@ const ApartSection = () => {
       description: "Tested, proven, ready to deploy quickly",
       side: "left",
       image: "/images/home-page/apart-1.webp",
-      bg: "bg-white",
+      bg: "bg-pure-white",
     },
     {
       number: "02",
@@ -22,7 +22,7 @@ const ApartSection = () => {
       description: "Most systems go live in under 14 days",
       side: "right",
       image: "/images/home-page/apart-2.webp",
-      bg: "bg-[#FFF8E1]",
+      bg: "bg-warm-beige",
     },
     {
       number: "03",
@@ -30,7 +30,7 @@ const ApartSection = () => {
       description: "Self-optimizing and built to grow with you",
       side: "left",
       image: "/images/home-page/apart-3.webp",
-      bg: "bg-[#E8F5E9]",
+      bg: "bg-deep-clay",
     },
     {
       number: "04",
@@ -38,7 +38,7 @@ const ApartSection = () => {
       description: "Personalized attention with enterprise-grade quality",
       side: "right",
       image: "/images/home-page/apart-4.webp",
-      bg: "bg-[#E3F2FD]",
+      bg: "bg-soft-white",
     },
     {
       number: "05",
@@ -204,7 +204,7 @@ const ApartSection = () => {
         {points.map((point) => (
           <div
             key={point.number}
-            className="bg-cream mobile-card flex flex-col items-start py-4 px-5 clip-diagonal-lg"
+            className="bg-pure-white mobile-card flex flex-col items-start py-4 px-5 clip-diagonal-lg"
           >
             <div className="text-terracotta text-6xl font-display font-bold mb-2">
               {point.number}
@@ -231,7 +231,7 @@ const ApartSection = () => {
       <div className="flex flex-col md:flex-row justify-center items-center mt-24 gap-4">
         <Link
           href="/contact"
-          className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand hover:bg-white hover:text-terracotta font-medium text-center bg-warm-sand text-white transition-all duration-300"
+          className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand hover:bg-text-primary hover:text-terracotta font-medium text-center bg-warm-sand text-text-primary transition-all duration-300"
         >
           <span className="font-display font-bold uppercase tracking-wider text-[clamp(1rem,2vw,1.4rem)]">
             Book Consultation Call
