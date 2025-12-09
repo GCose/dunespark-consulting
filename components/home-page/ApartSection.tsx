@@ -74,7 +74,7 @@ const ApartSection = () => {
     const mobileCards = document.querySelectorAll(".mobile-card");
 
     const observers = Array.from(mobileCards).map((card) => {
-      gsap.set(card, { opacity: 0, y: -50 });
+      gsap.set(card, { opacity: 0, y: 50 });
 
       const observer = new IntersectionObserver(
         (entries) => {
