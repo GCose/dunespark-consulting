@@ -141,7 +141,13 @@ const GrowthEcosystemSection = () => {
       scrollTrigger: {
         trigger: stackContainerRef.current,
         start: "top top",
-        end: "+=250%",
+        end: () => {
+          const isMobile = window.innerWidth < 768;
+          const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+          if (isMobile) return "+=450%";
+          if (isTablet) return "+=350%";
+          return "+=250%";
+        },
         scrub: 0.5,
         pin: true,
         pinSpacing: true,
