@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import Link from "next/link";
+import Image from "next/image";
+import { useRef, useEffect } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 if (typeof window !== "undefined") {
@@ -169,6 +169,39 @@ const PromiseSection = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.innerWidth >= 1024) return;
+
+    const mobileCards = document.querySelectorAll(".mobile-card");
+
+    const observers = Array.from(mobileCards).map((card) => {
+      gsap.set(card, { opacity: 0, y: 50 });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out",
+              });
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      observer.observe(card);
+      return observer;
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
   const cards = [
     {
       title: "High-quality leads without manual outreach",
@@ -313,7 +346,7 @@ const PromiseSection = () => {
             {cards.map((card, index) => (
               <div
                 key={index}
-                className="lg:min-w-[65vw] lg:w-[65vw] lg:h-screen lg:flex lg:items-center lg:justify-center lg:px-12 mt-8 lg:mt-0"
+                className="mobile-card lg:min-w-[65vw] lg:w-[65vw] lg:h-screen lg:flex lg:items-center lg:justify-center lg:px-12 mt-8 lg:mt-0"
               >
                 <div className="bg-terracotta clip-diagonal-lg p-8 lg:p-16 w-full lg:max-w-4xl lg:h-[90vh] flex flex-col gap-6 relative">
                   <h4 className="font-display font-semibold text-white text-[clamp(1.5rem,5vw,2.5rem)] max-w-190 leading-tight">

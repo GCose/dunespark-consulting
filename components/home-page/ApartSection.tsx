@@ -66,6 +66,39 @@ const ApartSection = () => {
     return () => observers.forEach((o) => o?.disconnect());
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.innerWidth >= 1024) return;
+
+    const mobileCards = document.querySelectorAll(".mobile-card");
+
+    const observers = Array.from(mobileCards).map((card) => {
+      gsap.set(card, { opacity: 0, y: 50 });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out",
+              });
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      observer.observe(card);
+      return observer;
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
   return (
     <section
       className={`${points[activePoint].bg} transition-colors duration-700 py-fluid-lg`}
@@ -165,7 +198,7 @@ const ApartSection = () => {
         </div>
       </div>
 
-      <div className="lg:hidden flex flex-col gap-12">
+      <div className="mobile-card lg:hidden flex flex-col gap-12">
         {points.map((point) => (
           <div
             key={point.number}
