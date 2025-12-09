@@ -319,7 +319,7 @@ const PromiseSection = () => {
                   <h4 className="font-display font-semibold text-white text-[clamp(1.5rem,5vw,2.5rem)] max-w-190 leading-tight">
                     {card.title}
                   </h4>
-                  <div className="mt-auto ml-auto relative w-50 h-50 md:w-80 md:h-80 lg:w-full lg:h-full lg:max-w-2xl lg:max-h-[75vh]">
+                  <div className="mt-auto ml-auto relative w-50 h-50 md:w-80 md:h-80 lg:w-full lg:h-full lg:max-w-[75vw] lg:max-h-[75vh]">
                     <Image
                       fill
                       alt={card.alt}
