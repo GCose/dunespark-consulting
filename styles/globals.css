@@ -37,22 +37,23 @@
   --spacing-fluid-xl: clamp(12rem, 20vw, 18rem);
   --spacing-fluid-2xl: clamp(16rem, 25vw, 24rem);
 
-  --color-cream: #f5f1e8;
-  --color-warm-beige: #ede6d6;
-  --color-soft-white: #fafaf8;
-  --color-pure-white: #ffffff;
+  --color-cream: #1a1a1a;
+  --color-warm-beige: #22201d;
+  --color-soft-white: #1e1c19;
+  --color-pure-white: #0f0f0f;
 
-  --color-terracotta: #c67b5c;
-  --color-terracotta-light: #d89580;
-  --color-terracotta-dark: #a86449;
-  --color-warm-sand: #d4b996;
-  --color-deep-clay: #8b6f47;
-  --color-burnt-sienna: #a0522d;
+  --color-terracotta: #d1876a;
+  --color-terracotta-light: #e3a68c;
+  --color-terracotta-dark: #8c4f38;
 
-  --color-text-primary: #2c2416;
-  --color-text-secondary: #5c4f3d;
-  --color-text-tertiary: #8b7e6a;
-  --color-text-muted: #afa593;
+  --color-warm-sand: #8e7458;
+  --color-deep-clay: #5a4632;
+  --color-burnt-sienna: #8a3f23;
+
+  --color-text-muted: #6e685e;
+  --color-text-primary: #eae7e2;
+  --color-text-tertiary: #9d9588;
+  --color-text-secondary: #c5bfb6;
 
   --font-display: "Boska", serif;
   --font-body: "Gambarino", serif;

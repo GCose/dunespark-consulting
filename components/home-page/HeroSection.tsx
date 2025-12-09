@@ -220,16 +220,16 @@ const HeroSection = () => {
           className="md:col-span-6 lg:col-span-5 lg:col-start-5 flex items-center px-0"
         >
           <div className="space-y-18">
-            <p className="font-body text-black font-normal text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
+            <p className="font-body text-white font-normal text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
               You deserve a growth engine that works, effortlessly,
               intelligently, and built to scale.
             </p>
-            <p className="font-body text-black text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
+            <p className="font-body text-white text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
               At Dunespark Consulting, we install elegant, AI-powered growth
               systems that run quietly in the background, freeing you to focus
               on what matters most.
             </p>
-            <p className="font-body text-black text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
+            <p className="font-body text-white text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
               Imagine a system designed for your success, one that runs quietly
               in the background, freeing you to focus on what matters most.
             </p>
