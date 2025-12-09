@@ -223,7 +223,7 @@ const PromiseSection = () => {
                 fill
                 alt="Growth systems"
                 src="/images/home-page/promise.webp"
-                className="object-cover clip-diagonal-sm"
+                className="object-cover clip-diagonal-lg"
               />
             </div>
           </div>
@@ -316,7 +316,7 @@ const PromiseSection = () => {
                 className="lg:min-w-[65vw] lg:w-[65vw] lg:h-screen lg:flex lg:items-center lg:justify-center lg:px-12 mt-8 lg:mt-0"
               >
                 <div className="bg-cream clip-diagonal-sm p-8 lg:p-16 w-full lg:max-w-4xl lg:h-[80vh] flex flex-col gap-6 relative">
-                  <h4 className="font-display font-semibold text-text-primary text-[clamp(1.9vw,5vw,2.5vw)] max-w-160 leading-tight">
+                  <h4 className="font-display font-semibold text-text-primary text-[clamp(1.5rem,5vw,2.5rem)] max-w-190 leading-tight">
                     {card.title}
                   </h4>
                   <div className="mt-auto ml-auto relative w-50 h-50 md:w-80 md:h-80 lg:w-full lg:h-full lg:max-w-2xl lg:max-h-[450px]">

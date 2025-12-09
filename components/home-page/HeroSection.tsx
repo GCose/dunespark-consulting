@@ -242,9 +242,9 @@ const HeroSection = () => {
               <Image
                 fill
                 alt="Tech consulting"
-                className="object-cover clip-diagonal-lg"
                 src="/images/home-page/hero-2.webp"
                 style={{ filter: "saturate(0.85)" }}
+                className="object-cover clip-diagonal-lg"
               />
             </div>
           </div>
