@@ -2,6 +2,8 @@ import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { useLottie } from "lottie-react";
+import moneyAnimation from "@/public/lotties/money.json";
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -13,6 +15,20 @@ const HeroSection = () => {
   const img1Ref = useRef<HTMLDivElement>(null);
   const paragraphsRef = useRef<HTMLDivElement>(null);
   const img2Ref = useRef<HTMLDivElement>(null);
+  const moneyLeftRef = useRef<HTMLDivElement>(null);
+  const moneyRightRef = useRef<HTMLDivElement>(null);
+
+  const { View: MoneyLeftView } = useLottie({
+    animationData: moneyAnimation,
+    loop: true,
+    autoplay: true,
+  });
+
+  const { View: MoneyRightView } = useLottie({
+    animationData: moneyAnimation,
+    loop: true,
+    autoplay: true,
+  });
 
   useEffect(() => {
     gsap.set(sectionRef.current, { opacity: 1, visibility: "visible" });
@@ -92,6 +108,11 @@ const HeroSection = () => {
       clipPath: "inset(0 100% 0 0)",
     });
 
+    gsap.set([moneyLeftRef.current, moneyRightRef.current], {
+      opacity: 0,
+      scale: 0,
+    });
+
     const textParagraphs = paragraphsRef.current?.querySelectorAll("p") || [];
     gsap.set(textParagraphs, { opacity: 0, y: 40 });
 
@@ -121,6 +142,17 @@ const HeroSection = () => {
             ease: "power3.out",
           });
 
+          tl.to(
+            moneyRightRef.current,
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+              ease: "back.out(1.7)",
+            },
+            "-=1.1"
+          );
+
           tl.to(img2Ref.current, {
             opacity: 1,
             clipPath: "inset(0 0% 0 0)",
@@ -128,6 +160,17 @@ const HeroSection = () => {
             delay: 0.2,
             ease: "power3.out",
           });
+
+          tl.to(
+            moneyLeftRef.current,
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+              ease: "back.out(1.7)",
+            },
+            "-=1.4"
+          );
 
           observer.disconnect();
         }
@@ -204,9 +247,9 @@ const HeroSection = () => {
 
       <section
         ref={section2Ref}
-        className="mt-20 md:mt-50 relative grid grid-cols-1 md:grid-cols-10 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] bg-pure-white"
+        className="mt-20 md:mt-50 relative grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] bg-pure-white lg:min-h-[180vh]"
       >
-        <div className="md:col-span-4 lg:col-span-4 lg:col-start-1 ">
+        <div className="lg:col-span-4 flex flex-col justify-between">
           <div className="relative aspect-3/4 overflow-hidden">
             <div ref={img1Ref} className="w-full h-full">
               <Image
@@ -218,31 +261,45 @@ const HeroSection = () => {
               />
             </div>
           </div>
+
+          <div
+            ref={moneyLeftRef}
+            className="hidden lg:block w-[400px] h-[400px] mt-auto"
+          >
+            {MoneyLeftView}
+          </div>
         </div>
 
         <div
           ref={paragraphsRef}
-          className="md:col-span-6 lg:col-span-5 lg:col-start-5 flex items-center px-0"
+          className="lg:col-span-4 flex items-center justify-center"
         >
-          <div className="space-y-18">
-            <p className="font-body text-white font-normal text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
+          <div className="space-y-12 lg:space-y-16">
+            <p className="font-body text-white font-normal text-[clamp(1.3rem,5vw,2rem)] leading-relaxed">
               You deserve a growth engine that works, effortlessly,
               intelligently, and built to scale.
             </p>
-            <p className="font-body text-white text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
+            <p className="font-body text-white text-[clamp(1.3rem,5vw,2rem)] leading-relaxed">
               At Dunespark Consulting, we install elegant, AI-powered growth
               systems that run quietly in the background, freeing you to focus
               on what matters most.
             </p>
-            <p className="font-body text-white text-[clamp(1.3rem,5vw,2rem)] leading-7 md:leading-relaxed">
+            <p className="font-body text-white text-[clamp(1.3rem,5vw,2rem)] leading-relaxed">
               Imagine a system designed for your success, one that runs quietly
               in the background, freeing you to focus on what matters most.
             </p>
           </div>
         </div>
 
-        <div className="md:col-span-10 md:col-start-1 lg:col-span-4 lg:col-start-10 mt-12  md:mt-16 lg:mt-0 lg:pt-280">
-          <div className="relative aspect-3/4 overflow-hidden">
+        <div className="lg:col-span-4 flex flex-col justify-between">
+          <div
+            ref={moneyRightRef}
+            className="hidden lg:block w-[400px] h-[400px] ml-auto"
+          >
+            {MoneyRightView}
+          </div>
+
+          <div className="relative aspect-3/4 overflow-hidden mt-auto">
             <div ref={img2Ref} className="w-full h-full">
               <Image
                 fill
