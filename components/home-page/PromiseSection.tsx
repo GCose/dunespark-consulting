@@ -23,6 +23,7 @@ const PromiseSection = () => {
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
   const horizontalContentRef = useRef<HTMLDivElement>(null);
   const brandTextRef = useRef<HTMLDivElement>(null);
+  const sectionTitleRef = useRef<HTMLHeadingElement>(null);
 
   const { View: RocketView } = useLottie({
     animationData: rocketAnimation,
@@ -150,6 +151,10 @@ const PromiseSection = () => {
     );
 
     observer.observe(sectionRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -163,6 +168,31 @@ const PromiseSection = () => {
 
     const isDesktop = window.innerWidth >= 1024;
     if (!isDesktop) return;
+
+    let titleObserver: IntersectionObserver | null = null;
+
+    if (sectionTitleRef.current) {
+      const words = sectionTitleRef.current.querySelectorAll(".word");
+      gsap.set(words, { y: -80, opacity: 0 });
+
+      titleObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            gsap.to(words, {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.15,
+              ease: "power3.out",
+            });
+            titleObserver?.disconnect();
+          }
+        },
+        { threshold: 0.3 }
+      );
+
+      titleObserver.observe(sectionTitleRef.current);
+    }
 
     const horizontalContent = horizontalContentRef.current;
     const horizontalContainer = horizontalContainerRef.current;
@@ -201,13 +231,42 @@ const PromiseSection = () => {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (titleObserver) {
+        titleObserver.disconnect();
+      }
+      if (mainTimeline.scrollTrigger) {
+        mainTimeline.scrollTrigger.kill();
+      }
+      mainTimeline.kill();
     };
   }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.innerWidth >= 1024) return;
+
+    if (sectionTitleRef.current) {
+      const words = sectionTitleRef.current.querySelectorAll(".word");
+      gsap.set(words, { y: -80, opacity: 0 });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            gsap.to(words, {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.15,
+              ease: "power3.out",
+            });
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.3 }
+      );
+
+      observer.observe(sectionTitleRef.current);
+    }
 
     const mobileCards = document.querySelectorAll(".mobile-card");
 
@@ -349,7 +408,7 @@ const PromiseSection = () => {
 
       <section
         ref={horizontalWrapperRef}
-        className="relative mt-32 lg:min-h-[500vh] md:bg-transparent circuit-board"
+        className="relative mt-32 lg:min-h-[500vh] md:bg-terracotta-dark/10 "
       >
         <div
           ref={horizontalContainerRef}
@@ -377,8 +436,15 @@ const PromiseSection = () => {
           >
             <div className="lg:min-w-screen lg:w-screen lg:h-screen lg:flex lg:items-center lg:justify-end lg:px-16">
               <div className="text-right space-y-6 py-14 lg:py-0">
-                <h3 className="font-display font-bold text-text-primary text-[clamp(2.2rem,5vw,7rem)] leading-tight">
-                  NO GUESSWORK. NO WASTED TIME.
+                <h3
+                  ref={sectionTitleRef}
+                  className="font-display font-bold text-text-primary text-[clamp(2.2rem,5vw,7rem)] leading-tight"
+                >
+                  <span className="word inline-block">NO</span>{" "}
+                  <span className="word inline-block">GUESSWORK.</span>{" "}
+                  <span className="word inline-block">NO</span>{" "}
+                  <span className="word inline-block">WASTED</span>{" "}
+                  <span className="word inline-block">TIME.</span>
                 </h3>
                 <p className="text-text-secondary text-xl font-medium md:text-2xl lg:text-3xl">
                   Just automated, elegant systems that generate

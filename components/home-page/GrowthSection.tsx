@@ -19,6 +19,8 @@ const GrowthEcosystemSection = () => {
   const card4Ref = useRef<HTMLDivElement>(null);
   const confettiRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const lastProgress = useRef(0);
+  const confettiPlayed = useRef(false);
 
   const { View: ConfettiView, play: playConfetti } = useLottie({
     animationData: confettiAnimation,
@@ -33,7 +35,6 @@ const GrowthEcosystemSection = () => {
       subtitle: "Your Automated Growth Audit",
       description:
         "Turn cold, uninterested visitors into qualified, warm calls with an AI-powered audit funnel. Kairo asks the right questions, delivers instant value, and filters prospects — so your sales team spends time on true buyers.",
-      gradient: "from-terracotta/20 to-warm-sand/30",
     },
     {
       ref: card2Ref,
@@ -41,7 +42,6 @@ const GrowthEcosystemSection = () => {
       subtitle: "Your AI Sales Prep Engine",
       description:
         "Arm your sales team with AI-driven insights before every call. Airo analyzes prospects, competitors, objections, and more — so your team closes with confidence and speed.",
-      gradient: "from-deep-clay/20 to-terracotta-dark/30",
     },
     {
       ref: card3Ref,
@@ -49,7 +49,6 @@ const GrowthEcosystemSection = () => {
       subtitle: "Seamless Client Delivery",
       description:
         "Deliver an onboarding experience that wows clients and saves your time — fully automated and customized.",
-      gradient: "from-warm-sand/20 to-terracotta-light/30",
     },
     {
       ref: card4Ref,
@@ -57,7 +56,6 @@ const GrowthEcosystemSection = () => {
       subtitle: "Continuous Revenue Growth",
       description:
         "Keep leads and clients engaged with smart workflows that increase lifetime value and reduce churn — silently working in the background.",
-      gradient: "from-terracotta-dark/20 to-burnt-sienna/30",
     },
   ];
 
@@ -71,14 +69,17 @@ const GrowthEcosystemSection = () => {
       gsap.set(words, { y: -80, opacity: 0 });
     }
 
-    gsap.set(
-      [card1Ref.current, card2Ref.current, card3Ref.current, card4Ref.current],
-      {
-        y: 200,
-        opacity: 0,
-        scale: 0.9,
-      }
-    );
+    gsap.set([card2Ref.current, card3Ref.current, card4Ref.current], {
+      y: 200,
+      opacity: 0,
+      scale: 0.9,
+    });
+
+    gsap.set(card1Ref.current, {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+    });
 
     gsap.set(confettiRef.current, { opacity: 0 });
     gsap.set(ctaRef.current, { opacity: 0, y: 50 });
@@ -113,6 +114,24 @@ const GrowthEcosystemSection = () => {
         scrub: 1,
         pin: true,
         pinSpacing: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+
+          if (progress < 0.5) {
+            confettiPlayed.current = false;
+            lastProgress.current = progress;
+          } else if (
+            progress > 0.85 &&
+            lastProgress.current <= 0.85 &&
+            !confettiPlayed.current
+          ) {
+            playConfetti();
+            confettiPlayed.current = true;
+            lastProgress.current = progress;
+          } else {
+            lastProgress.current = progress;
+          }
+        },
       },
     });
 
@@ -194,11 +213,8 @@ const GrowthEcosystemSection = () => {
         {
           opacity: 1,
           duration: 0.3,
-          onComplete: () => {
-            playConfetti();
-          },
         },
-        "-=0.5"
+        "+=0.3"
       )
       .to(
         ctaRef.current,
@@ -212,6 +228,7 @@ const GrowthEcosystemSection = () => {
       );
 
     return () => {
+      titleObserver.disconnect();
       if (tl.scrollTrigger) {
         tl.scrollTrigger.kill();
       }
@@ -327,7 +344,7 @@ const GrowthEcosystemSection = () => {
     >
       <div
         ref={confettiRef}
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none z-50"
+        className="fixed inset-0 w-screen h-screen pointer-events-none z-50"
       >
         {ConfettiView}
       </div>
@@ -372,7 +389,7 @@ const GrowthEcosystemSection = () => {
               style={{ transformOrigin: "center top" }}
             >
               <div
-                className={`relative circuit-board clip-diagonal-lg bg-cream border border-terracotta/20 p-12 lg:p-16 min-h-[70vh] flex flex-col`}
+                className={`relative clip-diagonal-lg bg-cream border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col`}
               >
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">
@@ -399,7 +416,7 @@ const GrowthEcosystemSection = () => {
 
       <div
         ref={ctaRef}
-        className="flex flex-col md:flex-row justify-center items-center gap-4 mt-24"
+        className="flex flex-col md:flex-row justify-center items-center gap-4 mt-auto"
       >
         <Link
           href="/contact"

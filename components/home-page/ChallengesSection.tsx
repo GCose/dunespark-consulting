@@ -115,12 +115,16 @@ const ChallengesSection = () => {
     );
 
     observer.observe(sectionRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
   }, [play]);
 
   return (
     <section
       ref={sectionRef}
-      className="dot-matrix py-fluid-lg md:mt-30 relative opacity-0 overflow-hidden"
+      className="bg-terracotta-dark/10 py-fluid-lg md:mt-30 relative opacity-0 overflow-hidden"
       style={{ visibility: "hidden" }}
     >
       <div
@@ -151,7 +155,7 @@ const ChallengesSection = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 relative z-10 max-w-[2400px] lg:mx-auto">
-        <div className="lg:col-span-4 lg:col-start-2 pt-5 md:pt-20 border-y md:border-b-0 md:border-y-0 border-terracotta">
+        <div className="lg:col-span-4 lg:col-start-2 pt-5 md:pt-20 border-y md:border-b-0 md:border-y-0 border-terracotta/40">
           <p
             ref={subtitleRef}
             className="text-terracotta text-2xl md:text-3xl lg:text-5xl font-bold md:leading-15 pb-5"
@@ -160,7 +164,7 @@ const ChallengesSection = () => {
           </p>
         </div>
 
-        <div className="lg:col-span-7 lg:col-start-7 md:border-l md:border-r border-terracotta md:px-10 pt-5 md:pt-20">
+        <div className="lg:col-span-7 lg:col-start-7 md:border-l md:border-r border-terracotta/40 md:px-10 pt-5 md:pt-20">
           <ul ref={listRef} className="space-y-8 mb-12">
             <li className="text-text-primary font-medium text-xl md:text-3xl leading-relaxed">
               You{"'"}ve hired agencies and consultants, but their work feels
@@ -203,13 +207,13 @@ const ChallengesSection = () => {
         <div className="lg:col-span-4 lg:col-start-2 pt-20 lg:pt-32">
           <h3
             ref={nextTitleRef}
-            className="font-display font-bold text-terracotta text-2xl md:text-4xl lg:text-5xl leading-tight pb-5 pt-5 md:pt-20 border-y md:border-y-0 border-terracotta"
+            className="font-display font-bold text-terracotta text-2xl md:text-4xl lg:text-5xl leading-tight pb-5 pt-5 md:pt-20 border-y md:border-y-0 border-terracotta/40"
           >
             Why is growth so hard?
           </h3>
         </div>
 
-        <div className="lg:col-span-7 lg:col-start-7 pt-12 flex flex-col gap-8 lg:pt-52 md:border-l md:border-r border-terracotta">
+        <div className="lg:col-span-7 lg:col-start-7 pt-12 flex flex-col gap-8 lg:pt-52 md:border-l md:border-r border-terracotta/40">
           <p
             ref={descriptionRef}
             className="text-text-primary font-medium text-xl md:text-2xl lg:text-3xl leading-relaxed md:px-10"
