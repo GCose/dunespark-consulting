@@ -1,9 +1,8 @@
 import { gsap } from "gsap";
 import Link from "next/link";
-import { useLottie } from "lottie-react";
 import { useRef, useEffect } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import moneyAnimation from "@/public/lotties/money.json";
+import { useLottie } from "lottie-react";
 import confettiAnimation from "@/public/lotties/confetti.json";
 
 if (typeof window !== "undefined") {
@@ -27,30 +26,6 @@ const GrowthEcosystemSection = () => {
     autoplay: false,
   });
 
-  const { View: Money1View, play: playMoney1 } = useLottie({
-    animationData: moneyAnimation,
-    loop: true,
-    autoplay: false,
-  });
-
-  const { View: Money2View, play: playMoney2 } = useLottie({
-    animationData: moneyAnimation,
-    loop: true,
-    autoplay: false,
-  });
-
-  const { View: Money3View, play: playMoney3 } = useLottie({
-    animationData: moneyAnimation,
-    loop: true,
-    autoplay: false,
-  });
-
-  const { View: Money4View, play: playMoney4 } = useLottie({
-    animationData: moneyAnimation,
-    loop: true,
-    autoplay: false,
-  });
-
   const cards = [
     {
       ref: card1Ref,
@@ -58,8 +33,7 @@ const GrowthEcosystemSection = () => {
       subtitle: "Your Automated Growth Audit",
       description:
         "Turn cold, uninterested visitors into qualified, warm calls with an AI-powered audit funnel. Kairo asks the right questions, delivers instant value, and filters prospects — so your sales team spends time on true buyers.",
-      gradient: "from-terracotta/40 to-warm-sand/50",
-      moneyView: Money1View,
+      gradient: "from-terracotta/20 to-warm-sand/30",
     },
     {
       ref: card2Ref,
@@ -67,8 +41,7 @@ const GrowthEcosystemSection = () => {
       subtitle: "Your AI Sales Prep Engine",
       description:
         "Arm your sales team with AI-driven insights before every call. Airo analyzes prospects, competitors, objections, and more — so your team closes with confidence and speed.",
-      gradient: "from-deep-clay/40 to-terracotta-dark/50",
-      moneyView: Money2View,
+      gradient: "from-deep-clay/20 to-terracotta-dark/30",
     },
     {
       ref: card3Ref,
@@ -76,8 +49,7 @@ const GrowthEcosystemSection = () => {
       subtitle: "Seamless Client Delivery",
       description:
         "Deliver an onboarding experience that wows clients and saves your time — fully automated and customized.",
-      gradient: "from-warm-sand/40 to-terracotta-light/50",
-      moneyView: Money3View,
+      gradient: "from-warm-sand/20 to-terracotta-light/30",
     },
     {
       ref: card4Ref,
@@ -85,8 +57,7 @@ const GrowthEcosystemSection = () => {
       subtitle: "Continuous Revenue Growth",
       description:
         "Keep leads and clients engaged with smart workflows that increase lifetime value and reduce churn — silently working in the background.",
-      gradient: "from-terracotta-dark/40 to-burnt-sienna/50",
-      moneyView: Money4View,
+      gradient: "from-terracotta-dark/20 to-burnt-sienna/30",
     },
   ];
 
@@ -100,17 +71,14 @@ const GrowthEcosystemSection = () => {
       gsap.set(words, { y: -80, opacity: 0 });
     }
 
-    gsap.set([card2Ref.current, card3Ref.current, card4Ref.current], {
-      y: 200,
-      opacity: 0,
-      scale: 0.9,
-    });
-
-    gsap.set(card1Ref.current, {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-    });
+    gsap.set(
+      [card1Ref.current, card2Ref.current, card3Ref.current, card4Ref.current],
+      {
+        y: 200,
+        opacity: 0,
+        scale: 0.9,
+      }
+    );
 
     gsap.set(confettiRef.current, { opacity: 0 });
     gsap.set(ctaRef.current, { opacity: 0, y: 50 });
@@ -141,14 +109,8 @@ const GrowthEcosystemSection = () => {
       scrollTrigger: {
         trigger: stackContainerRef.current,
         start: "top top",
-        end: () => {
-          const isMobile = window.innerWidth < 768;
-          const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-          if (isMobile) return "+=450%";
-          if (isTablet) return "+=350%";
-          return "+=250%";
-        },
-        scrub: 0.5,
+        end: "+=250%",
+        scrub: 1,
         pin: true,
         pinSpacing: true,
       },
@@ -159,19 +121,18 @@ const GrowthEcosystemSection = () => {
       opacity: 1,
       scale: 1,
       duration: 1,
-      ease: "power2.out",
-      onStart: () => playMoney1(),
+      ease: "power3.out",
     })
       .to(
         card1Ref.current,
         {
-          scale: 0.96,
-          opacity: 0.85,
-          y: -15,
-          duration: 0.8,
-          ease: "power2.inOut",
+          scale: 0.95,
+          opacity: 0.7,
+          y: -20,
+          duration: 1,
+          ease: "power3.inOut",
         },
-        "+=0.2"
+        "+=0.3"
       )
       .to(
         card2Ref.current,
@@ -180,21 +141,20 @@ const GrowthEcosystemSection = () => {
           opacity: 1,
           scale: 1,
           duration: 1,
-          ease: "power2.out",
-          onStart: () => playMoney2(),
+          ease: "power3.out",
         },
-        "-=0.5"
+        "-=0.7"
       )
       .to(
         [card1Ref.current, card2Ref.current],
         {
-          scale: 0.94,
-          opacity: 0.8,
-          y: -30,
-          duration: 0.8,
-          ease: "power2.inOut",
+          scale: 0.92,
+          opacity: 0.6,
+          y: -40,
+          duration: 1,
+          ease: "power3.inOut",
         },
-        "+=0.2"
+        "+=0.3"
       )
       .to(
         card3Ref.current,
@@ -203,21 +163,20 @@ const GrowthEcosystemSection = () => {
           opacity: 1,
           scale: 1,
           duration: 1,
-          ease: "power2.out",
-          onStart: () => playMoney3(),
+          ease: "power3.out",
         },
-        "-=0.5"
+        "-=0.7"
       )
       .to(
         [card1Ref.current, card2Ref.current, card3Ref.current],
         {
-          scale: 0.92,
-          opacity: 0.75,
-          y: -45,
-          duration: 0.8,
-          ease: "power2.inOut",
+          scale: 0.9,
+          opacity: 0.5,
+          y: -60,
+          duration: 1,
+          ease: "power3.inOut",
         },
-        "+=0.2"
+        "+=0.3"
       )
       .to(
         card4Ref.current,
@@ -226,31 +185,30 @@ const GrowthEcosystemSection = () => {
           opacity: 1,
           scale: 1,
           duration: 1,
-          ease: "power2.out",
-          onStart: () => playMoney4(),
+          ease: "power3.out",
         },
-        "-=0.5"
+        "-=0.7"
       )
       .to(
         confettiRef.current,
         {
           opacity: 1,
-          duration: 0.2,
-          onStart: () => {
+          duration: 0.3,
+          onComplete: () => {
             playConfetti();
           },
         },
-        "+=0.3"
+        "-=0.5"
       )
       .to(
         ctaRef.current,
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: "power2.out",
+          duration: 1.2,
+          ease: "power3.out",
         },
-        "-=0.1"
+        "-=0.3"
       );
 
     return () => {
@@ -259,7 +217,107 @@ const GrowthEcosystemSection = () => {
       }
       tl.kill();
     };
-  }, [playConfetti, playMoney1, playMoney2, playMoney3, playMoney4]);
+  }, [playConfetti]);
+
+  const GeometricShape = ({ index }: { index: number }) => {
+    const shapes = [
+      <svg
+        key="shape1"
+        viewBox="0 0 200 200"
+        className="w-full h-full"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="100"
+          cy="100"
+          r="80"
+          stroke="currentColor"
+          strokeWidth="2"
+          opacity="0.4"
+        />
+        <polygon
+          points="100,40 160,160 40,160"
+          stroke="currentColor"
+          strokeWidth="2"
+          opacity="0.6"
+        />
+      </svg>,
+      <svg
+        key="shape2"
+        viewBox="0 0 200 200"
+        className="w-full h-full"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          x="40"
+          y="40"
+          width="120"
+          height="120"
+          stroke="currentColor"
+          strokeWidth="2"
+          opacity="0.5"
+          transform="rotate(45 100 100)"
+        />
+        <circle
+          cx="100"
+          cy="100"
+          r="50"
+          stroke="currentColor"
+          strokeWidth="2"
+          opacity="0.4"
+        />
+      </svg>,
+      <svg
+        key="shape3"
+        viewBox="0 0 200 200"
+        className="w-full h-full"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon
+          points="100,30 170,85 170,145 100,200 30,145 30,85"
+          stroke="currentColor"
+          strokeWidth="2"
+          opacity="0.5"
+        />
+        <line
+          x1="100"
+          y1="30"
+          x2="100"
+          y2="200"
+          stroke="currentColor"
+          strokeWidth="1"
+          opacity="0.3"
+        />
+      </svg>,
+      <svg
+        key="shape4"
+        viewBox="0 0 200 200"
+        className="w-full h-full"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M100,40 L150,80 L150,140 L100,180 L50,140 L50,80 Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          opacity="0.5"
+        />
+        <circle
+          cx="100"
+          cy="110"
+          r="60"
+          stroke="currentColor"
+          strokeWidth="1"
+          opacity="0.3"
+        />
+      </svg>,
+    ];
+
+    return shapes[index];
+  };
 
   return (
     <section
@@ -269,7 +327,7 @@ const GrowthEcosystemSection = () => {
     >
       <div
         ref={confettiRef}
-        className="fixed inset-0 w-screen h-screen pointer-events-none z-50"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none z-50"
       >
         {ConfettiView}
       </div>
@@ -305,7 +363,7 @@ const GrowthEcosystemSection = () => {
         ref={stackContainerRef}
         className="relative min-h-screen flex items-start justify-center"
       >
-        <div className="sticky top-[8vh] w-full max-w-7xl mx-auto px-4">
+        <div className="sticky top-32 w-full max-w-5xl mx-auto px-4">
           {cards.map((card, index) => (
             <div
               key={index}
@@ -314,7 +372,7 @@ const GrowthEcosystemSection = () => {
               style={{ transformOrigin: "center top" }}
             >
               <div
-                className={`relative clip-diagonal-lg circuit-board bg-linear-to-br ${card.gradient} backdrop-blur-sm bg-cream/95 border border-terracotta/20 p-8 md:p-12 lg:p-16 min-h-[65vh] md:min-h-[70vh] lg:min-h-[80vh] flex flex-col`}
+                className={`relative circuit-board clip-diagonal-lg bg-cream border border-terracotta/20 p-12 lg:p-16 min-h-[70vh] flex flex-col`}
               >
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">
@@ -330,8 +388,8 @@ const GrowthEcosystemSection = () => {
                   </p>
                 </div>
 
-                <div className="absolute bottom-12 right-12 w-64 h-64 lg:w-96 lg:h-96 opacity-60">
-                  {card.moneyView}
+                <div className="absolute bottom-12 right-12 w-48 h-48 lg:w-64 lg:h-64 text-terracotta/30">
+                  <GeometricShape index={index} />
                 </div>
               </div>
             </div>
