@@ -206,7 +206,7 @@ const HeroSection = () => {
         ref={section2Ref}
         className="mt-20 md:mt-50 relative grid grid-cols-1 md:grid-cols-10 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] bg-pure-white"
       >
-        <div className="md:col-span-4 lg:col-span-4 lg:col-start-1 border-r border-terracotta/40">
+        <div className="md:col-span-4 lg:col-span-4 lg:col-start-1 ">
           <div className="relative aspect-3/4 overflow-hidden">
             <div ref={img1Ref} className="w-full h-full">
               <Image
@@ -241,7 +241,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className="md:col-span-10 md:col-start-1 lg:col-span-4 lg:col-start-10 mt-12 border-l border-terracotta/40 md:mt-16 lg:mt-0 lg:pt-280">
+        <div className="md:col-span-10 md:col-start-1 lg:col-span-4 lg:col-start-10 mt-12  md:mt-16 lg:mt-0 lg:pt-280">
           <div className="relative aspect-3/4 overflow-hidden">
             <div ref={img2Ref} className="w-full h-full">
               <Image

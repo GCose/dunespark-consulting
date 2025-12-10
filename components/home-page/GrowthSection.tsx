@@ -22,7 +22,11 @@ const GrowthEcosystemSection = () => {
   const lastProgress = useRef(0);
   const confettiPlayed = useRef(false);
 
-  const { View: ConfettiView, play: playConfetti } = useLottie({
+  const {
+    View: ConfettiView,
+    play: playConfetti,
+    goToAndPlay,
+  } = useLottie({
     animationData: confettiAnimation,
     loop: false,
     autoplay: false,
@@ -125,7 +129,7 @@ const GrowthEcosystemSection = () => {
             lastProgress.current <= 0.85 &&
             !confettiPlayed.current
           ) {
-            playConfetti();
+            goToAndPlay(0, true);
             confettiPlayed.current = true;
             lastProgress.current = progress;
           } else {

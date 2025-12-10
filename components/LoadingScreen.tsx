@@ -11,17 +11,20 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
   const text = "DUNESPARK CONSULTING";
   const indexRef = useRef(0);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const typeIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    const typeInterval = setInterval(() => {
+    typeIntervalRef.current = setInterval(() => {
       if (indexRef.current < text.length) {
         const char = text.charAt(indexRef.current);
         setTypedText((prev) => prev + char);
         indexRef.current += 1;
       } else {
-        clearInterval(typeInterval);
+        if (typeIntervalRef.current) {
+          clearInterval(typeIntervalRef.current);
+        }
 
         setTimeout(() => {
           setShowOverlay(true);
@@ -30,14 +33,16 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
     }, 100);
 
     return () => {
-      clearInterval(typeInterval);
+      if (typeIntervalRef.current) {
+        clearInterval(typeIntervalRef.current);
+      }
       document.body.style.overflow = "";
     };
   }, []);
 
   useEffect(() => {
     if (showOverlay && overlayRef.current) {
-      gsap.fromTo(
+      const animation = gsap.fromTo(
         overlayRef.current,
         { scale: 0 },
         {
@@ -51,11 +56,15 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
           },
         }
       );
+
+      return () => {
+        animation.kill();
+      };
     }
   }, [showOverlay, onFinish]);
 
   return (
-    <div className="fixed inset-0 circuit-board bg-cream flex items-center justify-center h-screen z-9999 overflow-hidden">
+    <div className="circuit-board fixed inset-0 bg-cream flex items-center justify-center h-screen z-9999 overflow-hidden">
       <h1 className="font-display font-extrabold text-4xl md:text-6xl lg:text-8xl text-terracotta tracking-tight">
         {typedText}
       </h1>
@@ -63,7 +72,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
       {showOverlay && (
         <div
           ref={overlayRef}
-          className="absolute inset-0 bg-cream clip-diagonal-lg z-50 overflow-hidden h-screen"
+          className="absolute inset-0 bg-pure-white clip-diagonal-lg z-50 overflow-hidden h-screen"
         />
       )}
     </div>
