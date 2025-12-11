@@ -1,125 +1,81 @@
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
-import { useLottie } from "lottie-react";
-import rocketLaunchAnimation from "@/public/lotties/rocket-launch.json";
+import { useRef, useEffect } from "react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const ApartSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const pointRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const rocket1Ref = useRef<HTMLDivElement>(null);
-  const rocket2Ref = useRef<HTMLDivElement>(null);
-  const rocket3Ref = useRef<HTMLDivElement>(null);
-  const rocket4Ref = useRef<HTMLDivElement>(null);
-  const rocket5Ref = useRef<HTMLDivElement>(null);
-  const rocket1Played = useRef(false);
-  const rocket2Played = useRef(false);
-  const rocket3Played = useRef(false);
-  const rocket4Played = useRef(false);
-  const rocket5Played = useRef(false);
-  const [activePoint, setActivePoint] = useState(0);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const videoRef = useRef<HTMLDivElement>(null);
+  const videoElementRef = useRef<HTMLVideoElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const card1Ref = useRef<HTMLDivElement>(null);
+  const card2Ref = useRef<HTMLDivElement>(null);
+  const card3Ref = useRef<HTMLDivElement>(null);
+  const card4Ref = useRef<HTMLDivElement>(null);
+  const card5Ref = useRef<HTMLDivElement>(null);
 
-  const { View: Rocket1View, goToAndPlay: playRocket1 } = useLottie({
-    animationData: rocketLaunchAnimation,
-    loop: false,
-    autoplay: false,
-  });
+  const cardRefs = [card1Ref, card2Ref, card3Ref, card4Ref, card5Ref];
 
-  const { View: Rocket2View, goToAndPlay: playRocket2 } = useLottie({
-    animationData: rocketLaunchAnimation,
-    loop: false,
-    autoplay: false,
-  });
-
-  const { View: Rocket3View, goToAndPlay: playRocket3 } = useLottie({
-    animationData: rocketLaunchAnimation,
-    loop: false,
-    autoplay: false,
-  });
-
-  const { View: Rocket4View, goToAndPlay: playRocket4 } = useLottie({
-    animationData: rocketLaunchAnimation,
-    loop: false,
-    autoplay: false,
-  });
-
-  const { View: Rocket5View, goToAndPlay: playRocket5 } = useLottie({
-    animationData: rocketLaunchAnimation,
-    loop: false,
-    autoplay: false,
-  });
-
-  const points = [
+  const pointsData = [
     {
       number: "01",
       title: "Pre-built AI Systems",
       description: "Tested, proven, ready to deploy quickly",
-      side: "left",
       image: "/images/home-page/apart-1.webp",
-      bg: "bg-pure-white",
     },
     {
       number: "02",
       title: "Rapid Installations",
       description: "Most systems go live in under 14 days",
-      side: "right",
       image: "/images/home-page/apart-2.webp",
-      bg: "bg-warm-beige",
     },
     {
       number: "03",
       title: "Designed for Scale",
       description: "Self-optimizing and built to grow with you",
-      side: "left",
       image: "/images/home-page/apart-3.webp",
-      bg: "bg-deep-clay",
     },
     {
       number: "04",
       title: "White-Glove Service",
       description: "Personalized attention with enterprise-grade quality",
-      side: "right",
       image: "/images/home-page/apart-4.webp",
-      bg: "bg-soft-white",
     },
     {
       number: "05",
       title: "Outcome-Focused",
       description: "Every system tied directly to revenue and growth",
-      side: "left",
       image: "/images/home-page/apart-5.webp",
-      bg: "bg-terracotta/10",
     },
   ];
 
   useEffect(() => {
+    if (!sectionRef.current) return;
+
+    gsap.set(videoRef.current, { opacity: 0 });
+
     if (titleRef.current) {
       const words = titleRef.current.querySelectorAll(".word");
       gsap.set(words, { y: -80, opacity: 0 });
     }
 
-    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
-      gsap.set(
-        [
-          rocket1Ref.current,
-          rocket2Ref.current,
-          rocket3Ref.current,
-          rocket4Ref.current,
-          rocket5Ref.current,
-        ],
-        {
-          opacity: 0,
-        }
-      );
-    }
+    gsap.set(descriptionRef.current, { opacity: 0, y: 40 });
 
-    const observer = new IntersectionObserver(
+    const titleObserver = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
+          const tl = gsap.timeline();
+
           if (titleRef.current) {
             const words = titleRef.current.querySelectorAll(".word");
-            gsap.to(words, {
+            tl.to(words, {
               y: 0,
               opacity: 1,
               duration: 1.2,
@@ -127,184 +83,146 @@ const ApartSection = () => {
               ease: "power3.out",
             });
           }
-          observer.disconnect();
+
+          tl.to(
+            descriptionRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power3.out",
+            },
+            "-=0.6"
+          );
+
+          titleObserver.disconnect();
         }
       },
       { threshold: 0.3 }
     );
 
-    if (titleRef.current) observer.observe(titleRef.current);
+    if (titleRef.current) titleObserver.observe(titleRef.current);
 
-    return () => observer.disconnect();
+    return () => {
+      titleObserver.disconnect();
+    };
   }, []);
 
   useEffect(() => {
-    const observers = pointRefs.current.map((ref, index) => {
-      if (!ref) return null;
-      const observer = new IntersectionObserver(
+    if (!cardsContainerRef.current) return;
+    if (typeof window === "undefined" || window.innerWidth < 1024) return;
+
+    gsap.set(
+      cardRefs.map((ref) => ref.current),
+      {
+        z: -2500,
+        scale: 0.3,
+        opacity: 0,
+        rotationY: 15,
+      }
+    );
+
+    const ctx = gsap.context(() => {
+      const mainScrollTrigger = ScrollTrigger.create({
+        trigger: cardsContainerRef.current,
+        start: "top top",
+        end: "+=150%",
+        pin: true,
+        scrub: 0.5,
+      });
+
+      const videoObserver = new IntersectionObserver(
         (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) setActivePoint(index);
-          });
-        },
-        { threshold: 0.5 }
-      );
-      observer.observe(ref);
-      return observer;
-    });
-    return () => observers.forEach((o) => o?.disconnect());
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.innerWidth >= 1024) return;
-
-    const mobileCards = document.querySelectorAll(".mobile-card");
-
-    const observers = Array.from(mobileCards).map((card) => {
-      gsap.set(card, { opacity: 0, y: 50 });
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              gsap.to(card, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                delay: 0.3,
-                ease: "power3.out",
-              });
-              observer.disconnect();
-            }
-          });
+          if (entries[0].isIntersecting) {
+            gsap.to(videoRef.current, {
+              opacity: 1,
+              duration: 1,
+              onStart: () => {
+                videoElementRef.current?.play();
+              },
+            });
+            videoObserver.disconnect();
+          }
         },
         { threshold: 0.3 }
       );
 
-      observer.observe(card);
-      return observer;
+      if (cardsContainerRef.current)
+        videoObserver.observe(cardsContainerRef.current);
+
+      cardRefs.forEach((ref, index) => {
+        const isLastCard = index === cardRefs.length - 1;
+
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: cardsContainerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.5,
+            onUpdate: (self) => {
+              const totalProgress = self.progress;
+              const cardsCount = cardRefs.length;
+              const cardDuration = 1 / cardsCount;
+
+              const cardStart = index * cardDuration;
+              const cardEnd = cardStart + cardDuration;
+
+              let cardProgress = 0;
+              if (totalProgress >= cardStart && totalProgress <= cardEnd) {
+                cardProgress = (totalProgress - cardStart) / cardDuration;
+              } else if (totalProgress < cardStart) {
+                cardProgress = 0;
+              } else {
+                cardProgress = 1;
+              }
+
+              // Three phases: in (0-0.33), center (0.33-0.66), out (0.66-1)
+              let z, scale, rotationY, opacity;
+
+              if (cardProgress < 0.33) {
+                // Phase 1: Coming IN from tunnel
+                const phaseProgress = cardProgress / 0.33;
+                z = -2500 + 2500 * phaseProgress;
+                scale = 0.3 + 0.7 * phaseProgress;
+                rotationY = 15 - 15 * phaseProgress;
+                opacity = phaseProgress;
+              } else if (cardProgress < 0.66 || isLastCard) {
+                // Phase 2: AT CENTER (paused)
+                z = 0;
+                scale = 1;
+                rotationY = 0;
+                opacity = 1;
+              } else {
+                // Phase 3: Going OUT past you
+                const phaseProgress = (cardProgress - 0.66) / 0.34;
+                z = 0 + 1500 * phaseProgress;
+                scale = 1 + 0.2 * phaseProgress;
+                rotationY = 0 - 15 * phaseProgress;
+                opacity = 1 - phaseProgress;
+              }
+
+              gsap.set(ref.current, { z, scale, rotationY, opacity });
+            },
+          },
+        });
+      });
+
+      return () => {
+        mainScrollTrigger.kill();
+        videoObserver.disconnect();
+      };
     });
 
-    return () => observers.forEach((o) => o.disconnect());
+    return () => {
+      ctx.revert();
+    };
   }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined" || window.innerWidth < 1024) return;
-
-    if (activePoint === 0 && !rocket1Played.current) {
-      rocket1Played.current = true;
-      gsap.set(rocket1Ref.current, { opacity: 1, y: 0 });
-      gsap.to(rocket1Ref.current, {
-        y: -800,
-        duration: 3,
-        ease: "none",
-        onStart: () => playRocket1(0, true),
-        onComplete: () => {
-          gsap.set(rocket1Ref.current, { opacity: 0 });
-        },
-      });
-    }
-
-    if (activePoint === 1 && !rocket2Played.current) {
-      rocket2Played.current = true;
-      gsap.set(rocket2Ref.current, { opacity: 1, y: 0 });
-      gsap.to(rocket2Ref.current, {
-        y: -800,
-        duration: 3,
-        ease: "none",
-        onStart: () => playRocket2(0, true),
-        onComplete: () => {
-          gsap.set(rocket2Ref.current, { opacity: 0 });
-        },
-      });
-    }
-
-    if (activePoint === 2 && !rocket3Played.current) {
-      rocket3Played.current = true;
-      gsap.set(rocket3Ref.current, { opacity: 1, y: 0 });
-      gsap.to(rocket3Ref.current, {
-        y: -800,
-        duration: 3,
-        ease: "none",
-        onStart: () => playRocket3(0, true),
-        onComplete: () => {
-          gsap.set(rocket3Ref.current, { opacity: 0 });
-        },
-      });
-    }
-
-    if (activePoint === 3 && !rocket4Played.current) {
-      rocket4Played.current = true;
-      gsap.set(rocket4Ref.current, { opacity: 1, y: 0 });
-      gsap.to(rocket4Ref.current, {
-        y: -800,
-        duration: 3,
-        ease: "none",
-        onStart: () => playRocket4(0, true),
-        onComplete: () => {
-          gsap.set(rocket4Ref.current, { opacity: 0 });
-        },
-      });
-    }
-
-    if (activePoint === 4 && !rocket5Played.current) {
-      rocket5Played.current = true;
-      gsap.set(rocket5Ref.current, { opacity: 1, y: 0 });
-      gsap.to(rocket5Ref.current, {
-        y: -800,
-        duration: 3,
-        ease: "none",
-        onStart: () => playRocket5(0, true),
-        onComplete: () => {
-          gsap.set(rocket5Ref.current, { opacity: 0 });
-        },
-      });
-    }
-  }, [
-    activePoint,
-    playRocket1,
-    playRocket2,
-    playRocket3,
-    playRocket4,
-    playRocket5,
-  ]);
 
   return (
     <section
-      className={`${points[activePoint].bg} transition-colors duration-700 py-fluid-lg relative`}
+      ref={sectionRef}
+      className="bg-pure-white py-fluid-lg relative overflow-hidden"
     >
-      <div
-        ref={rocket1Ref}
-        className="hidden lg:block fixed left-[0%] top-1/2 translate-x-0 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
-      >
-        {Rocket1View}
-      </div>
-      <div
-        ref={rocket2Ref}
-        className="hidden lg:block fixed left-[25%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
-      >
-        {Rocket2View}
-      </div>
-      <div
-        ref={rocket3Ref}
-        className="hidden lg:block fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
-      >
-        {Rocket3View}
-      </div>
-      <div
-        ref={rocket4Ref}
-        className="hidden lg:block fixed left-[75%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
-      >
-        {Rocket4View}
-      </div>
-      <div
-        ref={rocket5Ref}
-        className="hidden lg:block fixed right-[0%] top-1/2 translate-x-0 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
-      >
-        {Rocket5View}
-      </div>
-
       <div className="mb-16 lg:mb-24">
         <h2
           ref={titleRef}
@@ -324,115 +242,94 @@ const ApartSection = () => {
 
       <div className="flex justify-end mb-16 lg:mb-32">
         <div className="max-w-2xl">
-          <p className="text-text-primary text-xl md:text-2xl lg:text-3xl font-medium leading-10 text-right">
+          <p
+            ref={descriptionRef}
+            className="text-text-primary text-xl md:text-2xl lg:text-3xl font-medium leading-10 text-right"
+          >
             We{"'"}re not a typical agency. We{"'"}re your partner in
             intelligent growth, combining:
           </p>
         </div>
       </div>
 
-      <div className="hidden lg:grid grid-cols-12 gap-8 lg:gap-12">
-        <div className="lg:col-span-3 flex flex-col">
-          {points
-            .filter((p) => p.side === "left")
-            .map((point, idx) => {
-              const originalIndex = points.findIndex(
-                (p) => p.number === point.number
-              );
-              return (
-                <div
-                  key={point.number}
-                  ref={(el) => {
-                    pointRefs.current[originalIndex] = el;
-                  }}
-                  className={`min-h-[150vh] flex flex-col justify-center py-20 ${
-                    idx > 0 ? "mt-[150vh]" : ""
-                  }`}
-                >
-                  <div className="text-terracotta text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-4 md:mb-6">
-                    {point.number}
-                  </div>
-                  <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4 leading-tight">
-                    {point.title}
-                  </h3>
-                  <p className="text-text-secondary text-lg md:text-xl lg:text-3xl leading-10">
-                    {point.description}
-                  </p>
-                </div>
-              );
-            })}
+      <div
+        ref={cardsContainerRef}
+        className="hidden lg:block relative h-screen"
+      >
+        <div ref={videoRef} className="absolute inset-0 w-full h-full z-0">
+          <video
+            ref={videoElementRef}
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source
+              src="/videos/home-page/apart-section.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="lg:col-span-6 relative">
-          <div className="hidden lg:block lg:sticky lg:top-10 lg:py-10 mb-12 lg:mb-0 h-[80vh] md:h-[90vh]">
-            {points.map((point, idx) => (
-              <Image
-                fill
-                src={point.image}
-                key={point.number}
-                alt="Growth systems"
-                className={`object-cover clip-diagonal-lg transition-opacity duration-700 absolute top-0 left-0 w-full h-full ${
-                  idx === activePoint ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ perspective: "2000px" }}
+        >
+          {pointsData.map((point, index) => (
+            <div
+              key={point.number}
+              ref={cardRefs[index]}
+              className="absolute inset-0 px-8 md:px-16 lg:px-24 flex items-center gap-8 lg:gap-16"
+              style={{ transformStyle: "preserve-3d", zIndex: index }}
+            >
+              <div className="w-1/2 relative aspect-square">
+                <Image
+                  fill
+                  src={point.image}
+                  alt={point.title}
+                  className="object-cover clip-diagonal-lg"
+                />
+              </div>
 
-        <div className="lg:col-span-3 flex flex-col mt-[150vh]">
-          {points
-            .filter((p) => p.side === "right")
-            .map((point, idx) => {
-              const originalIndex = points.findIndex(
-                (p) => p.number === point.number
-              );
-              return (
-                <div
-                  key={point.number}
-                  ref={(el) => {
-                    pointRefs.current[originalIndex] = el;
-                  }}
-                  className={`min-h-[150vh] flex flex-col justify-center py-20 ${
-                    idx > 0 ? "mt-[150vh]" : ""
-                  }`}
-                >
-                  <div className="text-terracotta text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-4 md:mb-6">
-                    {point.number}
-                  </div>
-                  <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl lg:text-5xl mb-3 md:mb-4 leading-tight">
-                    {point.title}
-                  </h3>
-                  <p className="text-text-secondary text-lg md:text-xl lg:text-3xl leading-10">
-                    {point.description}
-                  </p>
+              <div className="w-1/2 space-y-6">
+                <div className="text-terracotta text-7xl md:text-8xl lg:text-9xl font-display font-bold">
+                  {point.number}
                 </div>
-              );
-            })}
+                <h3 className="font-display font-bold text-white text-3xl md:text-4xl lg:text-6xl leading-tight">
+                  {point.title}
+                </h3>
+                <p className="text-white text-xl md:text-2xl lg:text-3xl leading-relaxed">
+                  {point.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="lg:hidden flex flex-col gap-12">
-        {points.map((point) => (
-          <div
-            key={point.number}
-            className="bg-cream mobile-card flex flex-col items-start py-4 px-5 clip-diagonal-lg"
-          >
-            <div className="text-terracotta text-6xl font-display font-bold mb-2">
-              {point.number}
-            </div>
-            <h3 className="font-display font-bold text-text-primary text-2xl mb-2">
-              {point.title}
-            </h3>
-            <p className="text-text-secondary text-lg mb-4">
-              {point.description}
-            </p>
-            <div className="relative w-full h-64">
+      <div className="lg:hidden flex flex-col gap-12 mt-12">
+        {pointsData.map((point) => (
+          <div key={point.number} className="flex flex-col gap-6">
+            <div className="relative aspect-video w-full">
               <Image
                 fill
                 src={point.image}
                 alt={point.title}
                 className="object-cover clip-diagonal-lg"
               />
+            </div>
+
+            <div className="space-y-4">
+              <div className="text-terracotta text-6xl font-display font-bold">
+                {point.number}
+              </div>
+              <h3 className="font-display font-bold text-text-primary text-2xl md:text-3xl">
+                {point.title}
+              </h3>
+              <p className="text-text-secondary text-lg md:text-xl leading-relaxed">
+                {point.description}
+              </p>
             </div>
           </div>
         ))}

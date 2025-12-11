@@ -421,7 +421,7 @@ const PromiseSection = () => {
               fontSize: "clamp(8rem, 15vw, 25rem)",
               fontFamily: "Boska, serif",
               fontWeight: 700,
-              color: "#c67b5c",
+              color: "#06b6d4",
               opacity: 0.8,
               letterSpacing: "0.05em",
               width: "100vw",

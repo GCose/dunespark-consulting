@@ -1,35 +1,25 @@
+import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { useLottie } from "lottie-react";
-import splashAnimation from "@/public/lotties/water-splash.json";
 
 const ChallengesSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const splashContainerRef = useRef<HTMLDivElement>(null);
-  const mainTitleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const nextTitleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const videoElementRef = useRef<HTMLVideoElement>(null);
+  const nextTitleRef = useRef<HTMLHeadingElement>(null);
+  const mainTitleRef = useRef<HTMLHeadingElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-
-  const { View, play, setSpeed } = useLottie({
-    animationData: splashAnimation,
-    loop: true,
-    autoplay: false,
-  });
-
-  useEffect(() => {
-    setSpeed(0.6);
-  }, [setSpeed]);
+  const videoRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
 
     gsap.set(sectionRef.current, { opacity: 1, visibility: "visible" });
+    gsap.set(videoRef.current, { opacity: 0 });
     if (mainTitleRef.current) {
       const words = mainTitleRef.current.querySelectorAll(".word");
       gsap.set(words, { y: -80, opacity: 0 });
@@ -41,22 +31,35 @@ const ChallengesSection = () => {
     gsap.set(nextTitleRef.current, { opacity: 0, y: -50 });
     gsap.set(descriptionRef.current, { opacity: 0, y: 40 });
     gsap.set(imageRef.current, { opacity: 0, clipPath: "inset(0 100% 0 0)" });
-    gsap.set(splashContainerRef.current, { opacity: 0 });
 
     const observer = new IntersectionObserver(
       (entries) => {
         if (!entries[0].isIntersecting) return;
 
         const tl = gsap.timeline();
+
+        tl.to(videoRef.current, {
+          opacity: 1,
+          duration: 1.5,
+          ease: "power3.inOut",
+          onStart: () => {
+            videoElementRef.current?.play();
+          },
+        });
+
         if (mainTitleRef.current) {
           const words = mainTitleRef.current.querySelectorAll(".word");
-          tl.to(words, {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.15,
-            ease: "power3.out",
-          });
+          tl.to(
+            words,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.15,
+              ease: "power3.out",
+            },
+            "-=1.2"
+          );
         }
         tl.to(
           subtitleRef.current,
@@ -74,18 +77,6 @@ const ChallengesSection = () => {
           ctaRef.current,
           { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
           "-=0.5"
-        );
-
-        tl.to(
-          splashContainerRef.current,
-          {
-            opacity: 1,
-            duration: 0.3,
-            onComplete: () => {
-              play();
-            },
-          },
-          "-=1.4"
         );
 
         tl.to(
@@ -119,25 +110,27 @@ const ChallengesSection = () => {
     return () => {
       observer.disconnect();
     };
-  }, [play]);
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="bg-terracotta-dark/10 py-fluid-lg md:mt-30 relative opacity-0 overflow-hidden"
+      className="py-fluid-lg md:mt-30 relative opacity-0 overflow-hidden"
       style={{ visibility: "hidden" }}
     >
-      <div
-        ref={splashContainerRef}
-        className="hidden lg:block absolute top-1/2 left-0 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none z-0"
-        style={{
-          filter: "hue-rotate(200deg) saturate(1.8) brightness(0.85)",
-        }}
-      >
-        {View}
+      <div ref={videoRef} className="absolute inset-0 w-full h-full z-0">
+        <video
+          loop
+          muted
+          playsInline
+          ref={videoElementRef}
+          className="absolute inset-0 w-full h-full object-center"
+        >
+          <source src="/videos/home-page/hero-section3.mp4" type="video/mp4" />
+        </video>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] relative z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] relative z-20">
         <div className="lg:col-span-10">
           <h2
             ref={mainTitleRef}
@@ -154,7 +147,7 @@ const ChallengesSection = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 relative z-10 max-w-[2400px] lg:mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-12 relative z-20 max-w-[2400px] lg:mx-auto">
         <div className="lg:col-span-4 lg:col-start-2 pt-5 md:pt-20 border-y md:border-b-0 md:border-y-0 border-terracotta/40">
           <p
             ref={subtitleRef}

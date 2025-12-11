@@ -155,7 +155,7 @@ const HeroSection = () => {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src="/videos/hero-section.mp4" type="video/mp4" />
+            <source src="/videos/home-page/hero-section.mp4" type="video/mp4" />
           </video>
         </div>
 
@@ -216,7 +216,10 @@ const HeroSection = () => {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src="/videos/hero-section2.mp4" type="video/mp4" />
+            <source
+              src="/videos/home-page/hero-section2.mp4"
+              type="video/mp4"
+            />
           </video>
           <div className="absolute inset-0 bg-black/20" />
         </div>
