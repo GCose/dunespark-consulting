@@ -2,10 +2,53 @@ import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
+import { useLottie } from "lottie-react";
+import rocketLaunchAnimation from "@/public/lotties/rocket-launch.json";
 
 const ApartSection = () => {
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const pointRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const rocket1Ref = useRef<HTMLDivElement>(null);
+  const rocket2Ref = useRef<HTMLDivElement>(null);
+  const rocket3Ref = useRef<HTMLDivElement>(null);
+  const rocket4Ref = useRef<HTMLDivElement>(null);
+  const rocket5Ref = useRef<HTMLDivElement>(null);
+  const rocket1Played = useRef(false);
+  const rocket2Played = useRef(false);
+  const rocket3Played = useRef(false);
+  const rocket4Played = useRef(false);
+  const rocket5Played = useRef(false);
   const [activePoint, setActivePoint] = useState(0);
+
+  const { View: Rocket1View, goToAndPlay: playRocket1 } = useLottie({
+    animationData: rocketLaunchAnimation,
+    loop: false,
+    autoplay: false,
+  });
+
+  const { View: Rocket2View, goToAndPlay: playRocket2 } = useLottie({
+    animationData: rocketLaunchAnimation,
+    loop: false,
+    autoplay: false,
+  });
+
+  const { View: Rocket3View, goToAndPlay: playRocket3 } = useLottie({
+    animationData: rocketLaunchAnimation,
+    loop: false,
+    autoplay: false,
+  });
+
+  const { View: Rocket4View, goToAndPlay: playRocket4 } = useLottie({
+    animationData: rocketLaunchAnimation,
+    loop: false,
+    autoplay: false,
+  });
+
+  const { View: Rocket5View, goToAndPlay: playRocket5 } = useLottie({
+    animationData: rocketLaunchAnimation,
+    loop: false,
+    autoplay: false,
+  });
 
   const points = [
     {
@@ -49,6 +92,42 @@ const ApartSection = () => {
       bg: "bg-terracotta/10",
     },
   ];
+
+  useEffect(() => {
+    if (titleRef.current) {
+      const words = titleRef.current.querySelectorAll(".word");
+      gsap.set(words, { y: -80, opacity: 0 });
+    }
+
+    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+      gsap.set([rocket1Ref.current, rocket2Ref.current, rocket3Ref.current, rocket4Ref.current, rocket5Ref.current], {
+        opacity: 0,
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          if (titleRef.current) {
+            const words = titleRef.current.querySelectorAll(".word");
+            gsap.to(words, {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.15,
+              ease: "power3.out",
+            });
+          }
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (titleRef.current) observer.observe(titleRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const observers = pointRefs.current.map((ref, index) => {
@@ -101,13 +180,129 @@ const ApartSection = () => {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth < 1024) return;
+
+    if (activePoint === 0 && !rocket1Played.current) {
+      rocket1Played.current = true;
+      gsap.set(rocket1Ref.current, { opacity: 1, y: 0 });
+      gsap.to(rocket1Ref.current, {
+        y: -800,
+        duration: 3,
+        ease: "none",
+        onStart: () => playRocket1(0, true),
+        onComplete: () => {
+          gsap.set(rocket1Ref.current, { opacity: 0 });
+        }
+      });
+    }
+
+    if (activePoint === 1 && !rocket2Played.current) {
+      rocket2Played.current = true;
+      gsap.set(rocket2Ref.current, { opacity: 1, y: 0 });
+      gsap.to(rocket2Ref.current, {
+        y: -800,
+        duration: 3,
+        ease: "none",
+        onStart: () => playRocket2(0, true),
+        onComplete: () => {
+          gsap.set(rocket2Ref.current, { opacity: 0 });
+        }
+      });
+    }
+
+    if (activePoint === 2 && !rocket3Played.current) {
+      rocket3Played.current = true;
+      gsap.set(rocket3Ref.current, { opacity: 1, y: 0 });
+      gsap.to(rocket3Ref.current, {
+        y: -800,
+        duration: 3,
+        ease: "none",
+        onStart: () => playRocket3(0, true),
+        onComplete: () => {
+          gsap.set(rocket3Ref.current, { opacity: 0 });
+        }
+      });
+    }
+
+    if (activePoint === 3 && !rocket4Played.current) {
+      rocket4Played.current = true;
+      gsap.set(rocket4Ref.current, { opacity: 1, y: 0 });
+      gsap.to(rocket4Ref.current, {
+        y: -800,
+        duration: 3,
+        ease: "none",
+        onStart: () => playRocket4(0, true),
+        onComplete: () => {
+          gsap.set(rocket4Ref.current, { opacity: 0 });
+        }
+      });
+    }
+
+    if (activePoint === 4 && !rocket5Played.current) {
+      rocket5Played.current = true;
+      gsap.set(rocket5Ref.current, { opacity: 1, y: 0 });
+      gsap.to(rocket5Ref.current, {
+        y: -800,
+        duration: 3,
+        ease: "none",
+        onStart: () => playRocket5(0, true),
+        onComplete: () => {
+          gsap.set(rocket5Ref.current, { opacity: 0 });
+        }
+      });
+    }
+  }, [activePoint, playRocket1, playRocket2, playRocket3, playRocket4, playRocket5]);
+
   return (
     <section
-      className={`${points[activePoint].bg} transition-colors duration-700 py-fluid-lg`}
+      className={`${points[activePoint].bg} transition-colors duration-700 py-fluid-lg relative`}
     >
+      <div
+        ref={rocket1Ref}
+        className="hidden lg:block fixed left-[0%] top-1/2 -translate-x-0 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
+      >
+        {Rocket1View}
+      </div>
+      <div
+        ref={rocket2Ref}
+        className="hidden lg:block fixed left-[25%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
+      >
+        {Rocket2View}
+      </div>
+      <div
+        ref={rocket3Ref}
+        className="hidden lg:block fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
+      >
+        {Rocket3View}
+      </div>
+      <div
+        ref={rocket4Ref}
+        className="hidden lg:block fixed left-[75%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
+      >
+        {Rocket4View}
+      </div>
+      <div
+        ref={rocket5Ref}
+        className="hidden lg:block fixed right-[0%] top-1/2 translate-x-0 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
+      >
+        {Rocket5View}
+      </div>
+
       <div className="mb-16 lg:mb-24">
-        <h2 className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-[clamp(2.2rem,5vw,7rem)]">
-          WHAT SETS DUNESPARK APART — THE BOUTIQUE GROWTH EXPERIENCE
+        <h2
+          ref={titleRef}
+          className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-[clamp(2.2rem,5vw,7rem)]"
+        >
+          <span className="word inline-block">WHAT</span>{" "}
+          <span className="word inline-block">SETS</span>{" "}
+          <span className="word inline-block">DUNESPARK</span>{" "}
+          <span className="word inline-block">APART</span>{" "}
+          <span className="word inline-block">—</span>{" "}
+          <span className="word inline-block">THE</span>{" "}
+          <span className="word inline-block">BOUTIQUE</span>{" "}
+          <span className="word inline-block">GROWTH</span>{" "}
+          <span className="word inline-block">EXPERIENCE</span>
         </h2>
       </div>
 

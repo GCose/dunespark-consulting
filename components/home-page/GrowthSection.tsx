@@ -393,7 +393,7 @@ const GrowthEcosystemSection = () => {
               style={{ transformOrigin: "center top" }}
             >
               <div
-                className={`relative clip-diagonal-lg bg-cream border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col`}
+                className={`relative circuit-board clip-diagonal-lg bg-cream border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col`}
               >
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">
@@ -420,7 +420,7 @@ const GrowthEcosystemSection = () => {
 
       <div
         ref={ctaRef}
-        className="flex flex-col md:flex-row justify-center items-center gap-4 mt-auto"
+        className="flex flex-col md:flex-row justify-center items-start gap-4"
       >
         <Link
           href="/contact"
