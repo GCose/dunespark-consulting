@@ -35,7 +35,7 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed max-w-editorial top-0 left-0 right-0 z-50 bg-pure-white/80 backdrop-blur-md border-b border-text-primary/5 px-4 transition-transform duration-300 ${
+      className={`fixed max-w-editorial top-0 left-0 right-0 z-50 bg-transparent border-b border-text-primary/5 px-4 transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >

@@ -2,8 +2,6 @@ import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { useLottie } from "lottie-react";
-import moneyAnimation from "@/public/lotties/money.json";
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -12,23 +10,10 @@ const HeroSection = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
 
   const section2Ref = useRef<HTMLElement>(null);
+  const section2VideoRef = useRef<HTMLDivElement>(null);
   const img1Ref = useRef<HTMLDivElement>(null);
   const paragraphsRef = useRef<HTMLDivElement>(null);
   const img2Ref = useRef<HTMLDivElement>(null);
-  const moneyLeftRef = useRef<HTMLDivElement>(null);
-  const moneyRightRef = useRef<HTMLDivElement>(null);
-
-  const { View: MoneyLeftView } = useLottie({
-    animationData: moneyAnimation,
-    loop: true,
-    autoplay: true,
-  });
-
-  const { View: MoneyRightView } = useLottie({
-    animationData: moneyAnimation,
-    loop: true,
-    autoplay: true,
-  });
 
   useEffect(() => {
     gsap.set(sectionRef.current, { opacity: 1, visibility: "visible" });
@@ -40,7 +25,6 @@ const HeroSection = () => {
 
     gsap.set(imageRef.current, {
       opacity: 0,
-      clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
     });
 
     gsap.set(ctaRef.current, { opacity: 0, y: 50 });
@@ -48,26 +32,33 @@ const HeroSection = () => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.3 });
 
-      if (titleRef.current) {
-        const words = titleRef.current.querySelectorAll(".word");
-        tl.to(words, {
+      tl.to(imageRef.current, {
+        opacity: 1,
+        duration: 1.5,
+        ease: "power3.inOut",
+      });
+
+      tl.to(
+        titleRef.current?.querySelectorAll(".word") || [],
+        {
           y: 0,
           opacity: 1,
           duration: 1.2,
           stagger: 0.15,
           ease: "power3.out",
-        });
-      }
+        },
+        "+=1"
+      );
 
       tl.to(
-        imageRef.current,
+        ctaRef.current,
         {
           opacity: 1,
-          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          duration: 1.8,
-          ease: "power3.inOut",
+          y: 0,
+          duration: 1.2,
+          ease: "power3.out",
         },
-        "-=1.0"
+        "-=0.5"
       );
     });
 
@@ -75,42 +66,14 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    const ctaObserver = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          gsap.to(ctaRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: 1.4,
-            delay: 0.4,
-            ease: "power3.out",
-          });
-          ctaObserver.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (ctaRef.current) ctaObserver.observe(ctaRef.current);
-
-    return () => {
-      ctaObserver.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
     if (!section2Ref.current) return;
 
     gsap.set(section2Ref.current, { opacity: 0 });
+    gsap.set(section2VideoRef.current, { opacity: 0 });
 
     gsap.set([img1Ref.current, img2Ref.current], {
       opacity: 0,
       clipPath: "inset(0 100% 0 0)",
-    });
-
-    gsap.set([moneyLeftRef.current, moneyRightRef.current], {
-      opacity: 0,
-      scale: 0,
     });
 
     const textParagraphs = paragraphsRef.current?.querySelectorAll("p") || [];
@@ -124,6 +87,12 @@ const HeroSection = () => {
           tl.to(section2Ref.current, {
             opacity: 1,
             duration: 0.4,
+          });
+
+          tl.to(section2VideoRef.current, {
+            opacity: 1,
+            duration: 1.5,
+            ease: "power3.inOut",
           });
 
           tl.to(img1Ref.current, {
@@ -142,17 +111,6 @@ const HeroSection = () => {
             ease: "power3.out",
           });
 
-          tl.to(
-            moneyRightRef.current,
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 1,
-              ease: "back.out(1.7)",
-            },
-            "-=1.1"
-          );
-
           tl.to(img2Ref.current, {
             opacity: 1,
             clipPath: "inset(0 0% 0 0)",
@@ -160,17 +118,6 @@ const HeroSection = () => {
             delay: 0.2,
             ease: "power3.out",
           });
-
-          tl.to(
-            moneyLeftRef.current,
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 1,
-              ease: "back.out(1.7)",
-            },
-            "-=1.4"
-          );
 
           observer.disconnect();
         }
@@ -189,90 +136,101 @@ const HeroSection = () => {
     <>
       <section
         ref={sectionRef}
-        className="pb-15 bg-pure-white opacity-0"
+        className="relative h-screen flex items-center justify-center px-4 bg-pure-white opacity-0 overflow-hidden"
         style={{ visibility: "hidden" }}
       >
-        <h1
-          ref={titleRef}
-          className="font-display font-extrabold text-text-primary md:leading-tight tracking-tight text-[clamp(2.2rem,5vw,7rem)]"
-        >
-          <span className="word inline-block">INSTALL</span>{" "}
-          <span className="word inline-block">THE</span>{" "}
-          <span className="word inline-block">GROWTH</span>{" "}
-          <span className="word inline-block">INFRASTRUCTURE</span>
-          <br />
-          <span className="word inline-block">YOUR</span>{" "}
-          <span className="word inline-block">BUSINESS</span>{" "}
-          <span className="word inline-block">HAS</span>{" "}
-          <span className="word inline-block">BEEN</span>{" "}
-          <span className="word inline-block">MISSING</span>
-        </h1>
-
-        <div
-          ref={imageRef}
-          className="relative w-full h-[70vh] md:h-screen mt-10"
-        >
-          <Image
-            fill
-            priority
-            alt="Growth infrastructure"
-            src="/images/home-page/hero.jpg"
-            className="object-cover clip-diagonal-sm"
-          />
+        <div ref={imageRef} className="absolute inset-0 w-full h-full">
+          <video
+            loop
+            muted
+            autoPlay
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/videos/hero-section.mp4" type="video/mp4" />
+          </video>
         </div>
 
-        <div
-          ref={ctaRef}
-          className="mx-auto mt-10 flex flex-col md:flex-row items-start md:items-end md:justify-end gap-4"
-        >
-          <Link
-            href="/contact"
-            className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand hover:bg-white hover:text-terracotta font-medium text-center bg-warm-sand text-white transition-all duration-300"
+        <div className="relative z-10 text-center px-4 ">
+          <h1
+            ref={titleRef}
+            className="font-display font-extrabold text-white md:leading-tight tracking-tight text-[clamp(2.2rem,6vw,8rem)] mb-10 max-w-500"
           >
-            <span className="font-display font-bold uppercase tracking-wider text-[clamp(1rem,2vw,1.4rem)]">
-              Run Free Audit
-            </span>
-          </Link>
+            <span className="word inline-block">INSTALL</span>{" "}
+            <span className="word inline-block">THE</span>{" "}
+            <span className="word inline-block">GROWTH</span>{" "}
+            <span className="word inline-block">INFRASTRUCTURE</span>
+            <br />
+            <span className="word inline-block">YOUR</span>{" "}
+            <span className="word inline-block">BUSINESS</span>{" "}
+            <span className="word inline-block">HAS</span>{" "}
+            <span className="word inline-block">BEEN</span>{" "}
+            <span className="word inline-block">MISSING</span>
+          </h1>
 
-          <Link
-            href="/contact"
-            className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand text-terracotta font-medium text-center hover:bg-warm-sand hover:text-white transition-all duration-300"
+          <div
+            ref={ctaRef}
+            className="flex flex-col md:flex-row w-full items-center justify-center gap-4"
           >
-            <span className="font-display font-bold uppercase tracking-wider text-[clamp(1rem,2vw,1.4rem)]">
-              Book Discovery Call
-            </span>
-          </Link>
+            <Link
+              href="/contact"
+              className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand hover:bg-transparent hover:text-terracotta font-medium text-center bg-warm-sand text-white transition-all duration-300"
+            >
+              <span className="font-display font-bold uppercase tracking-wider text-[clamp(1rem,2vw,1.4rem)]">
+                Run Free Audit
+              </span>
+            </Link>
+
+            <Link
+              href="/contact"
+              className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand text-white font-medium text-center hover:bg-warm-sand hover:text-white transition-all duration-300"
+            >
+              <span className="font-display font-bold uppercase tracking-wider text-[clamp(1rem,2vw,1.4rem)]">
+                Book Discovery Call
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 
       <section
         ref={section2Ref}
-        className="mt-20 md:mt-50 relative grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] bg-pure-white lg:min-h-[180vh]"
+        className="pt-20 md:pt-50 px-4 relative grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] lg:min-h-[180vh] overflow-hidden"
       >
-        <div className="lg:col-span-4 flex flex-col justify-between">
+        <div
+          ref={section2VideoRef}
+          className="absolute inset-0 w-full h-full z-0"
+        >
+          <video
+            loop
+            muted
+            autoPlay
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/videos/hero-section2.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+
+        <div className="lg:col-span-4 flex flex-col justify-between relative z-10">
           <div className="relative aspect-3/4 overflow-hidden">
             <div ref={img1Ref} className="w-full h-full">
               <Image
                 fill
                 alt="Business growth"
                 src="/images/home-page/hero-1.webp"
-                style={{ filter: "saturate(0.85)" }}
                 className="object-cover clip-diagonal-lg"
               />
             </div>
           </div>
 
-          <div
-            ref={moneyLeftRef}
-            className="hidden lg:block w-[400px] h-[400px] mt-auto"
-          >
-            {MoneyLeftView}
-          </div>
+          <div className="hidden lg:block w-[400px] h-[400px] mt-auto" />
         </div>
 
         <div
           ref={paragraphsRef}
-          className="lg:col-span-4 flex items-center justify-center"
+          className="lg:col-span-4 flex items-center justify-center relative z-10"
         >
           <div className="space-y-12 lg:space-y-16">
             <p className="font-body text-white font-normal text-[clamp(1.3rem,5vw,2rem)] leading-relaxed">
@@ -291,13 +249,8 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className="lg:col-span-4 flex flex-col justify-between">
-          <div
-            ref={moneyRightRef}
-            className="hidden lg:block w-[400px] h-[400px] ml-auto"
-          >
-            {MoneyRightView}
-          </div>
+        <div className="lg:col-span-4 flex flex-col justify-between relative z-10">
+          <div className="hidden lg:block w-[400px] h-[400px] ml-auto" />
 
           <div className="relative aspect-3/4 overflow-hidden mt-auto">
             <div ref={img2Ref} className="w-full h-full">
@@ -305,7 +258,6 @@ const HeroSection = () => {
                 fill
                 alt="Tech consulting"
                 src="/images/home-page/hero-2.webp"
-                style={{ filter: "saturate(0.85)" }}
                 className="object-cover clip-diagonal-lg"
               />
             </div>

@@ -100,9 +100,18 @@ const ApartSection = () => {
     }
 
     if (typeof window !== "undefined" && window.innerWidth >= 1024) {
-      gsap.set([rocket1Ref.current, rocket2Ref.current, rocket3Ref.current, rocket4Ref.current, rocket5Ref.current], {
-        opacity: 0,
-      });
+      gsap.set(
+        [
+          rocket1Ref.current,
+          rocket2Ref.current,
+          rocket3Ref.current,
+          rocket4Ref.current,
+          rocket5Ref.current,
+        ],
+        {
+          opacity: 0,
+        }
+      );
     }
 
     const observer = new IntersectionObserver(
@@ -193,7 +202,7 @@ const ApartSection = () => {
         onStart: () => playRocket1(0, true),
         onComplete: () => {
           gsap.set(rocket1Ref.current, { opacity: 0 });
-        }
+        },
       });
     }
 
@@ -207,7 +216,7 @@ const ApartSection = () => {
         onStart: () => playRocket2(0, true),
         onComplete: () => {
           gsap.set(rocket2Ref.current, { opacity: 0 });
-        }
+        },
       });
     }
 
@@ -221,7 +230,7 @@ const ApartSection = () => {
         onStart: () => playRocket3(0, true),
         onComplete: () => {
           gsap.set(rocket3Ref.current, { opacity: 0 });
-        }
+        },
       });
     }
 
@@ -235,7 +244,7 @@ const ApartSection = () => {
         onStart: () => playRocket4(0, true),
         onComplete: () => {
           gsap.set(rocket4Ref.current, { opacity: 0 });
-        }
+        },
       });
     }
 
@@ -249,10 +258,17 @@ const ApartSection = () => {
         onStart: () => playRocket5(0, true),
         onComplete: () => {
           gsap.set(rocket5Ref.current, { opacity: 0 });
-        }
+        },
       });
     }
-  }, [activePoint, playRocket1, playRocket2, playRocket3, playRocket4, playRocket5]);
+  }, [
+    activePoint,
+    playRocket1,
+    playRocket2,
+    playRocket3,
+    playRocket4,
+    playRocket5,
+  ]);
 
   return (
     <section
@@ -260,7 +276,7 @@ const ApartSection = () => {
     >
       <div
         ref={rocket1Ref}
-        className="hidden lg:block fixed left-[0%] top-1/2 -translate-x-0 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
+        className="hidden lg:block fixed left-[0%] top-1/2 translate-x-0 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none z-50 opacity-0"
       >
         {Rocket1View}
       </div>

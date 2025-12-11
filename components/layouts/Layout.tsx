@@ -20,9 +20,9 @@ const Layout = ({
         <title>{title}</title>
         <meta name="description" content={description} />
       </Head>
-      <div className="min-h-screen max-w-editorial flex flex-col px-4">
+      <div className="min-h-screen max-w-editorial flex flex-col">
         <Navigation />
-        <main className="grow pt-24 md:pt-32">{children}</main>
+        <main className="overflow-hidden">{children}</main>
       </div>
       <Footer />
     </>
