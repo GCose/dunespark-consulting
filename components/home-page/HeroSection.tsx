@@ -11,6 +11,7 @@ const HeroSection = () => {
 
   const section2Ref = useRef<HTMLElement>(null);
   const section2VideoRef = useRef<HTMLDivElement>(null);
+  const section2VideoElementRef = useRef<HTMLVideoElement>(null);
   const img1Ref = useRef<HTMLDivElement>(null);
   const paragraphsRef = useRef<HTMLDivElement>(null);
   const img2Ref = useRef<HTMLDivElement>(null);
@@ -89,12 +90,6 @@ const HeroSection = () => {
             duration: 0.4,
           });
 
-          tl.to(section2VideoRef.current, {
-            opacity: 1,
-            duration: 1.5,
-            ease: "power3.inOut",
-          });
-
           tl.to(img1Ref.current, {
             opacity: 1,
             clipPath: "inset(0 0% 0 0)",
@@ -110,6 +105,19 @@ const HeroSection = () => {
             stagger: 0.45,
             ease: "power3.out",
           });
+
+          tl.to(
+            section2VideoRef.current,
+            {
+              opacity: 1,
+              duration: 1.5,
+              ease: "power3.inOut",
+              onStart: () => {
+                section2VideoElementRef.current?.play();
+              },
+            },
+            "-=1.8"
+          );
 
           tl.to(img2Ref.current, {
             opacity: 1,
@@ -202,9 +210,9 @@ const HeroSection = () => {
           className="absolute inset-0 w-full h-full z-0"
         >
           <video
+            ref={section2VideoElementRef}
             loop
             muted
-            autoPlay
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
