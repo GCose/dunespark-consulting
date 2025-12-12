@@ -203,7 +203,7 @@ const HeroSection = () => {
 
       <section
         ref={section2Ref}
-        className="pt-20 md:pt-50 px-4 relative grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] lg:min-h-[180vh] overflow-hidden"
+        className="pt-20 md:pt-50 pb-10 px-4 relative grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] lg:min-h-[180vh] overflow-hidden"
       >
         <div
           ref={section2VideoRef}

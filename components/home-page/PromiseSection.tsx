@@ -350,7 +350,7 @@ const PromiseSection = () => {
               <Image
                 fill
                 alt="Growth systems"
-                src="/images/home-page/promise.jpg"
+                src="/images/home-page/promise-section.jpg"
                 className="object-cover clip-diagonal-lg"
               />
             </div>

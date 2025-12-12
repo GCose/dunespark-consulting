@@ -438,14 +438,14 @@ const GrowthEcosystemSection = () => {
               >
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">
-                    <h3 className="font-display font-bold text-terracotta text-[clamp(2rem,5vw,4rem)] leading-tight">
+                    <h3 className="font-display font-bold text-terracotta text-[clamp(2rem,5vw,5rem)] leading-tight">
                       {card.title}
                     </h3>
-                    <h4 className="font-display font-semibold text-text-primary text-[clamp(1.5rem,3vw,2.5rem)] leading-tight">
+                    <h4 className="font-display font-semibold text-text-primary text-[clamp(1.5rem,3vw,2.7rem)] leading-tight">
                       {card.subtitle}
                     </h4>
                   </div>
-                  <p className="text-text-secondary text-xl md:text-2xl leading-relaxed max-w-3xl">
+                  <p className="text-text-secondary text-[clamp(1.25rem,3vw,1.8rem)] leading-relaxed max-w-3xl">
                     {card.description}
                   </p>
                 </div>
