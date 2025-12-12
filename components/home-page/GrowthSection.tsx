@@ -73,14 +73,25 @@ const GrowthEcosystemSection = () => {
       gsap.set(words, { y: -80, opacity: 0 });
     }
 
+    gsap.set(
+      [card1Ref.current, card2Ref.current, card3Ref.current, card4Ref.current],
+      {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        x: "-50%",
+        y: "-50%",
+        width: "100%",
+      }
+    );
+
     gsap.set([card2Ref.current, card3Ref.current, card4Ref.current], {
-      y: 200,
       opacity: 0,
       scale: 0.9,
+      y: "+=200",
     });
 
     gsap.set(card1Ref.current, {
-      y: 0,
       opacity: 1,
       scale: 1,
     });
@@ -140,7 +151,7 @@ const GrowthEcosystemSection = () => {
     });
 
     tl.to(card1Ref.current, {
-      y: 0,
+      y: "-50%",
       opacity: 1,
       scale: 1,
       duration: 1,
@@ -151,7 +162,7 @@ const GrowthEcosystemSection = () => {
         {
           scale: 0.95,
           opacity: 0.7,
-          y: -20,
+          y: "-=70",
           duration: 1,
           ease: "power3.inOut",
         },
@@ -160,7 +171,7 @@ const GrowthEcosystemSection = () => {
       .to(
         card2Ref.current,
         {
-          y: 0,
+          y: "-50%",
           opacity: 1,
           scale: 1,
           duration: 1,
@@ -173,7 +184,7 @@ const GrowthEcosystemSection = () => {
         {
           scale: 0.92,
           opacity: 0.6,
-          y: -40,
+          y: "-=90",
           duration: 1,
           ease: "power3.inOut",
         },
@@ -182,7 +193,7 @@ const GrowthEcosystemSection = () => {
       .to(
         card3Ref.current,
         {
-          y: 0,
+          y: "-50%",
           opacity: 1,
           scale: 1,
           duration: 1,
@@ -195,7 +206,7 @@ const GrowthEcosystemSection = () => {
         {
           scale: 0.9,
           opacity: 0.5,
-          y: -60,
+          y: "-=110",
           duration: 1,
           ease: "power3.inOut",
         },
@@ -204,7 +215,7 @@ const GrowthEcosystemSection = () => {
       .to(
         card4Ref.current,
         {
-          y: 0,
+          y: "-50%",
           opacity: 1,
           scale: 1,
           duration: 1,
@@ -382,18 +393,13 @@ const GrowthEcosystemSection = () => {
 
       <div
         ref={stackContainerRef}
-        className="relative min-h-screen flex items-start justify-center"
+        className="relative min-h-screen flex items-center justify-center"
       >
-        <div className="sticky top-32 w-full max-w-5xl mx-auto px-4">
+        <div className="w-full max-w-5xl mx-auto px-4 relative h-[70vh]">
           {cards.map((card, index) => (
-            <div
-              key={index}
-              ref={card.ref}
-              className="absolute top-0 left-0 w-full"
-              style={{ transformOrigin: "center top" }}
-            >
+            <div key={index} ref={card.ref}>
               <div
-                className={`relative circuit-board clip-diagonal-lg bg-cream border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col`}
+                className={`circuit-board clip-diagonal-lg bg-cream border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col relative`}
               >
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">

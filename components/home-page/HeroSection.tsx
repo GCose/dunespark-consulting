@@ -230,7 +230,7 @@ const HeroSection = () => {
               <Image
                 fill
                 alt="Business growth"
-                src="/images/home-page/hero-1.webp"
+                src="/images/home-page/hero-1.jpg"
                 className="object-cover clip-diagonal-lg"
               />
             </div>
@@ -268,7 +268,7 @@ const HeroSection = () => {
               <Image
                 fill
                 alt="Tech consulting"
-                src="/images/home-page/hero-2.webp"
+                src="/images/home-page/hero-2.jpg"
                 className="object-cover clip-diagonal-lg"
               />
             </div>
