@@ -112,7 +112,7 @@ const BenefitsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen md:mt-30 pb-20 bg-pure-white opacity-0"
+      className="min-h-screen md:mt-30 pb-20 bg-pure-white opacity-0 px-4"
       style={{ visibility: "hidden" }}
     >
       <div className="grid grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)]">

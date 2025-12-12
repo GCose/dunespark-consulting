@@ -131,7 +131,7 @@ const ProcessSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-fluid-lg relative opacity-0 overflow-hidden"
+      className="py-fluid-lg relative opacity-0 overflow-hidden px-4"
       style={{ visibility: "hidden" }}
     >
       <div ref={videoRef} className="absolute inset-0 w-full h-full z-0">

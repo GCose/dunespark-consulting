@@ -2,7 +2,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -21,7 +21,10 @@ const ApartSection = () => {
   const card4Ref = useRef<HTMLDivElement>(null);
   const card5Ref = useRef<HTMLDivElement>(null);
 
-  const cardRefs = [card1Ref, card2Ref, card3Ref, card4Ref, card5Ref];
+  const cardRefs = useMemo(
+    () => [card1Ref, card2Ref, card3Ref, card4Ref, card5Ref],
+    []
+  );
 
   const pointsData = [
     {
@@ -176,24 +179,20 @@ const ApartSection = () => {
                 cardProgress = 1;
               }
 
-              // Three phases: in (0-0.33), center (0.33-0.66), out (0.66-1)
               let z, scale, rotationY, opacity;
 
               if (cardProgress < 0.33) {
-                // Phase 1: Coming IN from tunnel
                 const phaseProgress = cardProgress / 0.33;
                 z = -2500 + 2500 * phaseProgress;
                 scale = 0.3 + 0.7 * phaseProgress;
                 rotationY = 15 - 15 * phaseProgress;
                 opacity = phaseProgress;
               } else if (cardProgress < 0.66 || isLastCard) {
-                // Phase 2: AT CENTER (paused)
                 z = 0;
                 scale = 1;
                 rotationY = 0;
                 opacity = 1;
               } else {
-                // Phase 3: Going OUT past you
                 const phaseProgress = (cardProgress - 0.66) / 0.34;
                 z = 0 + 1500 * phaseProgress;
                 scale = 1 + 0.2 * phaseProgress;
@@ -216,7 +215,7 @@ const ApartSection = () => {
     return () => {
       ctx.revert();
     };
-  }, []);
+  }, [cardRefs]);
 
   return (
     <section

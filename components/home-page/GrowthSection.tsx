@@ -12,6 +12,8 @@ if (typeof window !== "undefined") {
 const GrowthEcosystemSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const videoRef = useRef<HTMLDivElement>(null);
+  const videoElementRef = useRef<HTMLVideoElement>(null);
   const stackContainerRef = useRef<HTMLDivElement>(null);
   const card1Ref = useRef<HTMLDivElement>(null);
   const card2Ref = useRef<HTMLDivElement>(null);
@@ -22,11 +24,7 @@ const GrowthEcosystemSection = () => {
   const lastProgress = useRef(0);
   const confettiPlayed = useRef(false);
 
-  const {
-    View: ConfettiView,
-    play: playConfetti,
-    goToAndPlay,
-  } = useLottie({
+  const { View: ConfettiView, goToAndPlay } = useLottie({
     animationData: confettiAnimation,
     loop: false,
     autoplay: false,
@@ -67,6 +65,7 @@ const GrowthEcosystemSection = () => {
     if (!sectionRef.current || typeof window === "undefined") return;
 
     gsap.set(sectionRef.current, { opacity: 1, visibility: "visible" });
+    gsap.set(videoRef.current, { opacity: 0 });
 
     if (titleRef.current) {
       const words = titleRef.current.querySelectorAll(".word");
@@ -120,6 +119,25 @@ const GrowthEcosystemSection = () => {
     );
 
     if (titleRef.current) titleObserver.observe(titleRef.current);
+
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          gsap.to(videoRef.current, {
+            opacity: 1,
+            duration: 1,
+            onStart: () => {
+              videoElementRef.current?.play();
+            },
+          });
+          videoObserver.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (stackContainerRef.current)
+      videoObserver.observe(stackContainerRef.current);
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -244,12 +262,13 @@ const GrowthEcosystemSection = () => {
 
     return () => {
       titleObserver.disconnect();
+      videoObserver.disconnect();
       if (tl.scrollTrigger) {
         tl.scrollTrigger.kill();
       }
       tl.kill();
     };
-  }, [playConfetti]);
+  }, [goToAndPlay]);
 
   const GeometricShape = ({ index }: { index: number }) => {
     const shapes = [
@@ -395,11 +414,27 @@ const GrowthEcosystemSection = () => {
         ref={stackContainerRef}
         className="relative min-h-screen flex items-center justify-center"
       >
-        <div className="w-full max-w-5xl mx-auto px-4 relative h-[70vh]">
+        <div ref={videoRef} className="absolute inset-0 w-full h-full z-0">
+          <video
+            ref={videoElementRef}
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source
+              src="/videos/home-page/growth-section.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
+
+        <div className="w-full max-w-5xl mx-auto px-4 relative h-[70vh] z-10">
           {cards.map((card, index) => (
             <div key={index} ref={card.ref}>
               <div
-                className={`circuit-board clip-diagonal-lg bg-cream border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col relative`}
+                className={`circuit-board clip-diagonal-lg backdrop-blur-sm bg-transparent border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col relative`}
               >
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">
