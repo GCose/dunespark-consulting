@@ -124,7 +124,7 @@ const ChallengesSection = () => {
           muted
           playsInline
           ref={videoElementRef}
-          className="absolute inset-0 w-full h-full object-center"
+          className="absolute inset-0 w-full h-screen object-center"
         >
           <source src="/videos/home-page/hero-section3.mp4" type="video/mp4" />
         </video>
@@ -223,7 +223,7 @@ const ChallengesSection = () => {
             <Image
               fill
               alt="Growth challenges visualization"
-              src="/images/home-page/challenge.webp"
+              src="/images/home-page/challenge.jpg"
               className="object-cover clip-diagonal-lg"
             />
           </div>
