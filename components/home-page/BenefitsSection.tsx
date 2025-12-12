@@ -1,114 +1,193 @@
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Link from "next/link";
 import { useRef, useEffect } from "react";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useLottie } from "lottie-react";
+import rocketAnimation from "@/public/lotties/rocket-businessman.json";
 
 const BenefitsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const videoWrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
   const videoElementRef = useRef<HTMLVideoElement>(null);
-  const textRef = useRef<HTMLParagraphElement>(null);
+  const textContentRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const rocketRef = useRef<HTMLDivElement>(null);
 
-  const text = `Who Benefits Most From Dunespark Consulting? We partner best with founders and executives who are fed up with fragmented agencies and ineffective vendors, who crave predictable, scalable growth that frees their time, who value clarity, strategic insight, and white-glove partnership, who are ready to invest in systems that generate compounding revenue, and who believe that growth infrastructure is the future — not quick hacks.`;
+  const { View: RocketView } = useLottie({
+    animationData: rocketAnimation,
+    loop: true,
+    autoplay: true,
+  });
 
   useEffect(() => {
-    if (!sectionRef.current || !textRef.current) return;
+    if (!sectionRef.current) return;
 
-    gsap.set(videoRef.current, { opacity: 0 });
+    gsap.set(sectionRef.current, { opacity: 1, visibility: "visible" });
 
-    const videoObserver = new IntersectionObserver(
+    if (titleRef.current) {
+      const words = titleRef.current.querySelectorAll(".word");
+      gsap.set(words, { y: -80, opacity: 0 });
+    }
+
+    gsap.set(videoWrapperRef.current, { opacity: 0 });
+    gsap.set(textContentRef.current, { opacity: 0, y: -100 });
+    gsap.set(ctaRef.current, { opacity: 0, y: 50 });
+    gsap.set(rocketRef.current, { opacity: 0, x: -50, y: 30 });
+
+    const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          gsap.to(videoRef.current, {
+        if (!entries[0].isIntersecting) return;
+
+        const tl = gsap.timeline();
+
+        if (titleRef.current) {
+          const words = titleRef.current.querySelectorAll(".word");
+          tl.to(words, {
+            y: 0,
             opacity: 1,
-            duration: 1,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power3.out",
+          });
+        }
+
+        tl.to(
+          videoWrapperRef.current,
+          {
+            opacity: 1,
+            duration: 1.2,
+            ease: "power3.out",
             onStart: () => {
               videoElementRef.current?.play();
             },
-          });
-          videoObserver.disconnect();
-        }
+          },
+          "-=0.6"
+        );
+
+        tl.to(
+          textContentRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power3.out",
+          },
+          "-=0.8"
+        );
+
+        tl.to(
+          ctaRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.6"
+        );
+
+        tl.to(
+          rocketRef.current,
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.6"
+        );
+
+        observer.disconnect();
       },
       { threshold: 0.3 }
     );
 
-    if (sectionRef.current) videoObserver.observe(sectionRef.current);
+    observer.observe(sectionRef.current);
 
-    const chars = textRef.current.querySelectorAll(".char");
-    gsap.set(chars, { opacity: 0.5 });
-
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=200%",
-        pin: true,
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const totalChars = chars.length;
-
-          chars.forEach((char, index) => {
-            const charProgress = index / totalChars;
-
-            if (progress >= charProgress) {
-              const fadeProgress = Math.min(
-                (progress - charProgress) * totalChars * 0.1,
-                1
-              );
-              const opacity = 0.5 + 0.5 * fadeProgress;
-              gsap.set(char, { opacity });
-            }
-          });
-        },
-      });
-    });
-
-    return () => {
-      ctx.revert();
-      videoObserver.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
-
-  const renderTextWithChars = () => {
-    return text.split("").map((char, index) => (
-      <span key={index} className="char">
-        {char === " " ? "\u00A0" : char}
-      </span>
-    ));
-  };
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="min-h-screen md:mt-30 pb-20 bg-pure-white opacity-0"
+      style={{ visibility: "hidden" }}
     >
-      <div ref={videoRef} className="absolute inset-0 w-full h-full z-0">
-        <video
-          ref={videoElementRef}
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source
-            src="/videos/home-page/benefits-section.mp4"
-            type="video/mp4"
-          />
-        </video>
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
+      <div className="grid grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)]">
+        <div className="col-span-12 mb-16">
+          <h2
+            ref={titleRef}
+            className="font-display font-extrabold text-text-primary leading-[1.05] md:max-w-400 tracking-tight text-[clamp(2.2rem,5vw,7rem)]"
+          >
+            <span className="word inline-block">WHO</span>{" "}
+            <span className="word inline-block">BENEFITS</span>{" "}
+            <span className="word inline-block">MOST</span>{" "}
+            <span className="word inline-block">FROM</span>{" "}
+            <span className="word inline-block">DUNESPARK</span>{" "}
+            <span className="word inline-block">CONSULTING?</span>
+          </h2>
+        </div>
 
-      <div className="relative z-10 px-8 md:px-16 lg:px-24 max-w-7xl">
-        <p
-          ref={textRef}
-          className="font-display font-bold text-white text-[clamp(2rem,4vw,5rem)] leading-[1.2]"
+        <div ref={videoWrapperRef} className="col-span-12 lg:col-span-6">
+          <div ref={videoRef} className="relative aspect-3/4 overflow-hidden">
+            <video
+              ref={videoElementRef}
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover clip-diagonal-lg"
+            >
+              <source
+                src="/videos/home-page/benefits-section.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </div>
+
+        <div
+          ref={textContentRef}
+          className="col-span-12 lg:col-span-5 lg:col-start-7 flex flex-col pt-0"
         >
-          {renderTextWithChars()}
-        </p>
+          <div className="space-y-8">
+            <p className="text-text-primary text-xl font-medium md:text-2xl lg:text-3xl leading-relaxed">
+              We partner best with founders and executives who are fed up with
+              fragmented agencies and ineffective vendors.
+            </p>
+            <p className="text-text-primary text-xl font-medium md:text-2xl lg:text-3xl leading-relaxed">
+              Who crave predictable, scalable growth that frees their time, who
+              value clarity, strategic insight, and white-glove partnership.
+            </p>
+            <p className="text-text-primary text-xl font-medium md:text-2xl lg:text-3xl leading-relaxed">
+              Who are ready to invest in systems that generate compounding
+              revenue, and who believe that growth infrastructure is the future
+              — not quick hacks.
+            </p>
+          </div>
+
+          <div
+            ref={ctaRef}
+            className="flex flex-col md:flex-row items-start md:items-start md:justify-end gap-4 mt-10"
+          >
+            <Link
+              href="/contact"
+              className="group clip-diagonal-xl block w-full md:w-auto px-5 md:px-10 py-4 md:py-5 border-2 border-warm-sand text-terracotta font-medium text-center hover:bg-warm-sand hover:text-white transition-all duration-300"
+            >
+              <span className="font-display font-bold uppercase tracking-wider text-[clamp(1rem,2vw,1.4rem)]">
+                Book Discovery Call
+              </span>
+            </Link>
+          </div>
+
+          <div
+            ref={rocketRef}
+            className="hidden lg:block mt-12 w-[200px] h-[200px] lg:w-[250px] lg:h-[250px]"
+          >
+            {RocketView}
+          </div>
+        </div>
       </div>
     </section>
   );
