@@ -50,14 +50,14 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
     const totalVideos = videoUrls.length;
     const videoElements: HTMLVideoElement[] = [];
 
-    videoUrls.forEach((url, index) => {
+    videoUrls.forEach((url) => {
       const video = document.createElement("video");
       video.src = url;
       video.preload = "auto";
       video.muted = true;
       video.playsInline = true;
 
-      const updateProgress = () => {
+      const handleLoaded = () => {
         loadedCount++;
         const currentProgress = Math.round((loadedCount / totalVideos) * 100);
         setProgress(currentProgress);
@@ -69,8 +69,20 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
         }
       };
 
-      video.addEventListener("canplaythrough", updateProgress);
-      video.addEventListener("error", updateProgress);
+      const handleError = () => {
+        loadedCount++;
+        const currentProgress = Math.round((loadedCount / totalVideos) * 100);
+        setProgress(currentProgress);
+
+        if (loadedCount === totalVideos) {
+          setTimeout(() => {
+            setShowOverlay(true);
+          }, 300);
+        }
+      };
+
+      video.addEventListener("canplaythrough", handleLoaded, { once: true });
+      video.addEventListener("error", handleError, { once: true });
 
       video.load();
       videoElements.push(video);
