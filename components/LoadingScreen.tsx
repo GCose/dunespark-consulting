@@ -21,6 +21,23 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
     "/videos/home-page/apart-section.mp4",
     "/videos/home-page/process-section.mp4",
     "/videos/home-page/benefits-section.mp4",
+    "/videos/home-page/growth-section.mp4",
+  ];
+
+  const imageUrls = [
+    "/images/home-page/hero-1.jpg",
+    "/images/home-page/hero-2.jpg",
+    "/images/home-page/promise-section.jpg",
+    "/images/home-page/promise-card-1.webp",
+    "/images/home-page/promise-card-2.webp",
+    "/images/home-page/promise-card-3.webp",
+    "/images/home-page/promise-card-4.webp",
+    "/images/home-page/apart-1.webp",
+    "/images/home-page/apart-2.webp",
+    "/images/home-page/apart-3.webp",
+    "/images/home-page/apart-4.webp",
+    "/images/home-page/apart-5.webp",
+    "/images/home-page/challenge.jpg",
   ];
 
   useEffect(() => {
@@ -47,9 +64,23 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
 
   useEffect(() => {
     let loadedCount = 0;
-    const totalVideos = videoUrls.length;
+    const totalAssets = videoUrls.length + imageUrls.length;
     const videoElements: HTMLVideoElement[] = [];
+    const imageElements: HTMLImageElement[] = [];
 
+    const updateProgress = () => {
+      loadedCount++;
+      const currentProgress = Math.round((loadedCount / totalAssets) * 100);
+      setProgress(currentProgress);
+
+      if (loadedCount === totalAssets) {
+        setTimeout(() => {
+          setShowOverlay(true);
+        }, 300);
+      }
+    };
+
+    // Load Videos
     videoUrls.forEach((url) => {
       const video = document.createElement("video");
       video.src = url;
@@ -57,41 +88,31 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
       video.muted = true;
       video.playsInline = true;
 
-      const handleLoaded = () => {
-        loadedCount++;
-        const currentProgress = Math.round((loadedCount / totalVideos) * 100);
-        setProgress(currentProgress);
-
-        if (loadedCount === totalVideos) {
-          setTimeout(() => {
-            setShowOverlay(true);
-          }, 300);
-        }
-      };
-
-      const handleError = () => {
-        loadedCount++;
-        const currentProgress = Math.round((loadedCount / totalVideos) * 100);
-        setProgress(currentProgress);
-
-        if (loadedCount === totalVideos) {
-          setTimeout(() => {
-            setShowOverlay(true);
-          }, 300);
-        }
-      };
-
-      video.addEventListener("canplaythrough", handleLoaded, { once: true });
-      video.addEventListener("error", handleError, { once: true });
+      video.addEventListener("canplaythrough", updateProgress, { once: true });
+      video.addEventListener("error", updateProgress, { once: true });
 
       video.load();
       videoElements.push(video);
+    });
+
+    // Load Images
+    imageUrls.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+
+      img.onload = updateProgress;
+      img.onerror = updateProgress;
+
+      imageElements.push(img);
     });
 
     return () => {
       videoElements.forEach((video) => {
         video.src = "";
         video.load();
+      });
+      imageElements.forEach((img) => {
+        img.src = "";
       });
       document.body.style.overflow = "";
     };
