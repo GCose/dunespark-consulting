@@ -7,6 +7,7 @@ import PromiseSection from "@/components/home-page/PromiseSection";
 import ChallengesSection from "@/components/home-page/ChallengesSection";
 import GrowthEcosystemSection from "@/components/home-page/GrowthSection";
 import ProcessSection from "@/components/home-page/ProcessSection";
+import BenefitsSection from "@/components/home-page/BenefitsSection";
 
 const Home = () => {
   const [loadingFinished, setLoadingFinished] = useState(false);
@@ -25,6 +26,7 @@ const Home = () => {
           <ApartSection />
           <GrowthEcosystemSection />
           <ProcessSection />
+          <BenefitsSection />
         </>
       )}
     </Layout>
