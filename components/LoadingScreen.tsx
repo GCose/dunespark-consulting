@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
+import { useEffect, useState, useRef } from "react";
 
 type LoadingScreenProps = {
   onFinish: () => void;
@@ -14,7 +14,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const typeIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const videoUrls = [
+  const assets = [
     "/videos/home-page/hero-section.mp4",
     "/videos/home-page/hero-section2.mp4",
     "/videos/home-page/hero-section3.mp4",
@@ -22,9 +22,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
     "/videos/home-page/process-section.mp4",
     "/videos/home-page/benefits-section.mp4",
     "/videos/home-page/growth-section.mp4",
-  ];
-
-  const imageUrls = [
     "/images/home-page/hero-1.jpg",
     "/images/home-page/hero-2.jpg",
     "/images/home-page/promise-section.jpg",
@@ -63,57 +60,39 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
   }, []);
 
   useEffect(() => {
-    let loadedCount = 0;
-    const totalAssets = videoUrls.length + imageUrls.length;
-    const videoElements: HTMLVideoElement[] = [];
-    const imageElements: HTMLImageElement[] = [];
+    let loaded = 0;
+    const total = assets.length;
 
     const updateProgress = () => {
-      loadedCount++;
-      const currentProgress = Math.round((loadedCount / totalAssets) * 100);
-      setProgress(currentProgress);
+      loaded++;
+      setProgress(Math.round((loaded / total) * 100));
 
-      if (loadedCount === totalAssets) {
-        setTimeout(() => {
-          setShowOverlay(true);
-        }, 300);
+      if (loaded === total) {
+        setTimeout(() => setShowOverlay(true), 300);
       }
     };
 
-    // Load Videos
-    videoUrls.forEach((url) => {
-      const video = document.createElement("video");
-      video.src = url;
-      video.preload = "auto";
-      video.muted = true;
-      video.playsInline = true;
+    assets.forEach((url) => {
+      if (url.endsWith(".mp4")) {
+        const video = document.createElement("video");
+        video.preload = "auto";
+        video.muted = true;
+        video.playsInline = true;
 
-      video.addEventListener("canplaythrough", updateProgress, { once: true });
-      video.addEventListener("error", updateProgress, { once: true });
+        video.addEventListener("loadeddata", updateProgress, { once: true });
+        video.addEventListener("error", updateProgress, { once: true });
 
-      video.load();
-      videoElements.push(video);
-    });
-
-    // Load Images
-    imageUrls.forEach((url) => {
-      const img = new Image();
-      img.src = url;
-
-      img.onload = updateProgress;
-      img.onerror = updateProgress;
-
-      imageElements.push(img);
+        video.src = url;
+        video.load();
+      } else {
+        const img = new Image();
+        img.onload = updateProgress;
+        img.onerror = updateProgress;
+        img.src = url;
+      }
     });
 
     return () => {
-      videoElements.forEach((video) => {
-        video.src = "";
-        video.load();
-      });
-      imageElements.forEach((img) => {
-        img.src = "";
-      });
       document.body.style.overflow = "";
     };
   }, []);
