@@ -430,11 +430,11 @@ const GrowthEcosystemSection = () => {
           <div className="absolute inset-0 bg-black/30" />
         </div>
 
-        <div className="w-full max-w-5xl mx-auto px-4 relative h-[70vh] z-10">
+        <div className="w-full max-w-7xl mx-auto px-4 relative h-[70vh] z-10">
           {cards.map((card, index) => (
-            <div key={index} ref={card.ref}>
+            <div key={index} ref={card.ref} className="backdrop-blur-sm">
               <div
-                className={`circuit-board clip-diagonal-lg backdrop-blur-sm bg-transparent border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col relative`}
+                className={`circuit-board clip-diagonal-lg bg-transparent border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col relative`}
               >
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">
