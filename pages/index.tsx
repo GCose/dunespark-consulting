@@ -1,16 +1,17 @@
 import { useState } from "react";
 import Layout from "@/components/layouts/Layout";
 import LoadingScreen from "@/components/LoadingScreen";
+import FAQSection from "@/components/home-page/FAQSection";
+import CTASection from "@/components/home-page/CTASection";
 import HeroSection from "@/components/home-page/HeroSection";
 import ApartSection from "@/components/home-page/ApartSection";
 import PromiseSection from "@/components/home-page/PromiseSection";
-import ChallengesSection from "@/components/home-page/ChallengesSection";
-import GrowthEcosystemSection from "@/components/home-page/GrowthSection";
 import ProcessSection from "@/components/home-page/ProcessSection";
 import BenefitsSection from "@/components/home-page/BenefitsSection";
+import ChallengesSection from "@/components/home-page/ChallengesSection";
 import SuccessStoriesSection from "@/components/home-page/SuccessStories";
+import GrowthEcosystemSection from "@/components/home-page/GrowthSection";
 import PartnerBenefitsSection from "@/components/home-page/PartnerBenefitsSection";
-import FAQSection from "@/components/home-page/FAQSection";
 
 const Home = () => {
   const [loadingFinished, setLoadingFinished] = useState(false);
@@ -33,6 +34,7 @@ const Home = () => {
           <SuccessStoriesSection />
           <PartnerBenefitsSection />
           <FAQSection />
+          <CTASection />
         </>
       )}
     </Layout>
