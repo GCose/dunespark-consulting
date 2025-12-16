@@ -79,7 +79,7 @@ const PartnerBenefitsSection = () => {
       {
         opacity: 0,
         y: 80,
-        scale: 0.9,
+        scale: 0.5,
       }
     );
 
@@ -173,8 +173,6 @@ const PartnerBenefitsSection = () => {
               <div
                 className={`absolute inset-0 ${benefit.pattern} opacity-20`}
               />
-
-              {/* <div className="absolute inset-0 bg-linear-to-br from-terracotta/10 via-transparent to-terracotta-dark/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" /> */}
 
               <div className="relative h-full p-8 lg:p-12 flex flex-col justify-between backdrop-blur-sm bg-pure-white/10">
                 <div>
