@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 const PartnerBenefitsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const videoElementRef = useRef<HTMLVideoElement>(null);
   const card1Ref = useRef<HTMLDivElement>(null);
   const card2Ref = useRef<HTMLDivElement>(null);
   const card3Ref = useRef<HTMLDivElement>(null);
@@ -83,6 +84,20 @@ const PartnerBenefitsSection = () => {
       }
     );
 
+    // Video playback on scroll
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          videoElementRef.current?.play();
+        } else {
+          videoElementRef.current?.pause();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) videoObserver.observe(sectionRef.current);
+
     const titleObserver = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -133,6 +148,7 @@ const PartnerBenefitsSection = () => {
     return () => {
       titleObserver.disconnect();
       cardsObserver.disconnect();
+      videoObserver.disconnect();
     };
   }, []);
 
@@ -142,15 +158,27 @@ const PartnerBenefitsSection = () => {
       className="py-fluid-lg bg-pure-white opacity-0 px-4 relative overflow-hidden"
       style={{ visibility: "hidden" }}
     >
-      <div className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none">
-        <div className="cyan-glow"></div>
+      <div className="absolute inset-0 w-full h-full">
+        <video
+          ref={videoElementRef}
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source
+            src="/videos/home-page/partner-benefit-section.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div className="absolute inset-0 bg-black/20" />
       </div>
 
       <div className="relative z-10">
         <div className="mb-24 lg:mb-32">
           <h2
             ref={titleRef}
-            className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-[clamp(2.2rem,5vw,7rem)] max-w-[1400px]"
+            className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-[clamp(2.2rem,6vw,8rem)]"
           >
             <span className="word inline-block">WHAT</span>{" "}
             <span className="word inline-block">YOU</span>{" "}
@@ -168,7 +196,7 @@ const PartnerBenefitsSection = () => {
             <div
               key={index}
               ref={benefit.ref}
-              className={`${benefit.gridClass} group relative overflow-hidden clip-diagonal-lg border-2 border-terracotta/30 hover:border-terracotta transition-all duration-500`}
+              className={`${benefit.gridClass} group relative overflow-hidden clip-diagonal-lg border-2 border-terracotta/60 hover:border-terracotta transition-all duration-500`}
             >
               <div
                 className={`absolute inset-0 ${benefit.pattern} opacity-20`}

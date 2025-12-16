@@ -10,6 +10,7 @@ import ProcessSection from "@/components/home-page/ProcessSection";
 import BenefitsSection from "@/components/home-page/BenefitsSection";
 import SuccessStoriesSection from "@/components/home-page/SuccessStories";
 import PartnerBenefitsSection from "@/components/home-page/PartnerBenefitsSection";
+import FAQSection from "@/components/home-page/FAQSection";
 
 const Home = () => {
   const [loadingFinished, setLoadingFinished] = useState(false);
@@ -31,6 +32,7 @@ const Home = () => {
           <BenefitsSection />
           <SuccessStoriesSection />
           <PartnerBenefitsSection />
+          <FAQSection />
         </>
       )}
     </Layout>

@@ -1,5 +1,6 @@
 import { gsap } from "gsap";
 import Link from "next/link";
+import Image from "next/image";
 import { useRef, useEffect } from "react";
 import { useLottie } from "lottie-react";
 import rocketAnimation from "@/public/lotties/rocket-businessman.json";
@@ -9,7 +10,6 @@ const BenefitsSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const videoWrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
-  const videoElementRef = useRef<HTMLVideoElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const rocketRef = useRef<HTMLDivElement>(null);
@@ -58,9 +58,6 @@ const BenefitsSection = () => {
             opacity: 1,
             duration: 1.2,
             ease: "power3.out",
-            onStart: () => {
-              videoElementRef.current?.play();
-            },
           },
           "-=0.6"
         );
@@ -132,18 +129,12 @@ const BenefitsSection = () => {
 
         <div ref={videoWrapperRef} className="col-span-12 lg:col-span-6">
           <div ref={videoRef} className="relative aspect-3/4 overflow-hidden">
-            <video
-              ref={videoElementRef}
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover clip-diagonal-lg"
-            >
-              <source
-                src="/videos/home-page/benefits-section.mp4"
-                type="video/mp4"
-              />
-            </video>
+            <Image
+              fill
+              alt="Benefits of Dunespark Consulting"
+              src="/images/home-page/benefit.jpg"
+              className="object-cover clip-diagonal-lg"
+            />
           </div>
         </div>
 

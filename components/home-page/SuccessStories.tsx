@@ -128,24 +128,24 @@ const SuccessStoriesSection = () => {
         <div className="cyan-glow"></div>
       </div>
 
-      <div className="relative z-10">
-        <div className="mb-24 lg:mb-32">
-          <h2
-            ref={titleRef}
-            className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-[clamp(2.2rem,5vw,7rem)]"
-          >
-            <span className="word inline-block">REAL</span>{" "}
-            <span className="word inline-block">SUCCESS</span>{" "}
-            <span className="word inline-block">STORIES</span>
-          </h2>
-        </div>
+      <div className="mb-24 lg:mb-32">
+        <h2
+          ref={titleRef}
+          className="font-display font-extrabold text-text-primary leading-[1.05] tracking-tight text-[clamp(2.2rem,5vw,7rem)]"
+        >
+          <span className="word inline-block">REAL</span>{" "}
+          <span className="word inline-block">SUCCESS</span>{" "}
+          <span className="word inline-block">STORIES</span>
+        </h2>
+      </div>
 
+      <div className=" flex flex-col gap-[clamp(4rem,10vw,30rem)] relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)]">
           <div
             ref={case2ContentRef}
             className="lg:col-span-6 flex flex-col justify-center space-y-8 order-2 lg:order-1"
           >
-            <h3 className="font-display font-bold text-terracotta text-3xl md:text-4xl lg:text-5xl">
+            <h3 className="font-display uppercase font-bold text-terracotta text-3xl md:text-4xl lg:text-5xl">
               ShopEase E-commerce
             </h3>
 
@@ -162,7 +162,7 @@ const SuccessStoriesSection = () => {
 
             <div className="space-y-6 pt-8">
               <div className="flex items-baseline gap-4">
-                <span className="font-display font-bold text-terracotta text-6xl md:text-7xl lg:text-8xl">
+                <span className="font-display font-bold text-terracotta text-4xl lg:text-5xl">
                   65%
                 </span>
                 <span className="text-text-secondary text-2xl md:text-3xl">
@@ -171,7 +171,7 @@ const SuccessStoriesSection = () => {
               </div>
 
               <div className="flex items-baseline gap-4">
-                <span className="font-display font-bold text-terracotta text-6xl md:text-7xl lg:text-8xl">
+                <span className="font-display font-bold text-terracotta text-4xl lg:text-5xl">
                   38%
                 </span>
                 <span className="text-text-secondary text-2xl md:text-3xl">
@@ -180,7 +180,7 @@ const SuccessStoriesSection = () => {
               </div>
 
               <div className="flex items-baseline gap-4">
-                <span className="font-display font-bold text-terracotta text-6xl md:text-7xl lg:text-8xl">
+                <span className="font-display font-bold text-terracotta text-4xl lg:text-5xl">
                   3x
                 </span>
                 <span className="text-text-secondary text-2xl md:text-3xl">
@@ -194,11 +194,11 @@ const SuccessStoriesSection = () => {
             ref={case2ImageRef}
             className="lg:col-span-5 lg:col-start-8 order-1 lg:order-2"
           >
-            <div className="relative w-full h-screen overflow-hidden">
+            <div className="relative aspect-4/3 overflow-hidden">
               <Image
                 fill
                 alt="ShopEase E-commerce"
-                src="/images/home-page/promise-section.jpg"
+                src="/images/home-page/success-1.jpg"
                 className="object-cover clip-diagonal-lg"
               />
             </div>
@@ -207,11 +207,11 @@ const SuccessStoriesSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] mb-32 lg:mb-48">
           <div ref={case1ImageRef} className="lg:col-span-5">
-            <div className="relative w-full h-screen overflow-hidden">
+            <div className="relative aspect-4/3 overflow-hidden">
               <Image
                 fill
                 alt="UrbanCare Home Services"
-                src="/images/home-page/hero-img-1.jpg"
+                src="/images/home-page/success-2.jpg"
                 className="object-cover clip-diagonal-lg"
               />
             </div>
@@ -221,7 +221,7 @@ const SuccessStoriesSection = () => {
             ref={case1ContentRef}
             className="lg:col-span-6 lg:col-start-7 flex flex-col justify-center space-y-8"
           >
-            <h3 className="font-display font-bold text-terracotta text-3xl md:text-4xl lg:text-5xl">
+            <h3 className="font-display uppercase font-bold text-terracotta text-3xl md:text-4xl lg:text-5xl">
               UrbanCare Home Services
             </h3>
 
@@ -238,7 +238,7 @@ const SuccessStoriesSection = () => {
 
             <div className="space-y-6 pt-8">
               <div className="flex items-baseline gap-4">
-                <span className="font-display font-bold text-terracotta text-6xl md:text-7xl lg:text-8xl">
+                <span className="font-display font-bold text-terracotta text-4xl lg:text-5xl">
                   50%
                 </span>
                 <span className="text-text-secondary text-2xl md:text-3xl">
@@ -247,7 +247,7 @@ const SuccessStoriesSection = () => {
               </div>
 
               <div className="flex items-baseline gap-4">
-                <span className="font-display font-bold text-terracotta text-6xl md:text-7xl lg:text-8xl">
+                <span className="font-display font-bold text-terracotta text-4xl lg:text-5xl">
                   80%
                 </span>
                 <span className="text-text-secondary text-2xl md:text-3xl">
@@ -256,7 +256,7 @@ const SuccessStoriesSection = () => {
               </div>
 
               <div className="flex items-baseline gap-4">
-                <span className="font-display font-bold text-terracotta text-6xl md:text-7xl lg:text-8xl">
+                <span className="font-display font-bold text-terracotta text-4xl lg:text-5xl">
                   2x
                 </span>
                 <span className="text-text-secondary text-2xl md:text-3xl">
