@@ -8,6 +8,8 @@ import ChallengesSection from "@/components/home-page/ChallengesSection";
 import GrowthEcosystemSection from "@/components/home-page/GrowthSection";
 import ProcessSection from "@/components/home-page/ProcessSection";
 import BenefitsSection from "@/components/home-page/BenefitsSection";
+import SuccessStoriesSection from "@/components/home-page/SuccessStories";
+import PartnerBenefitsSection from "@/components/home-page/PartnerBenefitsSection";
 
 const Home = () => {
   const [loadingFinished, setLoadingFinished] = useState(false);
@@ -27,6 +29,8 @@ const Home = () => {
           <GrowthEcosystemSection />
           <ProcessSection />
           <BenefitsSection />
+          <SuccessStoriesSection />
+          <PartnerBenefitsSection />
         </>
       )}
     </Layout>

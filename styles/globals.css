@@ -519,3 +519,32 @@
     opacity: 0;
   }
 }
+
+.cyan-glow {
+  width: 1800px;
+  height: 1800px;
+  z-index: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(6, 182, 212, 0.4) 0%,
+    rgba(34, 211, 238, 0.3) 25%,
+    rgba(8, 145, 178, 0.2) 50%,
+    rgba(6, 182, 212, 0.1) 75%,
+    transparent 100%
+  );
+  filter: blur(60px);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
