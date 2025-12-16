@@ -155,8 +155,8 @@ const PartnerBenefitsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-fluid-lg bg-pure-white opacity-0 px-4 relative overflow-hidden"
       style={{ visibility: "hidden" }}
+      className="py-fluid-lg bg-pure-white opacity-0 px-4 relative overflow-hidden"
     >
       <div className="absolute inset-0 w-full h-full">
         <video
@@ -196,7 +196,7 @@ const PartnerBenefitsSection = () => {
             <div
               key={index}
               ref={benefit.ref}
-              className={`${benefit.gridClass} group relative overflow-hidden clip-diagonal-lg border-2 border-terracotta/60 hover:border-terracotta transition-all duration-500`}
+              className={`${benefit.gridClass} group relative backdrop-blur-sm overflow-hidden clip-diagonal-lg border-2 border-terracotta/60 hover:border-terracotta transition-all duration-500`}
             >
               <div
                 className={`absolute inset-0 ${benefit.pattern} opacity-20`}
