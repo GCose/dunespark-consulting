@@ -24,7 +24,6 @@ const CTASection = () => {
     gsap.set(ctaTextRef.current, { opacity: 0, y: 40 });
     gsap.set(buttonsRef.current, { opacity: 0, y: 50 });
 
-    // Video playback on scroll
     const videoObserver = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -117,7 +116,7 @@ const CTASection = () => {
         >
           <source src="/videos/home-page/hero-section.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
       <div className="grid grid-cols-12 gap-[clamp(1.5rem,3vw,2.5rem)] relative z-10">
@@ -138,7 +137,7 @@ const CTASection = () => {
           ref={descriptionRef}
           className="col-span-12 lg:col-span-8 lg:col-start-3"
         >
-          <p className="text-white text-xl md:text-2xl lg:text-5xl leading-relaxed text-center font-medium mb-8">
+          <p className="text-white text-xl md:text-2xl lg:text-4xl leading-relaxed text-center font-medium mb-8">
             The path to reliable, scalable growth isn{"'"}t about hustle or
             hope. It{"'"}s about installing the right systems — designed for
             your business — that deliver predictable revenue and free your time.
