@@ -171,7 +171,7 @@ const PartnerBenefitsSection = () => {
             type="video/mp4"
           />
         </video>
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
       <div className="relative z-10">
@@ -196,13 +196,14 @@ const PartnerBenefitsSection = () => {
             <div
               key={index}
               ref={benefit.ref}
-              className={`${benefit.gridClass} group relative backdrop-blur-sm overflow-hidden clip-diagonal-lg border-2 border-terracotta/60 hover:border-terracotta transition-all duration-500`}
+              className={`${benefit.gridClass} group relative overflow-hidden clip-diagonal-lg border-2 border-terracotta/60 hover:border-terracotta transition-all duration-500`}
             >
               <div
                 className={`absolute inset-0 ${benefit.pattern} opacity-20`}
               />
+              <div className="hover-effect absolute inset-0 bg-linear-to-br from-terracotta/40 via-transparent to-terracotta-dark/70 opacity-0 group-hover:opacity-100! transition-opacity duration-700" />
 
-              <div className="relative h-full p-8 lg:p-12 flex flex-col justify-between backdrop-blur-sm bg-pure-white/10">
+              <div className="relative h-full p-8 lg:p-12 flex flex-col justify-betweenbg-pure-white/10">
                 <div>
                   <div className="font-display font-bold text-terracotta text-6xl lg:text-7xl mb-6 leading-none">
                     {benefit.number}

@@ -179,7 +179,7 @@ const GrowthEcosystemSection = () => {
         card1Ref.current,
         {
           scale: 0.95,
-          opacity: 0.7,
+          opacity: 0.2,
           y: "-=70",
           duration: 1,
           ease: "power3.inOut",
@@ -201,7 +201,7 @@ const GrowthEcosystemSection = () => {
         [card1Ref.current, card2Ref.current],
         {
           scale: 0.92,
-          opacity: 0.6,
+          opacity: 0.2,
           y: "-=90",
           duration: 1,
           ease: "power3.inOut",
@@ -223,7 +223,7 @@ const GrowthEcosystemSection = () => {
         [card1Ref.current, card2Ref.current, card3Ref.current],
         {
           scale: 0.9,
-          opacity: 0.5,
+          opacity: 0.2,
           y: "-=110",
           duration: 1,
           ease: "power3.inOut",
@@ -432,10 +432,12 @@ const GrowthEcosystemSection = () => {
 
         <div className="w-full max-w-7xl mx-auto px-4 relative h-[70vh] z-10">
           {cards.map((card, index) => (
-            <div key={index} ref={card.ref} className="backdrop-blur-sm">
-              <div
-                className={`circuit-board clip-diagonal-lg bg-transparent border border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col relative`}
-              >
+            <div
+              key={index}
+              ref={card.ref}
+              className="bg-linear-to-br from-terracotta/10 via-transparent to-terracotta-dark/70 circuit-board clip-diagonal-lg border-2 border-terracotta p-12 lg:p-16 min-h-[70vh] flex flex-col relative"
+            >
+              <div>
                 <div className="flex-1 space-y-8">
                   <div className="space-y-4">
                     <h3 className="font-display font-bold text-terracotta text-[clamp(2rem,5vw,5rem)] leading-tight">
@@ -450,7 +452,7 @@ const GrowthEcosystemSection = () => {
                   </p>
                 </div>
 
-                <div className="absolute bottom-12 right-12 w-48 h-48 lg:w-64 lg:h-64 text-terracotta/30">
+                <div className="absolute bottom-12 right-12 w-48 h-48 lg:w-64 lg:h-64 text-terracotta">
                   <GeometricShape index={index} />
                 </div>
               </div>

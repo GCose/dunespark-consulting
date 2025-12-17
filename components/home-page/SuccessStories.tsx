@@ -121,12 +121,9 @@ const SuccessStoriesSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-fluid-lg bg-pure-white opacity-0 px-4 overflow-hidden"
+      className="circuit-board relative py-fluid-lg bg-pure-white opacity-0 px-4 overflow-hidden"
       style={{ visibility: "hidden" }}
     >
-      <div className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none">
-        <div className="cyan-glow"></div>
-      </div>
 
       <div className="mb-24 lg:mb-32">
         <h2
