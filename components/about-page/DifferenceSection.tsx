@@ -202,21 +202,9 @@ const DifferenceSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-pure-white opacity-0 overflow-hidden border-t border-terracotta/20"
+      className="relative bg-pure-white/40 opacity-0 overflow-hidden border-t border-terracotta/20"
       style={{ visibility: "hidden" }}
     >
-      <div className="absolute inset-0 w-full h-full">
-        <video
-          ref={videoRef}
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/home-page/hero-section2.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/80" />
-      </div>
 
       <div className="max-w-editorial mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-[clamp(8rem,15vw,10rem)]">

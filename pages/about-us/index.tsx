@@ -10,10 +10,12 @@ const AboutPage = () => {
       title="Dunespark Consulting | About Us"
       description="Growth shouldn't be guesswork. It should be engineered. Learn how Dunespark designs AI-powered growth systems that deliver real, measurable results."
     >
-      <AboutHeroSection />
-      <MissionVisionSection />
-      <DifferenceSection />
-      <CTASection />
+      <div className="circuit-board inset-0">
+        <AboutHeroSection />
+        <MissionVisionSection />
+        <DifferenceSection />
+        <CTASection />
+      </div>
     </Layout>
   );
 };

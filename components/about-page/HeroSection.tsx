@@ -117,7 +117,7 @@ const AboutHeroSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-pure-white opacity-0 relative overflow-hidden"
+      className="min-h-screen bg-pure-white/40 opacity-0 relative overflow-hidden"
       style={{ visibility: "hidden" }}
     >
       <div className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none opacity-20">

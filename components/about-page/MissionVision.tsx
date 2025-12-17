@@ -107,7 +107,7 @@ const MissionVisionSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-pure-white opacity-0 border-t border-terracotta/20"
+      className="bg-pure-white/40 opacity-0 border-t border-terracotta/20"
       style={{ visibility: "hidden" }}
     >
       <div className="max-w-editorial mx-auto px-4">
