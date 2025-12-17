@@ -17,7 +17,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onFinish }) => {
   const assets = [
     "/videos/home-page/hero-section.mp4",
     "/videos/home-page/hero-section2.mp4",
-    "/videos/home-page/hero-section3.mp4",
+    "/videos/home-page/challenges-section.mp4",
     "/videos/home-page/apart-section.mp4",
     "/videos/home-page/process-section.mp4",
     "/videos/home-page/benefits-section.mp4",

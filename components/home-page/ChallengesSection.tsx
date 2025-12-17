@@ -126,7 +126,10 @@ const ChallengesSection = () => {
           ref={videoElementRef}
           className="absolute inset-0 w-full h-screen object-center"
         >
-          <source src="/videos/home-page/hero-section3.mp4" type="video/mp4" />
+          <source
+            src="/videos/home-page/challenges-section.mp4"
+            type="video/mp4"
+          />
         </video>
       </div>
 
