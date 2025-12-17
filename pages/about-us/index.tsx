@@ -10,7 +10,7 @@ const AboutPage = () => {
       title="Dunespark Consulting | About Us"
       description="Growth shouldn't be guesswork. It should be engineered. Learn how Dunespark designs AI-powered growth systems that deliver real, measurable results."
     >
-      <div className="circuit-board inset-0">
+      <div className="circuit-board">
         <AboutHeroSection />
         <MissionVisionSection />
         <DifferenceSection />

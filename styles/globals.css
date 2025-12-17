@@ -357,7 +357,6 @@
       rgba(6, 182, 212, 0.4) 2px,
       transparent 2px
     );
-    z-index: 1000000000000000;
   background-size: 100% 100%, 100% 100%, 200px 200px, 200px 200px, 200px 200px;
   background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
   background-attachment: fixed;
@@ -423,6 +422,7 @@
     );
   background-size: 60px 104px, 60px 104px, 60px 104px;
   background-position: 0 0, 30px 52px, 0 0;
+  background-attachment: fixed;
 }
 
 .wireframe-topology {
@@ -443,6 +443,7 @@
   background-size: 40px 40px;
   background-position: 0 0, 20px 20px;
   position: relative;
+  background-attachment: fixed;
 }
 
 .wireframe-topology::before {
@@ -456,6 +457,7 @@
   );
   background-size: 40px 40px;
   animation: topologyWave 8s ease-in-out infinite;
+  background-attachment: fixed;
 }
 
 @keyframes topologyWave {
@@ -536,6 +538,7 @@
   );
   filter: blur(60px);
   animation: glowPulse 4s ease-in-out infinite;
+  background-attachment: fixed;
 }
 
 @keyframes glowPulse {
